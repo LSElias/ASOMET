@@ -54,13 +54,11 @@ model Usuario{
   idUsuario Int @id @default(autoincrement())
   idRol Int
   idEstUsuario Int
-  cedula String @db.Char(9)
-  nombre      String  @db.VarChar(50)
-  apellido1   String  @db.VarChar(50)
-  apellido2   String  @db.VarChar(50)
+  cedula Int 
+  nombreCompleto      String  @db.VarChar(150)
   correo String @db.VarChar(250) @unique
-  contrasena String 
-  telefono String @db.Char(8)
+  contrasena String
+  telefono Int
   rol   Rol     @relation(fields: [idRol],references: [idRol])
   estadoUsuario   EstadoUsuario     @relation(fields: [idEstUsuario],references: [idEstUsuario])
   evento Evento[]

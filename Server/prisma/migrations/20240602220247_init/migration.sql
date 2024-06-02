@@ -48,13 +48,11 @@ CREATE TABLE `Usuario` (
     `idUsuario` INTEGER NOT NULL AUTO_INCREMENT,
     `idRol` INTEGER NOT NULL,
     `idEstUsuario` INTEGER NOT NULL,
-    `cedula` CHAR(9) NOT NULL,
-    `nombre` VARCHAR(50) NOT NULL,
-    `apellido1` VARCHAR(50) NOT NULL,
-    `apellido2` VARCHAR(50) NOT NULL,
+    `cedula` INTEGER NOT NULL,
+    `nombreCompleto` VARCHAR(150) NOT NULL,
     `correo` VARCHAR(250) NOT NULL,
     `contrasena` VARCHAR(191) NOT NULL,
-    `telefono` CHAR(8) NOT NULL,
+    `telefono` INTEGER NOT NULL,
 
     UNIQUE INDEX `Usuario_correo_key`(`correo`),
     PRIMARY KEY (`idUsuario`)
