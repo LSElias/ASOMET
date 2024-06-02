@@ -14,3 +14,67 @@ datasource db {
 }
 
 //Modelos - Tablas 
+model EstadoUsuario {
+  idEstUsuario   Int     @id @default(autoincrement())
+  nombre  String  @db.VarChar(50)
+  usuario  Usuario[]
+}
+
+model EstadoConfirm{
+  idEstadoConfir   Int     @id @default(autoincrement())
+  nombre  String  @db.VarChar(50)
+  asistencia  Asistencia[]
+}
+
+model EstadoAsistencia{
+  idAsistencia   Int     @id @default(autoincrement())
+  nombre  String  @db.VarChar(50)
+  asistencia  Asistencia[]
+}
+
+model Rol{
+  idRol   Int     @id @default(autoincrement())
+  nombre  String  @db.VarChar(50)
+  usuario  Usuario[]
+}
+
+model Evento{
+  idEvento   Int     @id @default(autoincrement())
+  idCreador Int
+  titulo String 
+  descripcion  String  @db.VarChar(250)
+  fecha  String
+  hora  String
+  localizacion String @db.VarChar(250)
+  administrador Usuario @relation(fields: [idCreador],references: [idUsuario])
+  asistencia Asistencia[]
+}
+
+model Usuario{
+  idUsuario Int @id @default(autoincrement())
+  idRol Int
+  idEstUsuario Int
+  cedula String @db.Char(9)
+  nombre      String  @db.VarChar(50)
+  apellido1   String  @db.VarChar(50)
+  apellido2   String  @db.VarChar(50)
+  correo String @db.VarChar(250) @unique
+  contrasena String 
+  telefono String @db.Char(8)
+  rol   Rol     @relation(fields: [idRol],references: [idRol])
+  estadoUsuario   EstadoUsuario     @relation(fields: [idEstUsuario],references: [idEstUsuario])
+  evento Evento[]
+  asistencia Asistencia[]
+}
+
+model Asistencia{
+  idConfirm   Int   @id @default(autoincrement())
+  idEvento Int
+  idAsociado Int
+  idEstadoConfir Int
+  idAsistencia Int
+  evento Evento @relation(fields: [idEvento],references: [idEvento])
+  asociado Usuario @relation(fields: [idAsociado],references: [idUsuario])
+  estadoConfir EstadoConfirm @relation(fields: [idEstadoConfir],references: [idEstadoConfir])
+  estadoAsistencia EstadoAsistencia @relation(fields: [idAsistencia],references: [idAsistencia])
+}
