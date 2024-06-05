@@ -8,7 +8,8 @@ const app = express();
 const prism = new PrismaClient();
 
 //---Archivos de rutas---
-const videojuegoRouter= require("./routes/videojuegoRoutes");
+const usuarioRoutes = require('./routes/usuarioRoutes'); 
+const eventoRoutes = require('./routes/eventoRoutes');
 
 // Acceder a la configuracion del archivo .env
 dotEnv.config();
@@ -30,7 +31,8 @@ app.use(
 );
 
 //---- Definir rutas ---- 
- app.use("/videojuego/",videojuegoRouter);
+ app.use("/usuario/", usuarioRoutes);
+ app.use("/eventos/", eventoRoutes);
 
 // Servidor
 app.listen(port, () => { 
