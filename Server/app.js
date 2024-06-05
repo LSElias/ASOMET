@@ -32,7 +32,7 @@ app.use(
 
 //---- Definir rutas ---- 
  app.use("/usuario/", usuarioRoutes);
- app.use("/evento/", eventoRoutes);
+ app.use("/eventos/", eventoRoutes);
 
 // Servidor
 app.listen(port, () => { 
