@@ -1,0 +1,120 @@
+<div class="flex justify-center  laptop:grid laptop:grid-cols-[1fr,40%] h-full bg-[#3B4270] laptop:bg-white">
+  <div id="default-carousel" class="relative h-full bg-[#3B4270]  md:hidden laptop:block" data-carousel="slide">
+    <!-- Carousel wrapper -->
+    <div class="relative h-full overflow-hidden rounded-lg">
+      <!-- Item 1 -->
+      <div class="hidden duration-700 ease-in-out" *ngFor="let slide of slides; let i = index"
+        [attr.data-carousel-item]="i" [class.block]="currentSlide === i" [class.hidden]="currentSlide !== i">
+        <div>
+          <img *ngIf="i === 0" src="../../../assets/log-1.png"
+            class="absolute block -translate-x-1/2 -translate-y-1/4 3xl:-translate-y-[3rem] top-1/4 left-1/2 "
+            alt="...">
+          <h2 *ngIf="i === 0"
+            class="text-white text-2xl absolute block -translate-x-1/2 bottom-[30%]  2xl:bottom-[23%] 3xl:bottom-[30%] left-1/2 w-full text-center lg:text-3xl 2xl:text-4xl">
+            Conectando a través de la Comunicación</h2>
+          <h3 *ngIf="i === 0"
+            class="text-white text-base  absolute block -translate-x-1/2 bottom-[30%] 2xl:bottom-[23%] 3xl:bottom-[30%] translate-y-8 left-1/2 w-full text-center 2xl:text-lg">
+            En Asuma Meko, valoramos la comunicación clara y efectiva.
+          </h3>
+        </div>
+        <div>
+          <img *ngIf="i === 1" src="../../../assets/log-2.png"
+            class="absolute block -translate-x-1/2 -translate-y-1/4 3xl:-translate-y-[3rem] top-1/4 left-1/2 "
+            alt="...">
+          <h2 *ngIf="i === 1"
+            class="text-white text-2xl absolute block -translate-x-1/2 bottom-[30%]  2xl:bottom-[23%] 3xl:bottom-[30%] left-1/2 w-full text-center lg:text-3xl 2xl:text-4xl">
+            Soporte y Colaboración</h2>
+          <h3 *ngIf="i === 1"
+            class="text-white text-base  absolute block -translate-x-1/2 bottom-[30%] 2xl:bottom-[22.5%] 3xl:bottom-[30%] translate-y-8 left-1/2 w-full text-center 2xl:text-lg">
+            Hacemos de la organización de eventos una experiencia colaborativa.
+          </h3>
+        </div>
+        <div>
+          <img *ngIf="i === 2" src="../../../assets/log-3.png"
+            class="absolute block -translate-x-1/2 -translate-y-1/4 3xl:-translate-y-[3rem] top-1/4 left-1/2 "
+            alt="...">
+          <h2 *ngIf="i === 2"
+            class="text-white text-2xl absolute block -translate-x-1/2 bottom-[30%]  2xl:bottom-[23%] 3xl:bottom-[30%] left-1/2 w-full text-center lg:text-3xl 2xl:text-4xl">
+            Simplificando la Gestión de Eventos</h2>
+          <h3 *ngIf="i === 2"
+            class="text-white text-base  absolute block -translate-x-1/2 bottom-[30%] 2xl:bottom-[22.5%] 3xl:bottom-[30%] translate-y-8 left-1/2 w-full text-center 2xl:text-lg">
+            Hacemos de la organización de eventos una experiencia colaborativa.
+          </h3>
+        </div>
+        <div>
+          <img *ngIf="i === 3" src="../../../assets/log-4.png"
+            class="absolute block -translate-x-1/2 -translate-y-1/4 3xl:-translate-y-[3rem] top-1/4 left-1/2 "
+            alt="...">
+          <h2 *ngIf="i === 3"
+            class="text-white text-2xl absolute block -translate-x-1/2 bottom-[30%] 2xl:bottom-[23%] 3xl:bottom-[30%] left-1/2 w-full text-center lg:text-3xl 2xl:text-4xl">
+            Soporte y Colaboración</h2>
+          <h3 *ngIf="i === 3"
+            class="text-white text-base  absolute block -translate-x-1/2 bottom-[30%] 2xl:bottom-[22.5%] 3xl:bottom-[30%] translate-y-8 left-1/2 w-full text-center 2xl:text-lg">
+            Hacemos de la organización de eventos una experiencia colaborativa.
+          </h3>
+        </div>
+
+
+
+      </div>
+    </div>
+    <!-- Slider indicators -->
+    <div
+      class="absolute z-30 flex -translate-x-1/2 laptop:bottom-36  xl:bottom-20  3xl:bottom-44 left-1/2 space-x-3 rtl:space-x-reverse">
+      <button *ngFor="let slide of slides; let i = index"
+        [ngClass]="{'px-4': currentSlide === i, 'transition-padding': true}" (click)="setCurrentSlide(i)" type="button"
+        class="w-3 h-3 rounded-full" [attr.aria-current]="currentSlide === i ? 'true' : 'false'"
+        [attr.aria-label]="'Slide ' + (i + 1)" [attr.data-carousel-slide-to]="i"></button>
+    </div>
+
+    <!-- 
+    <div class="absolute z-30 flex -translate-x-1/2 bottom-20 3xl:bottom-44 left-1/2 space-x-3 rtl:space-x-reverse">
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
+          data-carousel-slide-to="0">
+        </button>
+    </div>
+  </div>
+     -->
+  </div>
+  <div class=" flex justify-start items-center flex-col gap-20 3xl:gap-36 ">
+
+    <div class="flex flex-col items-center justify-center  text-center pt-28">
+      <img class="logo w-28  3xl:w-28 " src="../../../assets/logo.png" />
+      <h1 class="asumameko text-2xl text-center text-[#b9c2f7] laptop:text-[#1b78b7]">Asuma<span
+          class="meko text-[#ffffff] laptop:text-[#646364]">meko</span></h1>
+
+    </div>
+
+    <form class=" w-[370px] laptop:w-[320px] 3xl:w-[330px] mx-auto pt-16 laptop:pt-10 xl:pt-5 2xl:pt-0">
+      <div class="flex justify-center pb-9">
+        <span class=" text-[#f6f5f5] laptop:text-[#7F837F] text-base font-semibold text-center">
+          Bienvenido a Asuma Meko
+        </span>
+      </div>
+      <div class="mb-7">
+        <label for="email" class="text-[#dedede] laptop:text-[#666666] block mb-2 text-xs font-medium ">Correo</label>
+        <input type="email" id="email"
+          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+          placeholder="correo@ejemplo.com" required />
+      </div>
+      <div class="mb-5">
+        <label for="password"
+          class="text-[#dedede] laptop:text-[#666666] block mb-2 text-xs font-medium  ">Contraseña</label>
+        <input type="password" id="password"
+          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+          placeholder="********" required />
+        <div class="flex justify-end">
+          <a href="#" class="mt-2 text-xs font-semibold text-[#3B4270]">¿Olvidaste tu contraseña? </a>
+        </div>
+      </div>
+
+
+      <div class="flex justify-center items-center mt-9">
+        <button type="submit" [routerLink]="'/menu'"
+          class="text-sm  text-white bg-[#E69F5B] hover:bg-[#636570] transition duration-200 laptop:bg-[#636570] laptop:hover:bg-[#E69F5B] font-medium rounded-3xl  px-10 py-2.5 text-center">Iniciar
+          Sesión</button>
+      </div>
+    </form>
+
+  </div>
+</div>
