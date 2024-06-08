@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { LoginModule } from './login/login.module';
 import { ReportesModule } from './reportes/reportes.module';
 
+
 @NgModule({
   declarations: [
     AppComponent

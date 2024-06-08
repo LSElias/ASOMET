@@ -1,1 +1,275 @@
-<p>usuario-index works!</p>
+<div class="flex">
+  <app-menu></app-menu>
+  <div class="w-full">
+    <app-header></app-header>
+    <div class="bg-gray-100 w-full h-full py-1">
+      <div class="flex bg-white mx-5 my-5 h-36 rounded-lg">
+        <div class="ml-5 my-6 border-left"></div>
+        <div
+          class="my-5 ml-5 mx-2 py-4 px-2 w-36 bg-blue-100 rounded-lg text-center flex flex-col"
+        >
+          <img
+            class="self-center pb-1"
+            src="../../../assets/images/adminUserIcon.png"
+          />
+          <h5 class="text-base tracking-tight text-gray-700">
+            Administrativos
+          </h5>
+          <p class="font-normal text-gray-700 dark:text-gray-400">
+            {{ 0 }}
+          </p>
+        </div>
+
+        <div
+          class="my-5 mx-2 py-4 px-2 w-36 bg-orange-100 rounded-lg text-center flex flex-col"
+        >
+          <img
+            class="self-center pb-1"
+            src="../../../assets/images/opUserIcon.png"
+          />
+          <h5 class="text-base tracking-tight text-gray-700">Operarios</h5>
+          <p class="font-normal text-gray-700 dark:text-gray-400">
+            {{ 0 }}
+          </p>
+        </div>
+
+        <div
+          class="my-5 mx-2 py-4 px-2 w-36 bg-yellow-50 rounded-lg text-center flex flex-col"
+        >
+          <img
+            class="self-center pb-1"
+            src="../../../assets/images/asocUserIcon.png"
+          />
+          <h5 class="text-base tracking-tight text-gray-700">Asociados</h5>
+          <p class="font-normal text-gray-700 dark:text-gray-400">
+            {{ 0 }}
+          </p>
+        </div>
+      </div>
+
+      <div
+        class=" bg-white mx-5 my-5 h-fit rounded-lg p-2 justify-center gap-2"
+      >
+        <div class="flex w-full h-fit p-3">
+          <div class="flex">
+            <button
+              type="button"
+              style="background: #8197b1"
+              class="btnspacing py-2.5 px-2 me-2 mb-2 text-sm text-base h-fit flex gap-1 font-medium text-white rounded-lg focus:z-10 focus:ring-4 focus:ring-gray-100"
+            >
+              <ng-icon name="heroPlus" size="1.4em"></ng-icon>
+              <p>Nuevo Usuario</p>
+            </button>
+          </div>
+
+          <span class="example-spacer"></span>
+
+          <button
+            id="dropdownDefaultButton"
+            data-dropdown-toggle="dropdown"
+            class="text-cyan-600 h-fit focus:ring-1 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
+            type="button"
+          >
+            {{ selectedStatus }}
+            <svg
+              class="w-2.5 h-2.5 ms-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 4 4 4-4"
+              />
+            </svg>
+          </button>
+
+          <!-- Dropdown menu -->
+          <div
+            id="dropdown"
+            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+          >
+            <ul
+              class="py-2 text-sm text-gray-700"
+              aria-labelledby="dropdownDefaultButton"
+            >
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 hover:bg-gray-50 text-cyan-600"
+                  >Dashboard</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 hover:bg-gray-50 text-cyan-600"
+                  >Settings</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 hover:bg-gray-50 text-cyan-600"
+                  >Earnings</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 hover:bg-gray-50 text-cyan-600"
+                  >Sign out</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!--- Dropdown again -->
+          <button
+            id="dropdownDefaultButton1"
+            data-dropdown-toggle="dropdown1"
+            class="text-blue-600 h-fit focus:ring-1 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
+            type="button"
+          >
+            {{ selectedStatus }}
+            <svg
+              class="w-2.5 h-2.5 ms-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 4 4 4-4"
+              />
+            </svg>
+          </button>
+
+          <!-- Dropdown menu -->
+          <div
+            id="dropdown1"
+            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+          >
+            <ul
+              class="py-2 text-sm text-blue-600"
+              aria-labelledby="dropdownDefaultButton"
+            >
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 hover:bg-gray-50 text-blue-600"
+                  >Dashboard</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 hover:bg-gray-50 text-blue-600"
+                  >Settings</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 hover:bg-gray-50 text-blue-600"
+                  >Earnings</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 hover:bg-gray-50 text-blue-600"
+                  >Sign out</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="max-w-md mx-auto">
+            <div class="relative">
+              <div
+                class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+              >
+                <svg
+                  class="w-4 h-4 text-indigo-600"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="search"
+                id="default-search"
+                class="block w-full h-11 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-transparent focus:ring-indigo-600 focus:border-indigo-600"
+                placeholder="Search Mockups, Logos..."
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+
+        <div class="relative overflow-x-auto p-3">
+          <table class="w-full text-sm text-left rtl:text-right text-gray-500  border-stone-300 border">
+              <thead class="text-xs text-black uppercase bg-gray-100">
+                  <tr>
+                      <th scope="col" class="px-6 py-3 border border-stone-300">
+                          Id
+                      </th>
+                      <th scope="col" class="px-6 py-3 border  border-stone-300">
+                          Cédula
+                      </th>
+                      <th scope="col" class="px-6 py-3 border  border-stone-300">
+                          Nombre
+                      </th>
+                      <th scope="col" class="px-6 py-3 border  border-stone-300">
+                          Correo
+                      </th>
+                      <th scope="col" class="px-6 py-3 border  border-stone-300">
+                        
+                    </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr class="bg-white border  border-stone-300">
+                      <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                          Apple MacBook Pro 17"
+                      </th>
+                      <td class="px-6 py-4 border  border-stone-300">
+                          Silver
+                      </td>
+                      <td class="px-6 py-4 border  border-stone-300">
+                          Laptop
+                      </td>
+                      <td class="px-6 py-4 border border-stone-300">
+                          $2999
+                      </td>
+                  </tr>
+               
+              </tbody>
+          </table>
+      </div>
+      
+
+
+      </div>
+    </div>
+  </div>
+</div>

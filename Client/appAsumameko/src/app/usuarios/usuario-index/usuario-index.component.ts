@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./usuario-index.component.css']
 })
 export class UsuarioIndexComponent {
+  selectedStatus: any;
+  constructor(){
+    this.selectedStatus = "meow";
+  }
 
+  
 }
