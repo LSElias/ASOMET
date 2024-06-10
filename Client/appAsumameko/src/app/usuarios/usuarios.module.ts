@@ -7,8 +7,9 @@ import { SharedModule } from '../shared/shared.module';
 import { MenuComponent } from '../shared/menu/menu.component';
 import { heroPlus } from '@ng-icons/heroicons/outline';
 import { NgIconsModule } from '@ng-icons/core';
-
-
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';  
 
 @NgModule({
   declarations: [
@@ -20,7 +21,10 @@ import { NgIconsModule } from '@ng-icons/core';
     UsuariosRoutingModule,
     SharedModule,
     NgIconsModule.withIcons({ heroPlus
-     })
+     }),
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ]
 })
 export class UsuariosModule { }
