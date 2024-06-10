@@ -26,6 +26,9 @@ import { HeaderComponent } from './header/header.component';
     provideNgIconsConfig({
       size: '5vh',
     }),
-  ]
+  ],
+  exports: [    
+    MenuComponent,
+    HeaderComponent]
 })
 export class SharedModule { }

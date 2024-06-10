@@ -1,0 +1,31 @@
+.border-left{
+    border-left: 2px solid #ECECEE;
+}
+
+.center{
+    text-align: center;
+}
+
+.bt-detalle{
+    background-image: url('../../../assets/images/detailUserIcon.png');
+    background-repeat: no-repeat;
+}
+
+.bt-editar{
+    background-image: url('../../../assets/images/editUserIcon.png');
+    background-repeat: no-repeat;
+}
+
+.bt-eliminar{
+    background-image: url('../../../assets/images/hideUserIcon.png');
+    background-repeat: no-repeat;
+}
+
+table{
+    border-collapse: separate;
+    
+}
+
+.colcolor{
+    background-color: #f0f0f0 !important;
+}

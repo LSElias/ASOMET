@@ -8,7 +8,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class LoginComponent implements OnInit, OnDestroy {
   currentSlide = 0;
   slides = [0, 1, 2, 3];
-  /*   slides = [0]; */
+  /* slides = [0]; */
   private carouselInterval: any;
 
   ngOnInit() {

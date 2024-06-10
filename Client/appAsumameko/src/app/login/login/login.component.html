@@ -10,10 +10,10 @@
             class="absolute block -translate-x-1/2 -translate-y-1/4 3xl:-translate-y-[3rem] top-1/4 left-1/2 "
             alt="...">
           <h2 *ngIf="i === 0"
-            class="text-white text-2xl absolute block -translate-x-1/2 bottom-[30%]  2xl:bottom-[23%] 3xl:bottom-[30%] left-1/2 w-full text-center lg:text-3xl 2xl:text-4xl">
+            class="text-white text-2xl absolute block -translate-x-1/2 bottom-[20%]   3xl:bottom-[30%] left-1/2 w-full text-center lg:text-3xl 2xl:text-4xl">
             Conectando a través de la Comunicación</h2>
           <h3 *ngIf="i === 0"
-            class="text-white text-base  absolute block -translate-x-1/2 bottom-[30%] 2xl:bottom-[23%] 3xl:bottom-[30%] translate-y-8 left-1/2 w-full text-center 2xl:text-lg">
+            class="text-white text-base  absolute block -translate-x-1/2 bottom-[20%]  3xl:bottom-[30%] translate-y-8 left-1/2 w-full text-center 2xl:text-lg">
             En Asuma Meko, valoramos la comunicación clara y efectiva.
           </h3>
         </div>
@@ -22,10 +22,10 @@
             class="absolute block -translate-x-1/2 -translate-y-1/4 3xl:-translate-y-[3rem] top-1/4 left-1/2 "
             alt="...">
           <h2 *ngIf="i === 1"
-            class="text-white text-2xl absolute block -translate-x-1/2 bottom-[30%]  2xl:bottom-[23%] 3xl:bottom-[30%] left-1/2 w-full text-center lg:text-3xl 2xl:text-4xl">
+            class="text-white text-2xl absolute block -translate-x-1/2 bottom-[20%]   3xl:bottom-[30%] left-1/2 w-full text-center lg:text-3xl 2xl:text-4xl">
             Soporte y Colaboración</h2>
           <h3 *ngIf="i === 1"
-            class="text-white text-base  absolute block -translate-x-1/2 bottom-[30%] 2xl:bottom-[22.5%] 3xl:bottom-[30%] translate-y-8 left-1/2 w-full text-center 2xl:text-lg">
+            class="text-white text-base  absolute block -translate-x-1/2 bottom-[20%]  3xl:bottom-[30%] translate-y-8 left-1/2 w-full text-center 2xl:text-lg">
             Hacemos de la organización de eventos una experiencia colaborativa.
           </h3>
         </div>
@@ -34,10 +34,10 @@
             class="absolute block -translate-x-1/2 -translate-y-1/4 3xl:-translate-y-[3rem] top-1/4 left-1/2 "
             alt="...">
           <h2 *ngIf="i === 2"
-            class="text-white text-2xl absolute block -translate-x-1/2 bottom-[30%]  2xl:bottom-[23%] 3xl:bottom-[30%] left-1/2 w-full text-center lg:text-3xl 2xl:text-4xl">
+            class="text-white text-2xl absolute block -translate-x-1/2 bottom-[20%]   3xl:bottom-[30%] left-1/2 w-full text-center lg:text-3xl 2xl:text-4xl">
             Simplificando la Gestión de Eventos</h2>
           <h3 *ngIf="i === 2"
-            class="text-white text-base  absolute block -translate-x-1/2 bottom-[30%] 2xl:bottom-[22.5%] 3xl:bottom-[30%] translate-y-8 left-1/2 w-full text-center 2xl:text-lg">
+            class="text-white text-base  absolute block -translate-x-1/2 bottom-[20%]  3xl:bottom-[30%] translate-y-8 left-1/2 w-full text-center 2xl:text-lg">
             Hacemos de la organización de eventos una experiencia colaborativa.
           </h3>
         </div>
@@ -46,10 +46,10 @@
             class="absolute block -translate-x-1/2 -translate-y-1/4 3xl:-translate-y-[3rem] top-1/4 left-1/2 "
             alt="...">
           <h2 *ngIf="i === 3"
-            class="text-white text-2xl absolute block -translate-x-1/2 bottom-[30%] 2xl:bottom-[23%] 3xl:bottom-[30%] left-1/2 w-full text-center lg:text-3xl 2xl:text-4xl">
+            class="text-white text-2xl absolute block -translate-x-1/2 bottom-[20%]   3xl:bottom-[30%] left-1/2 w-full text-center lg:text-3xl 2xl:text-4xl">
             Soporte y Colaboración</h2>
           <h3 *ngIf="i === 3"
-            class="text-white text-base  absolute block -translate-x-1/2 bottom-[30%] 2xl:bottom-[22.5%] 3xl:bottom-[30%] translate-y-8 left-1/2 w-full text-center 2xl:text-lg">
+            class="text-white text-base  absolute block -translate-x-1/2 bottom-[20%]  3xl:bottom-[30%] translate-y-8 left-1/2 w-full text-center 2xl:text-lg">
             Hacemos de la organización de eventos una experiencia colaborativa.
           </h3>
         </div>
@@ -60,7 +60,7 @@
     </div>
     <!-- Slider indicators -->
     <div
-      class="absolute z-30 flex -translate-x-1/2 laptop:bottom-36  xl:bottom-20  3xl:bottom-44 left-1/2 space-x-3 rtl:space-x-reverse">
+      class="absolute z-30 flex -translate-x-1/2 bottom-16  xl:bottom-12  3xl:bottom-44 left-1/2 space-x-3 rtl:space-x-reverse">
       <button *ngFor="let slide of slides; let i = index"
         [ngClass]="{'px-4': currentSlide === i, 'transition-padding': true}" (click)="setCurrentSlide(i)" type="button"
         class="w-3 h-3 rounded-full" [attr.aria-current]="currentSlide === i ? 'true' : 'false'"

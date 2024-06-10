@@ -9,11 +9,11 @@ export class HeaderNameService {
 
     setTitle(url: any){
         switch(url){
-            case 'usuario': { 
+            case '/usuario': { 
                 return 'Usuarios' 
              } 
-             case '': { 
-                    return ''
+             case '/usuario': { 
+                    return 'Eventos'
              } 
              default: { 
                 return 'Asumameko';
