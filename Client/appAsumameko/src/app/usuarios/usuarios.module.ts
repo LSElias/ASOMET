@@ -13,6 +13,9 @@ import { UsuarioCreateComponent } from './usuario-create/usuario-create.componen
 import { UsuarioUpdateComponent } from './usuario-update/usuario-update.component';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 import { UsuarioDesactivarComponent } from './usuario-desactivar/usuario-desactivar.component';
 
 @NgModule({
@@ -33,6 +36,9 @@ import { UsuarioDesactivarComponent } from './usuario-desactivar/usuario-desacti
     FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
   ],
 })
 export class UsuariosModule {}
