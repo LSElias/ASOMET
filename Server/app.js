@@ -10,6 +10,7 @@ const prism = new PrismaClient();
 //---Archivos de rutas---
 const usuarioRoutes = require('./routes/usuarioRoutes'); 
 const eventoRoutes = require('./routes/eventoRoutes');
+const asistenciaRoutes = require('./routes/asistenciaRoutes'); 
 
 // Acceder a la configuracion del archivo .env
 dotEnv.config();
@@ -33,6 +34,7 @@ app.use(
 //---- Definir rutas ---- 
  app.use("/usuario/", usuarioRoutes);
  app.use("/eventos/", eventoRoutes);
+ app.use("/asistencia/", asistenciaRoutes);
 
 // Servidor
 app.listen(port, () => { 
