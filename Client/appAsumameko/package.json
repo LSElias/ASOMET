@@ -23,6 +23,7 @@
     "@ng-icons/heroicons": "^27.5.2",
     "@ng-icons/lucide": "^27.5.2",
     "@ng-icons/octicons": "^27.5.2",
+    "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
