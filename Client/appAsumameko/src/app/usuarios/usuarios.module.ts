@@ -13,12 +13,14 @@ import { UsuarioCreateComponent } from './usuario-create/usuario-create.componen
 import { UsuarioUpdateComponent } from './usuario-update/usuario-update.component';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { UsuarioDesactivarComponent } from './usuario-desactivar/usuario-desactivar.component';
 
 @NgModule({
   declarations: [
     UsuarioIndexComponent,
     UsuarioCreateComponent,
     UsuarioUpdateComponent,
+    UsuarioDesactivarComponent,
   ],
   imports: [
     CommonModule,

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, filter, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/shared/generic.service';
 import { UsuarioCreateComponent } from '../usuario-create/usuario-create.component';
+import { UsuarioDesactivarComponent } from '../usuario-desactivar/usuario-desactivar.component';
 
 @Component({
   selector: 'app-usuario-index',
@@ -54,6 +55,8 @@ export class UsuarioIndexComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   dataSource = new MatTableDataSource<any>();
   @ViewChild('userFormModal') userFormModal!: UsuarioCreateComponent;
+  @ViewChild('hideUserFormModal')
+  hideUserFormModal!: UsuarioDesactivarComponent;
 
   constructor(
     private gService: GenericService,
@@ -190,9 +193,11 @@ export class UsuarioIndexComponent implements AfterViewInit {
   }
 
   deactivate(id: any) {
-    this.router.navigate(['/usuario/deactivar', id], {
+    /*  this.router.navigate(['/usuario/deactivar', id], {
       relativeTo: this.route,
-    });
+    }); */
+
+    this.hideUserFormModal.openModal(id);
   }
 
   ngOnDestroy() {

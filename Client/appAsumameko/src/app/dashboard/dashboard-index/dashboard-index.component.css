@@ -1,11 +1,25 @@
 .box {
   background-color: #ffffff;
-  height: 184px;
-  width: 521.0596313476562px;
 
   border-radius: 10px;
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.fs {
+  background-color: #453831;
+  height: 41px;
+  width: 41px;
+  border-radius: 9.3px;
+  padding-left: 11.6px;
+  padding-right: 11.69px;
+  padding-top: 12.8px;
+  padding-bottom: 12.8px;
+  display: flex;
+  flex-direction: column;
+  gap: 11.6px;
+  top: 3.5px;
+  position: relative;
 }
