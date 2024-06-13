@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -21,6 +21,7 @@ export class UsuarioCreateComponent {
   idRol: any;
   telefono: any;
   cedula: any;
+  @Output() usuarioCreado: EventEmitter<void> = new EventEmitter<void>();
 
   makeSubmit: boolean = false;
   numRegex = '^[0-9]*$';
@@ -151,6 +152,7 @@ export class UsuarioCreateComponent {
   closeModal() {
     this.submitted = false;
     this.userForm.reset();
+    this.usuarioCreado.emit();
     this.isVisible = false;
   }
 
@@ -211,6 +213,7 @@ export class UsuarioCreateComponent {
           this.router.navigate(['/usuario/']);
         });
     }
+    this.usuarioCreado.emit();
     this.closeModal();
   }
 

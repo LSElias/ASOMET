@@ -68,19 +68,26 @@ export class UsuarioIndexComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    var id = 0;
+    this.fetchUsuarios();
+  }
+
+  fetchUsuarios() {
     this.gService
       .list('usuario/')
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: any) => {
-        console.log(response);
         this.datos = response;
-        this.dataSource = new MatTableDataSource(this.datos);
+        this.dataSource = new MatTableDataSource(response);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.setCantUsuarios();
       });
   }
+
+  onUsuarioCreado() {
+    this.fetchUsuarios();
+  }
+
 
   // Redefinir cuando tengamos en el backend la función para traer los tipos de usuario -- ERG
   setSelectedRole() {
