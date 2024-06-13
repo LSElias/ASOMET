@@ -11,11 +11,10 @@ import { SharedModule } from './shared/shared.module';
 import { LoginModule } from './login/login.module';
 import { ReportesModule } from './reportes/reportes.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     HttpClientModule,
     BrowserAnimationsModule,
@@ -27,9 +26,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EventosModule,
     SharedModule,
     LoginModule,
-    ReportesModule
+    ReportesModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
