@@ -187,9 +187,11 @@ export class UsuarioIndexComponent implements AfterViewInit {
   }
 
   update(id: any) {
+    /*
     this.router.navigate(['/usuario/actualizar', id], {
       relativeTo: this.route,
-    });
+    });*/
+    this.userFormModal.openModal(id);
   }
 
   deactivate(id: any) {

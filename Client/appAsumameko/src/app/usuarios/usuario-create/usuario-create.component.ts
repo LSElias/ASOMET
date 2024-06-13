@@ -15,6 +15,7 @@ import {
 })
 export class UsuarioCreateComponent {
   isVisible = false;
+  idUser: any;
   userName: any;
   userEmail: any;
   idRol: any;
@@ -29,10 +30,14 @@ export class UsuarioCreateComponent {
   respCreate: any;
   genericService: any;
 
-  userFormCreate: FormGroup;
+  userForm: FormGroup;
   userData: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
   respuesta: any;
+
+  // Flags de creación/actualización
+  isCreate: boolean = true;
+  titleForm: string = 'Creación';
 
   roles = [
     {
@@ -56,7 +61,8 @@ export class UsuarioCreateComponent {
   }
 
   reactiveForm() {
-    this.userFormCreate = this.fb.group({
+    this.userForm = this.fb.group({
+      idUsuario: [null, null],
       idRol: [null, Validators.required],
       idEstUsuario: [1],
       cedula: [
@@ -65,15 +71,18 @@ export class UsuarioCreateComponent {
           Validators.required,
           Validators.minLength(9),
           Validators.maxLength(12),
-          Validators.pattern(this.numRegex)
+          Validators.pattern(this.numRegex),
         ]),
       ],
       correo: ['', [Validators.required, Validators.email]],
-      contrasena: ['', Validators.compose([
-        Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(20),
-      ])],
+      contrasena: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(20),
+        ]),
+      ],
       telefono: [
         '',
         Validators.compose([
@@ -83,13 +92,12 @@ export class UsuarioCreateComponent {
           Validators.maxLength(8),
         ]),
       ],
-      nombreCompleto: [ '', Validators.compose([
-        Validators.required,
-        Validators.minLength(8)
-      ])]
+      nombreCompleto: [
+        '',
+        Validators.compose([Validators.required, Validators.minLength(8)]),
+      ],
     });
   }
-
 
   onChange(event: any) {
     const value = event.target.value;
@@ -98,15 +106,51 @@ export class UsuarioCreateComponent {
     }
   }
 
-
+  onUpdate(id: any) {
+    if (id !== null) {
+      this.idRol = parseInt(id, 10);
+    }
+  }
 
   // Método para abrir el modal
-  openModal() {
+  openModal(id?: any) {
     this.isVisible = true;
+    if (id != undefined && !isNaN(Number(id))) {
+      this.loadData(id);
+    }
+  }
+
+  // Metodo de carga (Actualización)
+  loadData(id: any): void {
+    this.isCreate = false;
+    this.titleForm = 'Actualización';
+    this.idUser = id;
+
+    this.gService
+      .get('usuario/IdU', id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.userData = data;
+
+        this.userForm.setValue({
+          idUsuario: this.userData.id,
+          idRol: this.userData.idRol,
+          idEstUsuario: this.userData.idEstUsuario,
+          cedula: this.userData.cedula,
+          nombreCompleto: this.userData.nombreCompleto,
+          correo: this.userData.correo,
+          contrasena: this.userData.contrasena,
+          telefono: this.userData.telefono,
+        });
+
+        this.onUpdate(this.userData.idRol);
+      });
   }
 
   // Método para cerrar el modal
   closeModal() {
+    this.submitted = false;
+    this.userForm.reset();
     this.isVisible = false;
   }
 
@@ -114,51 +158,72 @@ export class UsuarioCreateComponent {
   onSubmit() {
     this.submitted = true;
 
+    console.log(this.userForm.value);
 
-    console.log(this.userFormCreate.value);
+    const formData = this.userForm.value;
 
-    const formData = this.userFormCreate.value;
-
+    formData.id = parseInt(this.idUser, 10);
     formData.idRol = parseInt(formData.idRol, 10);
     formData.cedula = parseInt(formData.cedula, 10);
     formData.telefono = parseInt(formData.telefono, 10);
 
-    if (this.userFormCreate.invalid) {
+    if (formData.id != 2) {
+      this.userForm.get('contrasena')?.clearValidators();
+      this.userForm.get('contrasena')?.updateValueAndValidity();
+    }
+
+    if (this.userForm.invalid) {
       return;
     }
 
-    if (this.userFormCreate.value) {
+    if (this.isCreate) {
+      if (this.userForm.value) {
+        this.gService
+          .create('usuario/registrar', formData)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((data: any) => {
+            this.respuesta = data;
+            this.noti.mensajeRedirect(
+              'Usuarios • Creación de Usuario',
+              `Usuario: ${data.name} ha sido creado con éxito.`,
+              TipoMessage.success,
+              'usuario'
+            );
+            console.log(data);
+            this.router.navigate(['usuario/']);
+          });
+      }
+    } else {
       this.gService
-        .create('usuario/registrar', formData)
+        .update('usuario', formData)
         .pipe(takeUntil(this.destroy$))
         .subscribe((data: any) => {
+          //Obtener respuesta
           this.respuesta = data;
+
+          
           this.noti.mensajeRedirect(
-            'Usuarios • Creación de Usuario',
-            `Usuario: ${data.name} ha sido creado con éxito.`,
+            'Usuarios • Actualización de Usuario',
+            `Usuario: ${data.name} ha sido actualizado con éxito.`,
             TipoMessage.success,
-            'usuario'
+            'usuarios'
           );
-          console.log(data);
-          this.router.navigate(['usuario/']);
+          this.router.navigate(['/usuario/']);
         });
     }
     this.closeModal();
   }
 
-
   onReset() {
-    this.userFormCreate.reset();
+    this.userForm.reset();
   }
-
 
   // Control de Errores
   public errorHandling = (control: string, error: string) => {
     return (
-      this.userFormCreate.controls[control].hasError(error) &&
-      this.userFormCreate.controls[control].invalid &&
-      (this.makeSubmit || this.userFormCreate.controls[control].touched)
+      this.userForm.controls[control].hasError(error) &&
+      this.userForm.controls[control].invalid &&
+      (this.makeSubmit || this.userForm.controls[control].touched)
     );
   };
 }
-
