@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MenuComponent } from './shared/menu/menu.component';
 import { LoginComponent } from './login/login/login.component';
+import { UsuarioIndexComponent } from './usuarios/usuario-index/usuario-index.component';
+import { DashboardIndexComponent } from './dashboard/dashboard-index/dashboard-index.component';
 
-const routes: Routes = [
+/* const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
@@ -12,6 +14,17 @@ const routes: Routes = [
     path: 'ee',
     component: MenuComponent,
   },
+]; */
+
+const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'usuario', component: UsuarioIndexComponent },
+  { path: 'dashboard', component: DashboardIndexComponent },
+  /* { path: 'eventos', component: EventosComponent },
+  { path: 'reportes', component: ReportesComponent },
+  { path: 'ajustes', component: AjustesComponent },
+  { path: 'logout', component: LogoutComponent }, */
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Ruta predeterminada
 ];
 
 @NgModule({

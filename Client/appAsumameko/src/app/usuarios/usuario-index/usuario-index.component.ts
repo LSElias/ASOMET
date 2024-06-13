@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, filter, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/shared/generic.service';
+import { UsuarioCreateComponent } from '../usuario-create/usuario-create.component';
+import { UsuarioDesactivarComponent } from '../usuario-desactivar/usuario-desactivar.component';
 
 @Component({
   selector: 'app-usuario-index',
@@ -52,6 +54,9 @@ export class UsuarioIndexComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource = new MatTableDataSource<any>();
+  @ViewChild('userFormModal') userFormModal!: UsuarioCreateComponent;
+  @ViewChild('hideUserFormModal')
+  hideUserFormModal!: UsuarioDesactivarComponent;
 
   constructor(
     private gService: GenericService,
@@ -150,12 +155,13 @@ export class UsuarioIndexComponent implements AfterViewInit {
     }
   }
 
-
   cedulaChange(event: any) {
-  console.log(this.datos[0].cedula)
+    console.log(this.datos[0].cedula);
     const cedulae = event.value;
     if (cedulae !== '') {
-      this.filteredData = this.datos.filter((i: any) => String(i.cedula).includes(String(cedulae)));
+      this.filteredData = this.datos.filter((i: any) =>
+        String(i.cedula).includes(String(cedulae))
+      );
       this.updateTable(this.filteredData);
     } else {
       this.updateTable(this.datos);
@@ -168,9 +174,10 @@ export class UsuarioIndexComponent implements AfterViewInit {
   }
 
   crear() {
-    this.router.navigate(['/usuario/crear'], {
+    /*   this.router.navigate(['/usuario/form/', 0], {
       relativeTo: this.route,
-    });
+    }); */
+    this.userFormModal.openModal();
   }
 
   redirectDetalle(id: any) {
@@ -186,9 +193,11 @@ export class UsuarioIndexComponent implements AfterViewInit {
   }
 
   deactivate(id: any) {
-    this.router.navigate(['/usuario/deactivar', id], {
+    /*  this.router.navigate(['/usuario/deactivar', id], {
       relativeTo: this.route,
-    });
+    }); */
+
+    this.hideUserFormModal.openModal(id);
   }
 
   ngOnDestroy() {

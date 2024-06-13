@@ -1,33 +1,21 @@
-<div class="bg-white w-72 h-screen flex-col py-5 px-2">
-    <!-- ========== INICIO Menú ERG ========== -->
-    <div class="flex mx-5 my-2">
-    <img class="logo" src="../../../assets/images/logo.png"/>
+<!-- menu.component.html -->
+<div class="bg-white h-screen flex-col py-5 px-8 sidebar-container">
+  <!-- INICIO Menú -->
+  <div class="flex my-2">
+    <img class="logo" src="../../../assets/images/logo.png" alt="Logo" />
     <p class="asumameko px-2">Asuma<span class="meko">meko</span></p>
-    </div>
-  <!-- ==========  FIN Menú ERG ========== -->
+  </div>
+  <!-- FIN Menú -->
 
-   <!-- ========== Inicio Botones ERG ========== -->
-    <div class="my-10">
-        <button class="botones activo bg-transparent my-2">    
-            <ng-icon name="heroChartPieSolid"></ng-icon>  <p> Dashboard </p> 
-        </button>
-        <button class="botones bg-transparent my-2">    
-            <ng-icon name="octPerson"></ng-icon>  <p> Usuarios </p> 
-        </button>
-        <button class="botones bg-transparent my-2">    
-            <ng-icon name="lucideCalendarRange"></ng-icon>  <p> Eventos </p> 
-        </button>
-        <button class="botones bg-transparent my-2">    
-            <ng-icon name="lucideBarChart2"></ng-icon>  <p> Reportes </p> 
-        </button>
-        <button class="botones bg-transparent my-2">    
-            <ng-icon name="lucideSettings"></ng-icon>  <p> Ajustes </p> 
-        </button>
-        <button class="botones bg-transparent my-2">    
-            <ng-icon name="lucideLogOut"></ng-icon>  <p> Cerrar Sesión </p> 
-        </button>
-
-    </div>
-    <!-- ==========  FIN Botones ERG ========== -->
-
+  <!-- Inicio Botones -->
+  <div class="my-10">
+    <button *ngFor="let item of navItems" class="botones bg-transparent my-2 menu-item" (click)="onItemSelected(item)"
+      [ngClass]="{
+        'activo': router.isActive(item.route, true)
+      }">
+      <img class="icono" [src]="item.iconPath" [alt]="item.displayName" />
+      <p>{{ item.displayName }}</p>
+    </button>
+  </div>
+  <!-- FIN Botones -->
 </div>

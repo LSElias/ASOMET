@@ -6,8 +6,8 @@
 
 .asumameko {
   user-select: none;
-  width: 165.75px;
-  height: 43px;
+  /* width: 165.75px;
+  height: 43px; */
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -31,7 +31,7 @@
   padding: 16px 24px;
   gap: 24px;
   color: #737791;
-  width: 252px;
+  width: 225px;
   height: 64px;
 
   /* Inside auto layout */
@@ -48,7 +48,7 @@
   padding: 16px 24px;
   gap: 24px;
 
-  width: 252px;
+  width: 225px;
   height: 64px;
 
   /* Shadow */
@@ -60,4 +60,9 @@
   flex: none;
   order: 0;
   flex-grow: 0;
+}
+
+.icono {
+  width: 27px !important;
+  height: 27px !important;
 }

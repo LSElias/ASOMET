@@ -15,6 +15,9 @@ export class HeaderNameService {
              case '/usuario': { 
                     return 'Eventos'
              } 
+             case '/dashboard': { 
+                return 'Dashboard'
+         } 
              default: { 
                 return 'Asumameko';
             } 
