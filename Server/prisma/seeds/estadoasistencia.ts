@@ -5,4 +5,7 @@ export const estadoasistencia = [
     {
         nombre: "Ausente",
     },
+    {
+        nombre: "Pendiente",
+    },
 ];
