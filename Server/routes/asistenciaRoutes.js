@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-const  asistenciaController = require("../controllers/asistenciaController");
+const  asistenciaControllers = require("../controllers/asistenciaControllers");
 
-//Reportes 
-router.get("/presentes",asistenciaController.getAsistencia);
-router.get("/ausencias",asistenciaController.getAusencia);
-router.get("/faltas",asistenciaController.getNollegaron);
-router.get("/noasistencias",asistenciaController.getNoAsistencia);
+router.get('/individual', asistenciaControllers.enviarCorreo_Individual)
+
+//En proceso 
+router.put('/:IdEvento', asistenciaControllers.updateAsistenciaByIdEvento);
+router.put('/:IdEvento', asistenciaControllers.updateConfirmacionByIdEvento);
+
+router.get('/:idEvento', asistenciaControllers.enviarCorreos_General);
 
 module.exports = router;

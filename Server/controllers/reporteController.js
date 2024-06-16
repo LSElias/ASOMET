@@ -1,7 +1,6 @@
 const { PrismaClient, Prisma } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-
 //Reportes
 
 //Asistencia
