@@ -114,7 +114,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idRol\": 3,\r\n    \"idEstUsuario\": 1,\r\n    \"cedula\": 111111280,\r\n    \"nombreCompleto\": \"NAVARRO LOPEZ OLIVIA\",\r\n    \"correo\": \"33ab@aso.co.cr\",\r\n    \"contrasena\": \"123456A\",\r\n    \"telefono\": 888888220\r\n}",
+							"raw": "{\r\n    \"idRol\": 3,\r\n    \"idEstUsuario\": 1,\r\n    \"cedula\": 11111199,\r\n    \"nombreCompleto\": \"NAVARRO LOPEZ OLIVIA\",\r\n    \"correo\": \"39ab@aso.co.cr\",\r\n    \"contrasena\": \"123456A\",\r\n    \"telefono\": 888888220\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -142,7 +142,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idRol\": 3,\r\n    \"idEstUsuario\": 1,\r\n    \"cedula\": 111111280,\r\n    \"nombreCompleto\": \"NAVARRO LOPEZ OLIVIA MARGARET\",\r\n    \"correo\": \"33ab@aso.co.cr\",\r\n    \"contrasena\": \"123456A\",\r\n    \"telefono\": 888888220\r\n}",
+							"raw": "{\r\n    \"idRol\": 3,\r\n    \"idEstUsuario\": 1,\r\n    \"cedula\": 11111199,\r\n    \"nombreCompleto\": \"NAVARRO LOPEZ OLIVIA\",\r\n    \"correo\": \"39ab@aso.co.cr\",\r\n    \"contrasena\": \"123456AB\",\r\n    \"telefono\": 888888220\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -150,13 +150,42 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/usuario/33",
+							"raw": "localhost:3000/usuario/32",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"usuario",
+								"32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Estado Usaurio",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idRol\": 3,\r\n    \"idEstUsuario\": 6,\r\n    \"cedula\": 111111280,\r\n    \"nombreCompleto\": \"NAVARRO LOPEZ OLIVIA MARGARET\",\r\n    \"correo\": \"33ab@aso.co.cr\",\r\n    \"contrasena\": \"123456A\",\r\n    \"telefono\": 888888220\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/usuario/idUser/33",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"idUser",
 								"33"
 							]
 						}
@@ -186,6 +215,427 @@
 							"path": [
 								"usuario",
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Info Asociados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/usuario/info",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"info"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Eventos",
+			"item": [
+				{
+					"name": "Evento By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/eventos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eventos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/eventos",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Datos Fijos",
+			"item": [
+				{
+					"name": "EstAsistencia",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/datos/asistencia",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"datos",
+								"asistencia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EstAsistenciaById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/datos/idA/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"datos",
+								"idA",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EstConfirm",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/datos/confirmacion",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"datos",
+								"confirmacion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EstConfirm By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/datos/idC/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"datos",
+								"idC",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EstUsuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/datos/usuario",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"datos",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EstUsuario By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/datos/idU/2",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"datos",
+								"idU",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rol",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/datos/rol",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"datos",
+								"rol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rol By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/datos/idR/2",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"datos",
+								"idR",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reportes",
+			"item": [
+				{
+					"name": "Asistencia",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/reporte/presentes",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"reporte",
+								"presentes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ausencias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/reporte/ausencias",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"reporte",
+								"ausencias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Faltas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/reporte/faltas",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"reporte",
+								"faltas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "noasistencias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/reporte/noasistencias",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"reporte",
+								"noasistencias"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Asistencia",
+			"item": [
+				{
+					"name": "Correo",
+					"item": [
+						{
+							"name": "Enviar Mensaje",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/asistencia/1",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"asistencia",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mensaje Individual",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idEvento\": 1,\r\n    \"usuariosId\": [1,2,3]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/asistencia/individual",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"asistencia",
+										"individual"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Actualizar Estado Asistencia",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idAsociado\": 2,\r\n    \"idAsistencia\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/asistencia/asist/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"asistencia",
+								"asist",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Confirmacion",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idAsociado\": 2,\r\n    \"idAsistencia\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/asistencia/confirm/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"asistencia",
+								"confirm",
+								"1"
 							]
 						}
 					},
