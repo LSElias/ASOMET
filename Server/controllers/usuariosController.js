@@ -175,6 +175,42 @@ module.exports.getByCedula = async (request, response, next) => {
   }
 };
 
+//GetInfoAsociados 
+module.exports.getInfoAsociados = async (request, response, next) => {
+  try {
+    const usuarios = await prisma.usuario.findMany({
+      orderBy: {
+        idUsuario: "asc",
+      },
+      where: {
+        idEstUsuario: 1,
+        idRol: 3,
+      },
+      include: {
+        rol: true,
+        estadoUsuario: true,
+      },
+    });
+
+    const datos = usuarios.map((u) => ({
+      id: u.idUsuario,
+      idRol: u.idRol,
+      rol: u.rol.nombre,
+      idEstUsuario: u.idEstUsuario,
+      estUsuario: u.estadoUsuario.nombre,
+      cedula: u.cedula,
+      nombreCompleto: u.nombreCompleto,
+      correo: u.correo,
+      contrasena: u.contrasena,
+      telefono: u.telefono,
+    }));
+
+    response.json(datos);
+  } catch (error) {
+    response.status(500).json({ message: "Error en la solicitud", error });
+  }
+};
+
 //Create
 module.exports.create = async (request, response, next) => {
   try {
