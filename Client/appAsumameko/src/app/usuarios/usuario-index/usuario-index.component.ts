@@ -7,6 +7,7 @@ import { Subject, filter, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/shared/generic.service';
 import { UsuarioCreateComponent } from '../usuario-create/usuario-create.component';
 import { UsuarioDesactivarComponent } from '../usuario-desactivar/usuario-desactivar.component';
+import { UsuarioDetalleComponent } from '../usuario-detalle/usuario-detalle.component';
 
 @Component({
   selector: 'app-usuario-index',
@@ -55,8 +56,8 @@ export class UsuarioIndexComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   dataSource = new MatTableDataSource<any>();
   @ViewChild('userFormModal') userFormModal!: UsuarioCreateComponent;
-  @ViewChild('hideUserFormModal')
-  hideUserFormModal!: UsuarioDesactivarComponent;
+  @ViewChild('hideUserFormModal') hideUserFormModal!: UsuarioDesactivarComponent;
+  @ViewChild('userDetalleModal') userDetalleModal!: UsuarioDetalleComponent;
 
   constructor(
     private gService: GenericService,
@@ -188,9 +189,7 @@ export class UsuarioIndexComponent implements AfterViewInit {
   }
 
   redirectDetalle(id: any) {
-    this.router.navigate(['/usuario/detalle', id], {
-      relativeTo: this.route,
-    });
+    this.userDetalleModal.openModal(id);
   }
 
   update(id: any) {

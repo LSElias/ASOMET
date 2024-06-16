@@ -13,41 +13,17 @@ import { GenericService } from 'src/app/shared/generic.service';
 })
 export class EventoIndexComponent {
   selectedStatus: any;
-  selectedRole: any;
   datos: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
-  displayedColumns = ['id', 'cedula', 'nombre', 'correo', 'accion'];
+  displayedColumns = ['id', 'titulo', 'localizacion', 'fecha', 'accion'];
   user = '';
   filteredData: any;
-  asociados = [];
-  ops = [];
-  admins = [];
+  rTitulo:any;
+  rFecha: any;
+  rLocalizacion : any;
 
-  statuses = [
-    {
-      id: 2,
-      name: 'Inactivo',
-    },
-    {
-      id: 1,
-      name: 'Activo',
-    },
-  ];
 
-  roles = [
-    {
-      id: 1,
-      name: 'Administrador',
-    },
-    {
-      id: 2,
-      name: 'Operario',
-    },
-    {
-      id: 3,
-      name: 'Asociado',
-    },
-  ];
+  statuses: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -62,28 +38,34 @@ export class EventoIndexComponent {
     private route: ActivatedRoute
   ) {
     this.selectedStatus = 1;
-    this.selectedRole = 1;
   }
 
   ngAfterViewInit() {
-    this.fetchUsuarios();
+    this.fetch();
   }
 
-  fetchUsuarios() {
+  fetch() {
     this.gService
-      .list('usuario/')
+      .list('eventos/')
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: any) => {
         this.datos = response;
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-        this.setCantUsuarios();
+        this.fillReciente(this.datos[0]);
       });
   }
 
+
+  fillReciente(data: any){
+    this.rTitulo = data.titulo
+    this.rFecha = data.fecha
+    this.rLocalizacion = data.localizacion
+  }
+
   onUsuarioCreado() {
-    this.fetchUsuarios();
+    this.fetch();
   }
 
 
@@ -103,12 +85,6 @@ export class EventoIndexComponent {
         break;
       }
     }
-  }
-
-  setCantUsuarios() {
-    this.asociados = this.datos.filter((data: any) => data.idRol === 3);
-    this.ops = this.datos.filter((data: any) => data.idRol === 2);
-    this.admins = this.datos.filter((data: any) => data.idRol === 1);
   }
 
   statusChange(value: any) {
@@ -160,12 +136,12 @@ export class EventoIndexComponent {
     }
   }
 
-  cedulaChange(event: any) {
-    console.log(this.datos[0].cedula);
-    const cedulae = event.value;
-    if (cedulae !== '') {
+  nombreChange(event: any) {
+    console.log(this.datos[0].titulo);
+    const titulae = event.value;
+    if (titulae !== '') {
       this.filteredData = this.datos.filter((i: any) =>
-        String(i.cedula).includes(String(cedulae))
+        String(i.titulo.toLowerCase()).includes(String(titulae.toLowerCase()))
       );
       this.updateTable(this.filteredData);
     } else {
