@@ -12,7 +12,7 @@ export class HeaderNameService {
             case '/usuario': { 
                 return 'Usuarios' 
              } 
-             case '/usuario': { 
+             case '/eventos': { 
                     return 'Eventos'
              } 
              case '/dashboard': { 

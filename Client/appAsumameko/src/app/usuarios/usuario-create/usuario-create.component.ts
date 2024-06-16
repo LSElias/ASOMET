@@ -187,7 +187,7 @@ export class UsuarioCreateComponent {
             this.respuesta = data;
             this.noti.mensajeRedirect(
               'Usuarios • Creación de Usuario',
-              `Usuario: ${data.name} ha sido creado con éxito.`,
+              `Usuario: ${data.nombreCompleto} ha sido creado con éxito.`,
               TipoMessage.success,
               'usuario'
             );
@@ -206,7 +206,7 @@ export class UsuarioCreateComponent {
           
           this.noti.mensajeRedirect(
             'Usuarios • Actualización de Usuario',
-            `Usuario: ${data.name} ha sido actualizado con éxito.`,
+            `Usuario: ${data.nombreCompleto} ha sido actualizado con éxito.`,
             TipoMessage.success,
             'usuarios'
           );
