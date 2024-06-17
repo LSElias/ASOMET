@@ -1,0 +1,66 @@
+<div class="flex">
+    <app-menu></app-menu>
+    <div class="w-full">
+      <app-header></app-header>
+      <div class="bg-gray-100 w-full h-full py-1">
+        <div class="flex bg-white mx-5 my-5 h-36 rounded-lg drop-shadow-md items-center">
+          <div class="my-5 ml-5 mx-2 py-4 px-2 w-14 h-fit bg-orange-50 rounded-lg text-center flex flex-col">
+            <img class="self-center pb-1" src="../../../assets/images/calendarEventIcon.png" />
+          </div>
+          <div class="my-5 py-4 px-7 h-fit flex flex-col  items-center gap-2 border-r-2">
+            <p class="text-xs text-gray-500"> Siguiente evento </p> 
+            <h1 class="text-lg text-black text-left"> {{"0"}}</h1>
+          </div>
+          <div class="my-5 py-4 px-7 h-fit flex flex-col items-center gap-2 border-r-2">
+            <p class="text-xs text-gray-500"> Fecha </p> 
+            <h1 class="text-lg text-black text-left"> {{"0"}}</h1>
+          </div>
+          <div class="my-5 py-4 px-7 h-fit flex flex-col items-center gap-2">
+            <p class="text-xs text-gray-500"> Lugar </p> 
+            <h1 class="text-lg text-black text-left"> {{"0"}}</h1>
+          </div>
+        </div>
+  
+        <div class="bg-white mx-5 my-5 h-fit rounded-lg p-2 justify-center gap-2 drop-shadow-sm">
+          <div class="flex w-full h-fit p-3">
+  
+            <!-- ========== Crear Usuario  ========== -->
+            <div>
+  
+              <button type="button"
+                class="py-2.5 px-3 me-2 mb-2 text-sm h-fit flex gap-1 font-medium text-white rounded-lg bg-[#8197B1] hover:bg-[#6E749B] transition duration-200">
+                <ng-icon name="heroPlus" size="1.4em"></ng-icon>
+                <p>Nuevo Evento</p>
+              </button>
+  
+            </div>
+            <!-- ========== Crear Usuario ========== -->
+  
+            <span class="example-spacer"></span>
+  
+
+            <!-- ========== Search Cédula
+            <div class="max-w-md mx-auto">
+              <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                  <svg class="w-4 h-4 text-indigo-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                  </svg>
+                </div>
+                <input (change)="nombreChange($event.target)" type="search" id="default-search"
+                  class="block w-full h-11 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-transparent focus:ring-indigo-600 focus:border-indigo-600"
+                  placeholder="Buscar por nombre" required />
+              </div>
+            </div>
+          </div>
+      Search Cédula  ========== -->
+  
+
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  

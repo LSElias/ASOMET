@@ -162,10 +162,11 @@ export class EventoIndexComponent {
   }
 
   redirectDetalle(id: any) {
-    this.router.navigate(['/usuario/detalle', id], {
+    this.router.navigate(['/eventos/', id], {
       relativeTo: this.route,
     });
   }
+
 
   update(id: any) {
     /*

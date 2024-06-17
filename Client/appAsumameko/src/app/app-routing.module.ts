@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login/login.component';
 import { UsuarioIndexComponent } from './usuarios/usuario-index/usuario-index.component';
 import { DashboardIndexComponent } from './dashboard/dashboard-index/dashboard-index.component';
 import { EventoIndexComponent } from './eventos/evento-index/evento-index.component';
+import { EventoDetalleComponent } from './eventos/evento-detalle/evento-detalle.component';
 
 /* const routes: Routes = [
   {
@@ -19,9 +20,12 @@ import { EventoIndexComponent } from './eventos/evento-index/evento-index.compon
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  
   { path: 'usuario', component: UsuarioIndexComponent },
   { path: 'dashboard', component: DashboardIndexComponent },
   { path: 'eventos', component: EventoIndexComponent },
+  { path: 'eventos/:id', component: EventoDetalleComponent },
+
 /*{ path: 'reportes', component: ReportesComponent },
   { path: 'ajustes', component: AjustesComponent },
   { path: 'logout', component: LogoutComponent }, */
