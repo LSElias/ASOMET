@@ -1,63 +1,36 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, filter, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/shared/generic.service';
-import { UsuarioCreateComponent } from '../usuario-create/usuario-create.component';
-import { UsuarioDesactivarComponent } from '../usuario-desactivar/usuario-desactivar.component';
-import { UsuarioDetalleComponent } from '../usuario-detalle/usuario-detalle.component';
 
 @Component({
-  selector: 'app-usuario-index',
-  templateUrl: './usuario-index.component.html',
-  styleUrls: ['./usuario-index.component.css'],
+  selector: 'app-evento-index',
+  templateUrl: './evento-index.component.html',
+  styleUrls: ['./evento-index.component.css']
 })
-export class UsuarioIndexComponent implements AfterViewInit {
+export class EventoIndexComponent {
   selectedStatus: any;
-  selectedRole: any;
   datos: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
-  displayedColumns = ['id', 'cedula', 'nombre', 'correo', 'accion'];
+  displayedColumns = ['id', 'titulo', 'localizacion', 'fecha', 'accion'];
   user = '';
   filteredData: any;
-  asociados = [];
-  ops = [];
-  admins = [];
+  rTitulo:any;
+  rFecha: any;
+  rLocalizacion : any;
 
-  statuses = [
-    {
-      id: 2,
-      name: 'Inactivo',
-    },
-    {
-      id: 1,
-      name: 'Activo',
-    },
-  ];
 
-  roles = [
-    {
-      id: 1,
-      name: 'Administrador',
-    },
-    {
-      id: 2,
-      name: 'Operario',
-    },
-    {
-      id: 3,
-      name: 'Asociado',
-    },
-  ];
+  statuses: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource = new MatTableDataSource<any>();
-  @ViewChild('userFormModal') userFormModal!: UsuarioCreateComponent;
-  @ViewChild('hideUserFormModal') hideUserFormModal!: UsuarioDesactivarComponent;
-  @ViewChild('userDetalleModal') userDetalleModal!: UsuarioDetalleComponent;
+//  @ViewChild('userFormModal') userFormModal!: EventoCreateComponent;
+//  @ViewChild('hideUserFormModal')
+//  hideUserFormModal!: UsuarioDesactivarComponent;
 
   constructor(
     private gService: GenericService,
@@ -65,28 +38,34 @@ export class UsuarioIndexComponent implements AfterViewInit {
     private route: ActivatedRoute
   ) {
     this.selectedStatus = 1;
-    this.selectedRole = 1;
   }
 
   ngAfterViewInit() {
-    this.fetchUsuarios();
+    this.fetch();
   }
 
-  fetchUsuarios() {
+  fetch() {
     this.gService
-      .list('usuario/')
+      .list('eventos/')
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: any) => {
         this.datos = response;
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-        this.setCantUsuarios();
+        this.fillReciente(this.datos[0]);
       });
   }
 
+
+  fillReciente(data: any){
+    this.rTitulo = data.titulo
+    this.rFecha = data.fecha
+    this.rLocalizacion = data.localizacion
+  }
+
   onUsuarioCreado() {
-    this.fetchUsuarios();
+    this.fetch();
   }
 
 
@@ -106,12 +85,6 @@ export class UsuarioIndexComponent implements AfterViewInit {
         break;
       }
     }
-  }
-
-  setCantUsuarios() {
-    this.asociados = this.datos.filter((data: any) => data.idRol === 3);
-    this.ops = this.datos.filter((data: any) => data.idRol === 2);
-    this.admins = this.datos.filter((data: any) => data.idRol === 1);
   }
 
   statusChange(value: any) {
@@ -163,12 +136,12 @@ export class UsuarioIndexComponent implements AfterViewInit {
     }
   }
 
-  cedulaChange(event: any) {
-    console.log(this.datos[0].cedula);
-    const cedulae = event.value;
-    if (cedulae !== '') {
+  nombreChange(event: any) {
+    console.log(this.datos[0].titulo);
+    const titulae = event.value;
+    if (titulae !== '') {
       this.filteredData = this.datos.filter((i: any) =>
-        String(i.cedula).includes(String(cedulae))
+        String(i.titulo.toLowerCase()).includes(String(titulae.toLowerCase()))
       );
       this.updateTable(this.filteredData);
     } else {
@@ -185,11 +158,13 @@ export class UsuarioIndexComponent implements AfterViewInit {
     /*   this.router.navigate(['/usuario/form/', 0], {
       relativeTo: this.route,
     }); */
-    this.userFormModal.openModal();
+   // this.userFormModal.openModal();
   }
 
   redirectDetalle(id: any) {
-    this.userDetalleModal.openModal(id);
+    this.router.navigate(['/usuario/detalle', id], {
+      relativeTo: this.route,
+    });
   }
 
   update(id: any) {
@@ -197,7 +172,7 @@ export class UsuarioIndexComponent implements AfterViewInit {
     this.router.navigate(['/usuario/actualizar', id], {
       relativeTo: this.route,
     });*/
-    this.userFormModal.openModal(id);
+ //   this.userFormModal.openModal(id);
   }
 
   deactivate(id: any) {
@@ -205,7 +180,7 @@ export class UsuarioIndexComponent implements AfterViewInit {
       relativeTo: this.route,
     }); */
 
-    this.hideUserFormModal.openModal(id);
+ //   this.hideUserFormModal.openModal(id);
   }
 
   ngOnDestroy() {

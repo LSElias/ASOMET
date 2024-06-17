@@ -184,5 +184,6 @@
 </div>
 
 <!-- Modal de Crear Usuario -->
-<app-usuario-create #userFormModal></app-usuario-create>
+<app-usuario-create #userFormModal (usuarioCreado)="onUsuarioCreado()"></app-usuario-create>
 <app-usuario-desactivar #hideUserFormModal></app-usuario-desactivar>
+<app-usuario-detalle #userDetalleModal></app-usuario-detalle>

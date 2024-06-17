@@ -1,19 +1,17 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/shared/generic.service';
-import {
-  NotificacionService,
-  TipoMessage,
-} from 'src/app/shared/notification.service';
+import { NotificacionService, TipoMessage } from 'src/app/shared/notification.service';
 
 @Component({
-  selector: 'app-usuario-create',
-  templateUrl: './usuario-create.component.html',
-  styleUrls: ['./usuario-create.component.css'],
+  selector: 'app-usuario-detalle',
+  templateUrl: './usuario-detalle.component.html',
+  styleUrls: ['./usuario-detalle.component.css']
 })
-export class UsuarioCreateComponent {
+export class UsuarioDetalleComponent {
+
   isVisible = false;
   idUser: any;
   userName: any;
@@ -21,7 +19,6 @@ export class UsuarioCreateComponent {
   idRol: any;
   telefono: any;
   cedula: any;
-  @Output() usuarioCreado: EventEmitter<void> = new EventEmitter<void>();
 
   makeSubmit: boolean = false;
   numRegex = '^[0-9]*$';
@@ -97,6 +94,7 @@ export class UsuarioCreateComponent {
         '',
         Validators.compose([Validators.required, Validators.minLength(8)]),
       ],
+      rol: [null,null]
     });
   }
 
@@ -142,6 +140,7 @@ export class UsuarioCreateComponent {
           correo: this.userData.correo,
           contrasena: this.userData.contrasena,
           telefono: this.userData.telefono,
+          rol: this.userData.rol
         });
 
         this.onUpdate(this.userData.idRol);
@@ -152,7 +151,6 @@ export class UsuarioCreateComponent {
   closeModal() {
     this.submitted = false;
     this.userForm.reset();
-    this.usuarioCreado.emit();
     this.isVisible = false;
   }
 
@@ -213,7 +211,6 @@ export class UsuarioCreateComponent {
           this.router.navigate(['/usuario/']);
         });
     }
-    this.usuarioCreado.emit();
     this.closeModal();
   }
 
@@ -229,4 +226,6 @@ export class UsuarioCreateComponent {
       (this.makeSubmit || this.userForm.controls[control].touched)
     );
   };
+
+
 }
