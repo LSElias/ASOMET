@@ -60,16 +60,28 @@ module.exports.enviarCorreo_Individual = async (request, response, next) => {
     }
 
     //Correo de usuario
-    const usuario = await prisma.usuario.findUnique({
-      where: {
-        idUsuario: parseInt(datos.idUsuario),
-      },
-    });
+    const usuariosId = datos.usuariosId; 
+    const info = []; 
 
-    const info = {
-      correo: usuario.correo,
-    };
+    for (let i = 0; i < usuariosId.length; i++) {
+      
+      const usuarios = await prisma.usuario.findUnique({
+        where: {
+          idUsuario: parseInt(usuariosId[i]),
+        },
+      });
 
+      if(usuarios.length === null){
+        return response.status(404).json({
+          message: "Usuario no seleccionado",
+        });
+      }
+      
+      if(usuarios){
+        info.push({ correo: usuarios.correo, }); 
+      }
+
+    }
     //Proceso email
 
     response.json(info);
@@ -87,26 +99,13 @@ module.exports.updateAsistenciaByIdEvento = async (request, response, next) => {
     let idEvento = parseInt(request.params.idEvento);
     let idAsociado = parseInt(info.idAsociado); 
 
-    const oldInfo = await prisma.asistencia.findUnique({
-      where: {
-        AND: 
-        [
-          {idEvento: idEvento},
-          { idAsociado: idAsociado}
-        ]
-      },
-    });
-
     const newInfo = await prisma.asistencia.update({
       where: {
-        AND: 
-        [
-          {idEvento: idEvento},
-          { idAsociado: idAsociado}
-        ]
+          idEvento: idEvento,
+          idAsociado: idAsociado
       },
       data: {
-        idAsistencia: info.idAsistencia,
+        idAsistencia: info.idAsistencia
       },
     });
 
@@ -123,23 +122,10 @@ module.exports.updateConfirmacionByIdEvento = async (request, response, next) =>
     let idEvento = parseInt(request.params.idEvento);
     let idAsociado = parseInt(info.idAsociado); 
 
-    const oldInfo = await prisma.asistencia.findUnique({
-      where: {
-        AND: 
-        [
-          {idEvento: idEvento},
-          { idAsociado: idAsociado}
-        ]
-      }
-    });
-
     const newInfo = await prisma.asistencia.update({
       where: {
-        AND: 
-        [
-          {idEvento: idEvento},
-          { idAsociado: idAsociado}
-        ]
+       idEvento: idEvento,
+       idAsociado: idAsociado
       },
       data: {
         idConfirm: info.idConfirm,
