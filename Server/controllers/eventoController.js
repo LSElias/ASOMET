@@ -22,28 +22,28 @@ module.exports.getAll = async (request, response, next) => {
   }
 };
 
-// Get event by ID
+//Get event by ID
 module.exports.getById = async (request, response, next) => {
   const { id } = request.params;
   try {
     const evento = await prisma.evento.findUnique({
-      where: { idEvento: Number(id) },
+      where: {
+        idEvento: parseInt(id, 10),
+      },
       include: {
         administrador: true,
         asistencia: true,
       },
     });
-
-    if (!evento) {
-      return response.status(404).json({ message: "Event not found" });
+    if (evento) {
+      response.json(evento);
+    } else {
+      response.status(404).json({ error: "Evento no encontrado" });
     }
-
-    response.json(evento);
   } catch (error) {
     next(error);
   }
 };
-
 
 // Create a new event
 module.exports.create = async (request, response, next) => {
@@ -57,6 +57,7 @@ module.exports.create = async (request, response, next) => {
         fecha,
         hora,
         localizacion,
+        activo: activo !== undefined ? activo : true
       },
     });
 
@@ -80,6 +81,7 @@ module.exports.update = async (request, response, next) => {
         fecha,
         hora,
         localizacion,
+        activo
       },
     });
 
@@ -102,5 +104,43 @@ module.exports.delete = async (request, response, next) => {
     next(error);
   }
 };
+
+module.exports.searchByTitle = async (request, response, next) => {
+  const { titulo } = request.query;
+  try {
+    const eventos = await prisma.evento.findMany({
+      where: {
+        titulo: {
+          contains: titulo
+        },
+      },
+      include: {
+        administrador: true,
+        asistencia: true,
+      },
+    });
+    response.json(eventos);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports.searchByStatus = async (req, res) => {
+  const { activo } = req.query;
+  const isActive = activo === 'true'; 
+
+  try {
+    const eventos = await prisma.evento.findMany({
+      where: {
+        activo: isActive
+      }
+    });
+    res.json(eventos);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al buscar eventos por estado' });
+  }
+};
+
 
 
