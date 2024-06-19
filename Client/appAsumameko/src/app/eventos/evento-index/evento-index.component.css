@@ -1,42 +1,41 @@
 .border-left {
-    border-left: 2px solid #ececee;
-  }
-  
-  .center {
-    text-align: center;
-  }
-  
-  .bt-detalle {
-    background-image: url("../../../assets/images/detailUserIcon.png");
-    background-repeat: no-repeat;
-  }
-  
-  .bt-editar {
-    background-image: url("../../../assets/images/editUserIcon.png");
-    background-repeat: no-repeat;
-  }
-  
-  .bt-desactivar {
-    background-image: url("../../../assets/images/hideUserIcon.png");
-    background-repeat: no-repeat;
-  }
-  
-  table {
-    border-collapse: separate;
-  }
-  
-  .colcolor {
-    background-color: #f3f4f6 !important;
-    text-transform: uppercase;
-  }
-  
-  tr {
-    height: 40px !important;
-    color: #374151;
-  }
-  
-  td {
-    color: #6b7280;
-    border: none;
-  }
-  
+  border-left: 2px solid #ececee;
+}
+
+.center {
+  text-align: center;
+}
+
+.bt-detalle {
+  background-image: url("../../../assets/images/detailUserIcon.png");
+  background-repeat: no-repeat;
+}
+
+.bt-editar {
+  background-image: url("../../../assets/images/editUserIcon.png");
+  background-repeat: no-repeat;
+}
+
+.bt-desactivar {
+  background-image: url("../../../assets/images/hideUserIcon.png");
+  background-repeat: no-repeat;
+}
+
+table {
+  border-collapse: separate;
+}
+
+.colcolor {
+  background-color: #f3f4f6 !important;
+  text-transform: uppercase;
+}
+
+tr {
+  height: 40px !important;
+  color: #374151;
+}
+
+td {
+  color: #6b7280;
+  border: none;
+}
