@@ -245,9 +245,101 @@
 			"name": "Eventos",
 			"item": [
 				{
-					"name": "Evento By Id",
+					"name": "Obtener Todos",
 					"request": {
 						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/eventos",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/eventos/{id}",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventos",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombreEvento\": \"Conferencia de Innovación\",\n  \"fecha\": \"2024-06-20\",\n  \"ubicacion\": \"Centro de Convenciones\",\n  \"descripcion\": \"Una conferencia sobre las últimas innovaciones tecnológicas.\",\n  \"capacidad\": 300\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/eventos",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombreEvento\": \"Conferencia de Innovación y Tecnología\",\n  \"fecha\": \"2024-06-21\",\n  \"ubicacion\": \"Centro de Convenciones Internacional\",\n  \"descripcion\": \"Una conferencia actualizada sobre las últimas innovaciones tecnológicas.\",\n  \"capacidad\": 350\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/eventos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
 						"header": [],
 						"url": {
 							"raw": "localhost:3000/eventos/1",
@@ -264,18 +356,50 @@
 					"response": []
 				},
 				{
-					"name": "Eventos",
+					"name": "Buscar por Título",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/eventos",
+							"raw": "localhost:3000/eventos/buscarPorTitulo?titulo=nombreDelEvento",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"eventos"
+								"eventos",
+								"titulo"
+							],
+							"query": [
+								{
+									"key": "titulo",
+									"value": "nombreDelEvento"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por Estado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/eventos/buscarPorEstado?activo=true",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventos",
+								"estado"
+							],
+							"query": [
+								{
+									"key": "activo",
+									"value": "true"
+								}
 							]
 						}
 					},
