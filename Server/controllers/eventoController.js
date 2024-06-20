@@ -46,7 +46,8 @@ module.exports.getById = async (request, response, next) => {
 
 // Create a new event
 module.exports.create = async (request, response, next) => {
-  const { idCreador, titulo, descripcion, fecha, hora, localizacion } = request.body;
+  const { idCreador, titulo, descripcion, fecha, hora, localizacion } =
+    request.body;
   try {
     const newEvento = await prisma.evento.create({
       data: {
@@ -69,7 +70,8 @@ module.exports.create = async (request, response, next) => {
 // Update event
 module.exports.update = async (request, response, next) => {
   const { id } = request.params;
-  const { idCreador, titulo, descripcion, fecha, hora, localizacion } = request.body;
+  const { idCreador, titulo, descripcion, fecha, hora, localizacion } =
+    request.body;
   try {
     const updatedEvento = await prisma.evento.update({
       where: { idEvento: Number(id) },

@@ -5,11 +5,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/shared/generic.service';
+import { EventoFormComponent } from '../evento-form/evento-form.component';
 
 @Component({
   selector: 'app-evento-index',
   templateUrl: './evento-index.component.html',
-  styleUrls: ['./evento-index.component.css']
+  styleUrls: ['./evento-index.component.css'],
 })
 export class EventoIndexComponent {
   selectedStatus: any;
@@ -18,20 +19,16 @@ export class EventoIndexComponent {
   displayedColumns = ['id', 'titulo', 'localizacion', 'fecha', 'accion'];
   user = '';
   filteredData: any;
-  rTitulo:any;
+  rTitulo: any;
   rFecha: any;
-  rLocalizacion : any;
-
+  rLocalizacion: any;
 
   statuses: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource = new MatTableDataSource<any>();
-//  @ViewChild('userFormModal') userFormModal!: EventoCreateComponent;
-//  @ViewChild('hideUserFormModal')
-//  hideUserFormModal!: UsuarioDesactivarComponent;
-
+  @ViewChild('eventModal') eventModal!: EventoFormComponent;
   constructor(
     private gService: GenericService,
     private router: Router,
@@ -57,17 +54,15 @@ export class EventoIndexComponent {
       });
   }
 
-
-  fillReciente(data: any){
-    this.rTitulo = data.titulo
-    this.rFecha = data.fecha
-    this.rLocalizacion = data.localizacion
+  fillReciente(data: any) {
+    this.rTitulo = data.titulo;
+    this.rFecha = data.fecha;
+    this.rLocalizacion = data.localizacion;
   }
 
   onUsuarioCreado() {
     this.fetch();
   }
-
 
   // Redefinir cuando tengamos en el backend la función para traer los tipos de usuario -- ERG
   setSelectedRole() {
@@ -155,10 +150,8 @@ export class EventoIndexComponent {
   }
 
   crear() {
-    /*   this.router.navigate(['/usuario/form/', 0], {
-      relativeTo: this.route,
-    }); */
-   // this.userFormModal.openModal();
+    this.eventModal.openModal();
+    console.log('dsk');
   }
 
   redirectDetalle(id: any) {
@@ -167,21 +160,19 @@ export class EventoIndexComponent {
     });
   }
 
-
   update(id: any) {
     /*
     this.router.navigate(['/usuario/actualizar', id], {
       relativeTo: this.route,
     });*/
- //   this.userFormModal.openModal(id);
+    //   this.userFormModal.openModal(id);
   }
 
   deactivate(id: any) {
     /*  this.router.navigate(['/usuario/deactivar', id], {
       relativeTo: this.route,
     }); */
-
- //   this.hideUserFormModal.openModal(id);
+    //   this.hideUserFormModal.openModal(id);
   }
 
   ngOnDestroy() {
