@@ -15,11 +15,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { heroPlus } from '@ng-icons/heroicons/outline';
-
+import { EventoDetalleComponent } from './evento-detalle/evento-detalle.component';
+import { EventoFormComponent } from './evento-form/evento-form.component';
 
 @NgModule({
   declarations: [
-    EventoIndexComponent
+    EventoIndexComponent,
+    EventoDetalleComponent,
+    EventoFormComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +38,6 @@ import { heroPlus } from '@ng-icons/heroicons/outline';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-  ]
+  ],
 })
-export class EventosModule { }
+export class EventosModule {}

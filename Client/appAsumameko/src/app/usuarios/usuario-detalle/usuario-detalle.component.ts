@@ -3,15 +3,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/shared/generic.service';
-import { NotificacionService, TipoMessage } from 'src/app/shared/notification.service';
+import {
+  NotificacionService,
+  TipoMessage,
+} from 'src/app/shared/notification.service';
 
 @Component({
   selector: 'app-usuario-detalle',
   templateUrl: './usuario-detalle.component.html',
-  styleUrls: ['./usuario-detalle.component.css']
+  styleUrls: ['./usuario-detalle.component.css'],
 })
 export class UsuarioDetalleComponent {
-
   isVisible = false;
   idUser: any;
   userName: any;
@@ -61,40 +63,14 @@ export class UsuarioDetalleComponent {
   reactiveForm() {
     this.userForm = this.fb.group({
       idUsuario: [null, null],
-      idRol: [null, Validators.required],
-      idEstUsuario: [1],
-      cedula: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(9),
-          Validators.maxLength(12),
-          Validators.pattern(this.numRegex),
-        ]),
-      ],
-      correo: ['', [Validators.required, Validators.email]],
-      contrasena: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(20),
-        ]),
-      ],
-      telefono: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(this.numRegex),
-          Validators.minLength(8),
-          Validators.maxLength(8),
-        ]),
-      ],
-      nombreCompleto: [
-        '',
-        Validators.compose([Validators.required, Validators.minLength(8)]),
-      ],
-      rol: [null,null]
+      idRol: [null, null],
+      idEstUsuario: [null, null],
+      cedula: [null, null],
+      correo: [null, null],
+      contrasena: [null, null],
+      telefono: [null, null],
+      nombreCompleto: [null, null],
+      rol: [null, null],
     });
   }
 
@@ -140,7 +116,7 @@ export class UsuarioDetalleComponent {
           correo: this.userData.correo,
           contrasena: this.userData.contrasena,
           telefono: this.userData.telefono,
-          rol: this.userData.rol
+          rol: this.userData.rol,
         });
 
         this.onUpdate(this.userData.idRol);
@@ -201,7 +177,6 @@ export class UsuarioDetalleComponent {
           //Obtener respuesta
           this.respuesta = data;
 
-          
           this.noti.mensajeRedirect(
             'Usuarios • Actualización de Usuario',
             `Usuario: ${data.nombreCompleto} ha sido actualizado con éxito.`,
@@ -226,6 +201,4 @@ export class UsuarioDetalleComponent {
       (this.makeSubmit || this.userForm.controls[control].touched)
     );
   };
-
-
 }
