@@ -45,10 +45,55 @@ module.exports.getById = async (request, response, next) => {
 };
 
 // Create a new event
+// module.exports.create = async (request, response, next) => {
+//   const { idCreador, titulo, descripcion, fecha, hora, localizacion } = request.body;
+//   try {
+//     const newEvento = await prisma.evento.create({
+//       data: {
+//         idCreador,
+//         titulo,
+//         descripcion,
+//         fecha,
+//         hora,
+//         localizacion
+//       },
+//     });
+
+//     response.status(201).json(newEvento);
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
+
 module.exports.create = async (request, response, next) => {
   const { idCreador, titulo, descripcion, fecha, hora, localizacion } =
     request.body;
   try {
+ 
+    const usuariosActivos = await prisma.usuario.findMany({
+      orderBy: {
+        idUsuario: "asc",
+      },
+      include: {
+        rol: true,
+        estadoUsuario: true,
+      },
+    });
+
+    const estadoAntes = await prisma.estadoAsistencia.findFirst({
+      where: {
+        nombre: 'Pendiente'
+      }
+    });
+
+    const estadoDespues = await prisma.estadoAsistencia.findFirst({
+      where: {
+        nombre: 'Pendiente' 
+      }
+    });
+
+    // Crear el evento
     const newEvento = await prisma.evento.create({
       data: {
         idCreador,
@@ -57,15 +102,77 @@ module.exports.create = async (request, response, next) => {
         fecha,
         hora,
         localizacion,
-    //    activo: activo !== undefined ? activo : true
+        asistencia: {
+          create: usuariosActivos.map(usuario => ({
+            idAsociado: usuario.idUsuario,
+            idEstadoConfir: estadoAntes.idAsistencia,
+            idAsistencia: estadoDespues.idAsistencia
+          }))
+        }
       },
+      include: {
+        asistencia: {
+          include: {
+            asociado: {
+              select: {
+                idUsuario: true,
+                nombreCompleto: true,
+                correo: true,
+                telefono: true
+              }
+            },
+            estadoConfir: {
+              select: {
+                idEstadoConfir: true,
+                nombre: true
+              }
+            },
+            estadoAsistencia: {
+              select: {
+                idAsistencia: true,
+                nombre: true
+              }
+            }
+          }
+        }
+      }
     });
 
-    response.status(201).json(newEvento);
+    const newEventDetail = {
+      idEvento: newEvento.idEvento,
+      idCreador: newEvento.idCreador,
+      titulo: newEvento.titulo,
+      descripcion: newEvento.descripcion,
+      fecha: newEvento.fecha,
+      hora: newEvento.hora,
+      localizacion: newEvento.localizacion,
+      asistencia: newEvento.asistencia.map(asistencia => ({
+        idConfirm: asistencia.idConfirm,
+        asociado: {
+          idUsuario: asistencia.asociado.idUsuario,
+          nombreCompleto: asistencia.asociado.nombreCompleto,
+          correo: asistencia.asociado.correo,
+          telefono: asistencia.asociado.telefono
+        },
+        estadoConfirmacion: {
+          idEstadoConfir: asistencia.estadoConfir.idEstadoConfir,
+          nombre: asistencia.estadoConfir.nombre
+        },
+        estadoAsistencia: {
+          idAsistencia: asistencia.estadoAsistencia.idAsistencia,
+          nombre: asistencia.estadoAsistencia.nombre
+        }
+      }))
+    };    
+    
+
+    response.status(201).json(newEventDetail);
   } catch (error) {
     next(error);
   }
 };
+
+
 
 // Update event
 module.exports.update = async (request, response, next) => {
@@ -80,8 +187,7 @@ module.exports.update = async (request, response, next) => {
         descripcion,
         fecha,
         hora,
-        localizacion,
-     //   activo
+        localizacion
       },
     });
 
@@ -125,19 +231,19 @@ module.exports.searchByTitle = async (request, response, next) => {
   }
 };
 
-module.exports.searchByStatus = async (req, res) => {
-  const { activo } = req.query;
-  const isActive = activo === 'true'; 
+// module.exports.searchByStatus = async (req, res) => {
+//   const { activo } = req.query;
+//   const isActive = activo === 'true'; 
 
-  try {
-    const eventos = await prisma.evento.findMany({
-      where: {
-        activo: isActive
-      }
-    });
-    res.json(eventos);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error al buscar eventos por estado' });
-  }
-};
+//   try {
+//     const eventos = await prisma.evento.findMany({
+//       where: {
+//         activo: isActive
+//       }
+//     });
+//     res.json(eventos);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: 'Error al buscar eventos por estado' });
+//   }
+// };
