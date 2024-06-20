@@ -54,81 +54,14 @@ export class EventoIndexComponent {
       });
   }
 
+  onEventoCreado() {
+    this.fetch();
+  }
+
   fillReciente(data: any) {
     this.rTitulo = data.titulo;
     this.rFecha = data.fecha;
     this.rLocalizacion = data.localizacion;
-  }
-
-  onUsuarioCreado() {
-    this.fetch();
-  }
-
-  // Redefinir cuando tengamos en el backend la función para traer los tipos de usuario -- ERG
-  setSelectedRole() {
-    switch (this.user) {
-      case 'Administrador': {
-        this.selectedStatus = 'Operario';
-        break;
-      }
-      case 'Operario': {
-        this.selectedStatus = 'Asociados';
-        break;
-      }
-      default: {
-        this.selectedStatus = 'Administradores';
-        break;
-      }
-    }
-  }
-
-  statusChange(value: any) {
-    console.log(value.value);
-    switch (value.value) {
-      case '2': {
-        this.filteredData = this.datos.filter(
-          (data: any) => data.idEstUsuario === 2
-        );
-        this.updateTable(this.filteredData);
-        break;
-      }
-      case '1': {
-        this.filteredData = this.datos.filter(
-          (data: any) => data.idEstUsuario === 1
-        );
-        this.updateTable(this.filteredData);
-        break;
-      }
-      default: {
-        this.updateTable(this.datos);
-        break;
-      }
-    }
-  }
-
-  roleChange(value: any) {
-    console.log(value.value);
-    switch (value.value) {
-      case '1': {
-        this.filteredData = this.datos.filter((data: any) => data.idRol === 1);
-        this.updateTable(this.filteredData);
-        break;
-      }
-      case '2': {
-        this.filteredData = this.datos.filter((data: any) => data.idRol === 2);
-        this.updateTable(this.filteredData);
-        break;
-      }
-      case '3': {
-        this.filteredData = this.datos.filter((data: any) => data.idRol === 3);
-        this.updateTable(this.filteredData);
-        break;
-      }
-      default: {
-        this.updateTable(this.datos);
-        break;
-      }
-    }
   }
 
   nombreChange(event: any) {
@@ -151,7 +84,6 @@ export class EventoIndexComponent {
 
   crear() {
     this.eventModal.openModal();
-    console.log('dsk');
   }
 
   redirectDetalle(id: any) {
@@ -165,7 +97,7 @@ export class EventoIndexComponent {
     this.router.navigate(['/usuario/actualizar', id], {
       relativeTo: this.route,
     });*/
-    //   this.userFormModal.openModal(id);
+     this.eventModal.openModal(id);
   }
 
   deactivate(id: any) {

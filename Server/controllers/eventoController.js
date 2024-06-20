@@ -57,7 +57,7 @@ module.exports.create = async (request, response, next) => {
         fecha,
         hora,
         localizacion,
-        activo: activo !== undefined ? activo : true
+    //    activo: activo !== undefined ? activo : true
       },
     });
 
@@ -69,12 +69,11 @@ module.exports.create = async (request, response, next) => {
 
 // Update event
 module.exports.update = async (request, response, next) => {
-  const { id } = request.params;
-  const { idCreador, titulo, descripcion, fecha, hora, localizacion } =
+  const { idEvento, idCreador, titulo, descripcion, fecha, hora, localizacion } =
     request.body;
   try {
     const updatedEvento = await prisma.evento.update({
-      where: { idEvento: Number(id) },
+      where: { idEvento: Number(idEvento) },
       data: {
         idCreador,
         titulo,
@@ -82,7 +81,7 @@ module.exports.update = async (request, response, next) => {
         fecha,
         hora,
         localizacion,
-        activo
+     //   activo
       },
     });
 
