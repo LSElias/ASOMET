@@ -7,55 +7,69 @@
         <div class="my-5 ml-5 mx-2 py-4 px-2 w-14 h-fit bg-orange-50 rounded-lg text-center flex flex-col">
           <img class="self-center pb-1" src="../../../assets/images/calendarEventIcon.png" />
         </div>
-        <div class="my-5 py-4 px-7 h-fit flex flex-col  items-center gap-2 border-r-2">
-          <p class="text-xs text-gray-500"> Siguiente evento </p>
-          <h1 class="text-lg text-black text-left"> {{"0"}}</h1>
+
+        <div *ngIf="datos" class="my-5 py-4 px-7 h-fit flex flex-col  items-center gap-2 border-r-2">
+          <p class="text-xs text-gray-500"> Título </p>
+          <h1 class="text-sm text-black text-left"> {{datos.titulo }}</h1>
         </div>
-        <div class="my-5 py-4 px-7 h-fit flex flex-col items-center gap-2 border-r-2">
-          <p class="text-xs text-gray-500"> Fecha </p>
-          <h1 class="text-lg text-black text-left"> {{"0"}}</h1>
-        </div>
-        <div class="my-5 py-4 px-7 h-fit flex flex-col items-center gap-2">
+
+        <div *ngIf="datos" class="my-5 py-4 px-7 h-fit flex flex-col items-center gap-2 border-r-2">
           <p class="text-xs text-gray-500"> Lugar </p>
-          <h1 class="text-lg text-black text-left"> {{"0"}}</h1>
+          <h1 class="text-sm text-black text-left"> {{datos.localizacion}}</h1>
         </div>
+
+        <div *ngIf="datos" class="my-5 py-4 px-7 h-fit flex flex-col items-center gap-2 border-r-2">
+          <p class="text-xs text-gray-500"> Fecha </p>
+          <h1 class="text-sm text-black text-left"> {{datos.fecha}}</h1>
+        </div>
+        <div *ngIf="datos" class="my-5 py-4 px-7 h-fit flex flex-col items-center gap-2 ">
+          <p class="text-xs text-gray-500"> Hora </p>
+          <h1 class="text-sm text-black text-left"> {{datos.hora}}</h1>
+        </div>
+        <div *ngIf="datos" class="my-5 py-4 px-7 h-fit flex flex-col items-end gap-2 flex-grow ">
+          <button data-tooltip-target="tooltip-default" type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center ">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-info-square-rounded">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 9h.01" />
+              <path d="M11 12h1v4h1" />
+              <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+            </svg></button>
+
+          <div id="tooltip-default" role="tooltip"
+            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip w-[45ch] ">
+            Descripción del evento: {{datos.descripcion}}
+            <br><br>
+            Creado por: {{datos.administrador.nombreCompleto}}
+            <div class="tooltip-arrow" data-popper-arrow></div>
+          </div>
+
+        </div>
+
       </div>
+
+
+
+
 
       <div class="bg-white mx-5 my-5 h-fit rounded-lg p-2 justify-center gap-2 drop-shadow-sm">
         <div class="flex w-full h-fit p-3">
 
           <!-- ========== Crear Usuario  ========== -->
           <div>
-
             <button type="button"
               class="py-2.5 px-3 me-2 mb-2 text-sm h-fit flex gap-1 font-medium text-white rounded-lg bg-[#8197B1] hover:bg-[#6E749B] transition duration-200">
               <ng-icon name="heroPlus" size="1.4em"></ng-icon>
-              <p>Nuevo Evento</p>
+              <p>Button</p>
             </button>
-
           </div>
           <!-- ========== Crear Usuario ========== -->
 
           <span class="example-spacer"></span>
 
 
-          <!-- ========== Search Cédula
-            <div class="max-w-md mx-auto">
-              <div class="relative">
-                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                  <svg class="w-4 h-4 text-indigo-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                  </svg>
-                </div>
-                <input (change)="nombreChange($event.target)" type="search" id="default-search"
-                  class="block w-full h-11 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-transparent focus:ring-indigo-600 focus:border-indigo-600"
-                  placeholder="Buscar por nombre" required />
-              </div>
-            </div>
-          </div>
-      Search Cédula  ========== -->
 
 
 
