@@ -17,6 +17,8 @@ export class EventoDetalleComponent {
   eventId: number | null = null;
   datos: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
+  displayedColumns = ['asociado', 'estado', 'accion'];
+  filteredData: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -45,6 +47,27 @@ export class EventoDetalleComponent {
       .subscribe((response: any) => {
         this.datos = response;
         console.log(response);
+        /*         this.dataSource = new MatTableDataSource(response);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator; */
       });
+  }
+
+  nombreChange(event: any) {
+    console.log(this.datos[0].titulo);
+    const titulae = event.value;
+    if (titulae !== '') {
+      this.filteredData = this.datos.filter((i: any) =>
+        String(i.titulo.toLowerCase()).includes(String(titulae.toLowerCase()))
+      );
+      this.updateTable(this.filteredData);
+    } else {
+      this.updateTable(this.datos);
+    }
+  }
+
+  updateTable(data: any) {
+    this.dataSource = new MatTableDataSource<any>(data);
+    this.dataSource.paginator = this.paginator;
   }
 }
