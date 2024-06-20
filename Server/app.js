@@ -13,7 +13,7 @@ const eventoRoutes = require('./routes/eventoRoutes');
 const reporteRoutes = require('./routes/reporteRoutes'); 
 const datosRoutes = require('./routes/datosRoutes'); 
 const asistenciaRoutes = require('./routes/asistenciaRoutes'); 
-const mailRoutes = require('./routes/mailRoutes'); // Ajusta el path según tu estructura de proyecto
+const mailRoutes = require('./routes/mailRoutes'); 
 
 
 // Acceder a la configuracion del archivo .env

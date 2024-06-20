@@ -81,17 +81,15 @@ module.exports.create = async (request, response, next) => {
       },
     });
 
-    // Obtener estado antes del evento (podría ser algún estado por defecto)
     const estadoAntes = await prisma.estadoAsistencia.findFirst({
       where: {
-        nombre: 'Pendiente' // Por ejemplo, un estado por defecto antes del evento
+        nombre: 'Pendiente'
       }
     });
 
-    // Obtener estado después del evento (también podría ser algún estado por defecto)
     const estadoDespues = await prisma.estadoAsistencia.findFirst({
       where: {
-        nombre: 'Pendiente' // Por ejemplo, un estado por defecto después del evento
+        nombre: 'Pendiente' 
       }
     });
 

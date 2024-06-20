@@ -288,15 +288,15 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"nombreEvento\": \"Conferencia de Innovación\",\n  \"fecha\": \"2024-06-20\",\n  \"ubicacion\": \"Centro de Convenciones\",\n  \"descripcion\": \"Una conferencia sobre las últimas innovaciones tecnológicas.\",\n  \"capacidad\": 300\n}",
+							"raw": "{\n  \"idCreador\": 1,\n  \"titulo\": \"Evento de Prueba\",\n  \"descripcion\": \"Esta es una descripción del evento de prueba.\",\n  \"fecha\": \"2024-06-20\",\n  \"hora\": \"18:00:00\",\n  \"localizacion\": \"Ciudad de Prueba\"}",
 							"options": {
-								"raw": {
-									"language": "json"
-								}
+							  "raw": {
+								"language": "json"
+							  }
 							}
-						},
+						  },
 						"url": {
-							"raw": "localhost:3000/eventos",
+							"raw": "localhost:3000/eventos/crear",
 							"host": [
 								"localhost"
 							],
@@ -315,13 +315,13 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"nombreEvento\": \"Conferencia de Innovación y Tecnología\",\n  \"fecha\": \"2024-06-21\",\n  \"ubicacion\": \"Centro de Convenciones Internacional\",\n  \"descripcion\": \"Una conferencia actualizada sobre las últimas innovaciones tecnológicas.\",\n  \"capacidad\": 350\n}",
+							"raw": "{\n  \"idCreador\": 1,\n  \"titulo\": \"Evento Actualizado\",\n  \"descripcion\": \"Esta es una descripción actualizada del evento.\",\n  \"fecha\": \"2024-07-21\",\n  \"hora\": \"19:00:00\",\n  \"localizacion\": \"Nueva Ciudad de Prueba\"}",
 							"options": {
-								"raw": {
-									"language": "json"
-								}
+							  "raw": {
+								"language": "json"
+							  }
 							}
-						},
+						  },
 						"url": {
 							"raw": "localhost:3000/eventos/1",
 							"host": [
@@ -374,31 +374,6 @@
 								{
 									"key": "titulo",
 									"value": "nombreDelEvento"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Buscar por Estado",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:3000/eventos/buscarPorEstado?activo=true",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"eventos",
-								"estado"
-							],
-							"query": [
-								{
-									"key": "activo",
-									"value": "true"
 								}
 							]
 						}
