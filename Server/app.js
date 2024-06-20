@@ -13,6 +13,7 @@ const eventoRoutes = require('./routes/eventoRoutes');
 const reporteRoutes = require('./routes/reporteRoutes'); 
 const datosRoutes = require('./routes/datosRoutes'); 
 const asistenciaRoutes = require('./routes/asistenciaRoutes'); 
+const mailRoutes = require('./routes/mailRoutes'); // Ajusta el path según tu estructura de proyecto
 
 
 // Acceder a la configuracion del archivo .env
@@ -40,6 +41,7 @@ app.use(
  app.use("/reporte/", reporteRoutes);
  app.use("/datos/", datosRoutes);
  app.use("/asistencia/", asistenciaRoutes);
+ app.use('/mail/', mailRoutes);
 
 // Servidor
 app.listen(port, () => { 
