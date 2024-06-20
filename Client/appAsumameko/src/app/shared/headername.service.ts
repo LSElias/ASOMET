@@ -8,11 +8,15 @@ import { Observable } from 'rxjs';
 export class HeaderNameService {
 
     setTitle(url: any){
+        
+        url = url.replace(/\/\d{1,2}$/, '');
+        console.log(url);
+        
         switch(url){
             case '/usuario': { 
                 return 'Usuarios' 
              } 
-             case '/usuario': { 
+             case '/eventos' || '/eventos/': { 
                     return 'Eventos'
              } 
              case '/dashboard': { 

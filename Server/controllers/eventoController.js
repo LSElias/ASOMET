@@ -2,7 +2,6 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 
-
 // Get all
 module.exports.getAll = async (request, response, next) => {
   try {
@@ -68,7 +67,8 @@ module.exports.getById = async (request, response, next) => {
 
 
 module.exports.create = async (request, response, next) => {
-  const { idCreador, titulo, descripcion, fecha, hora, localizacion } = request.body;
+  const { idCreador, titulo, descripcion, fecha, hora, localizacion } =
+    request.body;
   try {
  
     const usuariosActivos = await prisma.usuario.findMany({
@@ -176,18 +176,18 @@ module.exports.create = async (request, response, next) => {
 
 // Update event
 module.exports.update = async (request, response, next) => {
-  const { id } = request.params;
-  const { idCreador, titulo, descripcion, fecha, hora, localizacion } = request.body;
+  const { idEvento, idCreador, titulo, descripcion, fecha, hora, localizacion } =
+    request.body;
   try {
     const updatedEvento = await prisma.evento.update({
-      where: { idEvento: Number(id) },
+      where: { idEvento: Number(idEvento) },
       data: {
         idCreador,
         titulo,
         descripcion,
         fecha,
         hora,
-        localizacion,
+        localizacion
       },
     });
 
@@ -247,6 +247,3 @@ module.exports.searchByTitle = async (request, response, next) => {
 //     res.status(500).json({ error: 'Error al buscar eventos por estado' });
 //   }
 // };
-
-
-

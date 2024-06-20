@@ -17,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { UsuarioDesactivarComponent } from './usuario-desactivar/usuario-desactivar.component';
+import { UsuarioDetalleComponent } from './usuario-detalle/usuario-detalle.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { UsuarioDesactivarComponent } from './usuario-desactivar/usuario-desacti
     UsuarioCreateComponent,
     UsuarioUpdateComponent,
     UsuarioDesactivarComponent,
+    UsuarioDetalleComponent,
   ],
   imports: [
     CommonModule,

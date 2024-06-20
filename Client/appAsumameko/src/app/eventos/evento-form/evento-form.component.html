@@ -1,0 +1,115 @@
+<!-- Main modal -->
+<div id="authentication-modal" tabindex="-1" aria-hidden="true"
+  class="scrollable fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75" [class.hidden]="!isVisible">
+  <div class="relative p-4 w-full max-w-md max-h-full">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-lg shadow">
+      <div class="px-5 pt-5 flex justify-end">
+        <button type="button" (click)="closeModal()"
+          class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+      </div>
+      <!-- Modal header -->
+      <div class="flex items-center justify-center">
+        <div>
+          <h3 class="text-2xl text-center font-semibold text-[#252b36] pb-8">
+            {{titleForm}}
+          </h3>
+        </div>
+      </div>
+      <!-- Modal body -->
+      <div class="p-4 md:p-5">
+        <!-- Formulario para crear o actualizar usuario -->
+        <form [formGroup]="eventForm" novalidate class="flex flex-col gap-4">
+          <div>
+            <label for="titulo" class="block mb-2 text-sm font-medium text-[#344054]">Título
+            </label>
+            <input type="text" name="titulo" id="titulo" placeholder="Título" formControlName="titulo"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              required />
+              <mat-error *ngIf="errorHandling('titulo', 'required')">
+                El título es <strong>requerido</strong>.
+              </mat-error>
+              <mat-error *ngIf="errorHandling('titulo', 'minLength')">
+                El título <strong> debe de tener más de 5 carácteres</strong>.
+              </mat-error>
+          </div>
+
+          <div>
+            <label for="localizacion" class="block mb-2 text-sm font-medium text-[#344054]">Localizacion
+            </label>
+            <input type="text" name="localizacion" placeholder="Auditorio General" formControlName="localizacion"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              required />
+              <mat-error *ngIf="errorHandling('localizacion', 'required')">
+                La localización es <strong>requerida</strong>.
+              </mat-error>
+              <mat-error *ngIf="errorHandling('localizacion', 'minLength')">
+                La localización <strong> debe de tener más de 5 carácteres</strong>.
+              </mat-error>
+          </div>
+
+          <div>
+            <label for="fecha" class="block mb-2 text-sm font-medium text-[#344054]">Fecha del evento</label>
+            <!--          <div class="relative max-w-sm">
+              <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                </svg>
+              </div>
+              <input type="date" name="fecha" formControlName="fecha"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  "
+                placeholder="06/18/2024">
+            </div> -->
+            <input type="text" name="fecha" id="fecha" placeholder="Viernes, 25 de junio del 2025."
+              formControlName="fecha"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              required />
+              <mat-error *ngIf="errorHandling('fecha', 'required')">
+                La fecha es <strong>requerida</strong>.
+              </mat-error>
+          </div>
+
+          <div>
+            <label for="hora" class="block mb-2 text-sm font-medium text-[#344054]">Hora del evento</label>
+            <div class="relative flex">
+              <input type="time" id="time" name="hora" formControlName="hora"
+                class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                min="00:00" max="23:59" value="00:00" required />
+                <mat-error *ngIf="errorHandling('hora', 'required')">
+                  La hora es <strong>requerida</strong>.
+                </mat-error>
+            </div>
+          </div>
+
+
+          <div>
+            <label for="descripcion" class="block mb-2 text-sm font-medium text-[#344054]">Descripción</label>
+            <textarea id="descripcion" rows="4" name="descripcion" formControlName="descripcion"
+              class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  "
+              placeholder="Escribe la descripción aquí.."></textarea>
+              <mat-error *ngIf="errorHandling('descripcion', 'required')">
+                La descripción es <strong>requerida</strong>.
+              </mat-error>
+              <mat-error *ngIf="errorHandling('descripcion', 'minLength')">
+                La descripción <strong> debe de tener más de 5 carácteres</strong>.
+              </mat-error>
+          </div>
+
+
+          <button (click)="onSubmit()" type="submit"
+            class="mt-4 w-full text-white bg-[#E8A25A] hover:bg-[#c48546] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-200">
+            Guardar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

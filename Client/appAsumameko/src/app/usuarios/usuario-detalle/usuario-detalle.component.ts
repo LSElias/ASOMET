@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/shared/generic.service';
 import {
@@ -9,11 +9,11 @@ import {
 } from 'src/app/shared/notification.service';
 
 @Component({
-  selector: 'app-usuario-create',
-  templateUrl: './usuario-create.component.html',
-  styleUrls: ['./usuario-create.component.css'],
+  selector: 'app-usuario-detalle',
+  templateUrl: './usuario-detalle.component.html',
+  styleUrls: ['./usuario-detalle.component.css'],
 })
-export class UsuarioCreateComponent {
+export class UsuarioDetalleComponent {
   isVisible = false;
   idUser: any;
   userName: any;
@@ -21,7 +21,6 @@ export class UsuarioCreateComponent {
   idRol: any;
   telefono: any;
   cedula: any;
-  @Output() usuarioCreado: EventEmitter<void> = new EventEmitter<void>();
 
   makeSubmit: boolean = false;
   numRegex = '^[0-9]*$';
@@ -64,39 +63,14 @@ export class UsuarioCreateComponent {
   reactiveForm() {
     this.userForm = this.fb.group({
       idUsuario: [null, null],
-      idRol: [null, Validators.required],
-      idEstUsuario: [1],
-      cedula: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(9),
-          Validators.maxLength(12),
-          Validators.pattern(this.numRegex),
-        ]),
-      ],
-      correo: ['', [Validators.required, Validators.email]],
-      contrasena: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(20),
-        ]),
-      ],
-      telefono: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(this.numRegex),
-          Validators.minLength(8),
-          Validators.maxLength(8),
-        ]),
-      ],
-      nombreCompleto: [
-        '',
-        Validators.compose([Validators.required, Validators.minLength(8)]),
-      ],
+      idRol: [null, null],
+      idEstUsuario: [null, null],
+      cedula: [null, null],
+      correo: [null, null],
+      contrasena: [null, null],
+      telefono: [null, null],
+      nombreCompleto: [null, null],
+      rol: [null, null],
     });
   }
 
@@ -142,6 +116,7 @@ export class UsuarioCreateComponent {
           correo: this.userData.correo,
           contrasena: this.userData.contrasena,
           telefono: this.userData.telefono,
+          rol: this.userData.rol,
         });
 
         this.onUpdate(this.userData.idRol);
@@ -152,7 +127,6 @@ export class UsuarioCreateComponent {
   closeModal() {
     this.submitted = false;
     this.userForm.reset();
-    this.usuarioCreado.emit();
     this.isVisible = false;
   }
 
@@ -203,7 +177,6 @@ export class UsuarioCreateComponent {
           //Obtener respuesta
           this.respuesta = data;
 
-          
           this.noti.mensajeRedirect(
             'Usuarios • Actualización de Usuario',
             `Usuario: ${data.nombreCompleto} ha sido actualizado con éxito.`,
@@ -213,7 +186,6 @@ export class UsuarioCreateComponent {
           this.router.navigate(['/usuario/']);
         });
     }
-    this.usuarioCreado.emit();
     this.closeModal();
   }
 

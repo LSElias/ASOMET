@@ -1,0 +1,13 @@
+textarea {
+  resize: none;
+}
+
+.scrollable {
+  overflow-y: auto;
+}
+
+mat-error{
+  color: firebrick !important;
+  font-size: small !important;
+  margin: 0px 2.5px !important;
+}
