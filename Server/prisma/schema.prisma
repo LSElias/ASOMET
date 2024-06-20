@@ -46,6 +46,7 @@ model Evento{
   fecha  String
   hora  String
   localizacion String @db.VarChar(250)
+  activo Boolean @default(true)
   administrador Usuario @relation(fields: [idCreador],references: [idUsuario])
   asistencia Asistencia[]
 }

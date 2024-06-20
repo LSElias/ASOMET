@@ -142,4 +142,3 @@ module.exports.searchByStatus = async (req, res) => {
     res.status(500).json({ error: 'Error al buscar eventos por estado' });
   }
 };
-
