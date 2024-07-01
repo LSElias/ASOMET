@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "c62801e6-a587-432f-8672-d3c95228f505",
-		"name": "API Asomet",
+		"_postman_id": "14b6a849-2790-4828-a237-0ec8da7aef35",
+		"name": "API Asomet 1.0",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25387302"
 	},
@@ -114,7 +114,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idRol\": 3,\r\n    \"idEstUsuario\": 1,\r\n    \"cedula\": 11111199,\r\n    \"nombreCompleto\": \"NAVARRO LOPEZ OLIVIA\",\r\n    \"correo\": \"39ab@aso.co.cr\",\r\n    \"contrasena\": \"123456A\",\r\n    \"telefono\": 888888220\r\n}",
+							"raw": "{\r\n    \"idRol\": 3,\r\n    \"idEstUsuario\": 1,\r\n    \"cedula\": 11111143,\r\n    \"nombreCompleto\": \"NAVARRO LOPEZ Kair\",\r\n    \"correo\": \"100ab@aso.co.cr\",\r\n    \"contrasena\": \"123456A\",\r\n    \"telefono\": 888888220\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -268,14 +268,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/eventos/{id}",
+							"raw": "localhost:3000/eventos/1",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"eventos",
-								"{id}"
+								"1"
 							]
 						}
 					},
@@ -288,13 +288,13 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"idCreador\": 1,\n  \"titulo\": \"Evento de Prueba\",\n  \"descripcion\": \"Esta es una descripción del evento de prueba.\",\n  \"fecha\": \"2024-06-20\",\n  \"hora\": \"18:00:00\",\n  \"localizacion\": \"Ciudad de Prueba\"}",
+							"raw": "{\n  \"idCreador\": 31,\n  \"titulo\": \"Evento de Prueba5\",\n  \"descripcion\": \"Esta es una descripción del evento de prueba23\",\n  \"fecha\": \"2024-07-08\",\n  \"hora\": \"18:20\",\n  \"localizacion\": \"Ciudad de Prueba\"\n  }",
 							"options": {
-							  "raw": {
-								"language": "json"
-							  }
+								"raw": {
+									"language": "json"
+								}
 							}
-						  },
+						},
 						"url": {
 							"raw": "localhost:3000/eventos/crear",
 							"host": [
@@ -302,7 +302,8 @@
 							],
 							"port": "3000",
 							"path": [
-								"eventos"
+								"eventos",
+								"crear"
 							]
 						}
 					},
@@ -317,11 +318,11 @@
 							"mode": "raw",
 							"raw": "{\n  \"idCreador\": 1,\n  \"titulo\": \"Evento Actualizado\",\n  \"descripcion\": \"Esta es una descripción actualizada del evento.\",\n  \"fecha\": \"2024-07-21\",\n  \"hora\": \"19:00:00\",\n  \"localizacion\": \"Nueva Ciudad de Prueba\"}",
 							"options": {
-							  "raw": {
-								"language": "json"
-							  }
+								"raw": {
+									"language": "json"
+								}
 							}
-						  },
+						},
 						"url": {
 							"raw": "localhost:3000/eventos/1",
 							"host": [
@@ -361,7 +362,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/eventos/buscarPorTitulo?titulo=nombreDelEvento",
+							"raw": "localhost:3000/eventos/titulo?titulo=nombreDelEvento",
 							"host": [
 								"localhost"
 							],
@@ -547,76 +548,95 @@
 			"name": "Reportes",
 			"item": [
 				{
-					"name": "Asistencia",
+					"name": "Siguiente Evento",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/reporte/presentes",
+							"raw": "localhost:3000/reporte/siguiente",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"reporte",
-								"presentes"
+								"siguiente"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Ausencias",
+					"name": "Listado: Confirm vs Asist",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/reporte/ausencias",
+							"raw": "localhost:3000/reporte/vs",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"reporte",
-								"ausencias"
+								"vs"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Faltas",
+					"name": "Listado: Mayor - Menor Asist.",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/reporte/faltas",
+							"raw": "localhost:3000/reporte/asis",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"reporte",
-								"faltas"
+								"asis"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "noasistencias",
+					"name": "Evento: Menor Asis.",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/reporte/noasistencias",
+							"raw": "localhost:3000/reporte/menor",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"reporte",
-								"noasistencias"
+								"menor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Evento: Mayor Asis.",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/reporte/mayor",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"reporte",
+								"mayor"
 							]
 						}
 					},
@@ -679,17 +699,75 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Actualizar Estado Asistencia",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idAsociado\": 2,\r\n    \"idAsistencia\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/asistencia/asist/1",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"asistencia",
+										"asist",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Confirmacion",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"idAsociado\": 2,\r\n    \"idAsistencia\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/asistencia/confirm/1",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"asistencia",
+										"confirm",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
 				{
-					"name": "Actualizar Estado Asistencia",
+					"name": "Crear",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idAsociado\": 2,\r\n    \"idAsistencia\": 3\r\n}",
+							"raw": "[\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 1,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 2,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 3,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 4,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 5,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 6,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 7,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 8,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 9,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 10,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 11,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 12,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 13,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 14,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 15,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 16,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 17,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 18,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 19,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 20,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 21,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 22,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 23,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 24,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 25,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 26,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 27,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 28,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 29,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    }\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -697,44 +775,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/asistencia/asist/1",
+							"raw": "localhost:3000/asistencia/crear",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"asistencia",
-								"asist",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualizar Confirmacion",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idAsociado\": 2,\r\n    \"idAsistencia\": 3\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/asistencia/confirm/1",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"asistencia",
-								"confirm",
-								"1"
+								"crear"
 							]
 						}
 					},

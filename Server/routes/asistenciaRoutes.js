@@ -6,8 +6,11 @@ const  asistenciaControllers = require("../controllers/asistenciaControllers");
 router.get('/individual', asistenciaControllers.enviarCorreo_Individual)
 
 //En proceso 
+router.post("/crear", asistenciaControllers.create);
+
 router.put('/asist/:idEvento', asistenciaControllers.updateAsistenciaByIdEvento);
 router.put('confirm/:idEvento', asistenciaControllers.updateConfirmacionByIdEvento);
+
 
 router.get('/:idEvento', asistenciaControllers.enviarCorreos_General);
 
