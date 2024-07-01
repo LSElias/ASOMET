@@ -90,6 +90,26 @@ module.exports.enviarCorreo_Individual = async (request, response, next) => {
   }
 };
 
+
+//Crear asistencia - Prueba para reportes
+module.exports.create = async (request, response, next) => {
+  try {
+    const info = request.body;
+
+    const newAsis = await prisma.asistencia.createMany({
+      data: info,
+    });
+    
+    response.status(200).json({
+      status: true,
+      message: "Creado exitosamente",
+      data: newAsis,
+    });
+  } catch (error) {
+    response.status(500).json({ message: "Error en la creación" });
+  }
+};
+
 ///En proceso 
 
 //Modificar asistencia --> Evento presencial
@@ -137,3 +157,5 @@ module.exports.updateConfirmacionByIdEvento = async (request, response, next) =>
     response.status(500).json({ message: "Error en la solictud" });
   }
 };
+
+

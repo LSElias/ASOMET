@@ -59,13 +59,60 @@ async function main() {
       idCreador: 30,
       titulo: "Asamblea General - Prueba",
       descripcion: "Asomameco, les invita a asistir a la primera asamblea del año. Catering:  Información",
-      fecha: "Viernes, 25 de junio del 2025.",
+      fecha: "2024-06-26",
       hora: "17:30",
       localizacion: "Auditorio General"
     
     }
   });
 
+//Eventos para prueba de reportes -- scr: Documentos datos para asistencia 
+await prisma.evento.create({
+  data: {
+    idCreador: 30,
+    titulo: "Prueba 2",
+    descripcion: "Asomameco, les invita a asistir a la primera asamblea del año. Catering:  Información",
+    fecha: "2024-06-28",
+    hora: "17:30",
+    localizacion: "Auditorio General"
+  
+  }
+});
+
+await prisma.evento.create({
+  data: {
+    idCreador: 30,
+    titulo: "Prueba 3",
+    descripcion: "Asomameco, les invita a asistir a la primera asamblea del año. Catering:  Información",
+    fecha: "2024-06-31",
+    hora: "17:30",
+    localizacion: "Auditorio General"
+  
+  }
+});
+await prisma.evento.create({
+  data: {
+    idCreador: 30,
+    titulo: "Prueba 4",
+    descripcion: "Asomameco, les invita a asistir a la primera asamblea del año. Catering:  Información",
+    fecha: "2024-07-04",
+    hora: "17:30",
+    localizacion: "Auditorio General"
+  
+  }
+});
+
+await prisma.evento.create({
+  data: {
+    idCreador: 30,
+    titulo: "Prueba 5",
+    descripcion: "Asomameco, les invita a asistir a la primera asamblea del año. Catering:  Información",
+    fecha: "2024-07-06",
+    hora: "17:30",
+    localizacion: "Auditorio General"
+  
+  }
+});
   //Asistencia
   const path = './prisma/src/confirmacion_asistencia.csv';
 
