@@ -3,10 +3,11 @@ const router = express.Router();
 
 const  reporteController = require("../controllers/reporteController");
 
-//Reportes 
-router.get("/presentes",reporteController.getAsistencia);
-router.get("/ausencias",reporteController.getAusencia);
-router.get("/faltas",reporteController.getNollegaron);
-router.get("/noasistencias",reporteController.getNoAsistencia);
+router.get("/vs",reporteController.getAsistenciaByEvento);
+router.get("/siguiente",reporteController.getAsistenciaSiguienteEvento);
+router.get("/menor",reporteController.getMenorAsistencia);
+router.get("/mayor",reporteController.getMayorAsistencia);
+router.get("/asis",reporteController.getCantidadMayorMenor);
+
 
 module.exports = router;

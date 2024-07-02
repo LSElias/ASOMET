@@ -1,39 +1,123 @@
 const { PrismaClient, Prisma } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-//Reportes
+//Confirmacion vs  Asistencia 
 
-//Asistencia
-module.exports.getAsistencia = async (request, response, next) => {
+//Listado de evento --> Confirm, Asisten., No Asisten, Tasa % 
+//Información de gráfico de barras 
+module.exports.getAsistenciaByEvento = async (request, response, next) => {
+  try {
+    const result = await prisma.$queryRaw(
+      Prisma.sql`SELECT a.idEvento, e.titulo, e.fecha, (SELECT COUNT(*) FROM asistencia WHERE idEstadoConfir = 1 AND idEvento = a.idEvento) AS Confirmacion, (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 1 AND idEvento = a.idEvento) AS Asistencia, (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 2 AND idEvento = a.idEvento) AS Ausentes, FORMAT(( (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 1 AND idEvento = a.idEvento) / (SELECT COUNT(*) FROM asistencia WHERE (idEstadoConfir = 1 AND idEvento = a.idEvento)) * 100), 0) AS Tasa FROM asistencia a JOIN evento e ON a.idEvento = e.idEvento WHERE e.fecha <= CURDATE() GROUP BY a.idEvento, e.fecha ORDER BY e.fecha DESC`
+    )
+  
+    //Modificar tipo Fecha --> Int to String
+    const conversion_BigInt_String = result.map(item => {
+      const data = { ...item };
+      Object.keys(data).forEach(key => {
+        if (typeof data[key] === 'bigint') {
+          data[key] = data[key].toString();
+        }
+      });
+      return data;
+    });
+    response.json(conversion_BigInt_String);
+  }catch (error) {
+    response.status(500).json({ message: "Error" });
+  }
+};
+
+//Siguiente Evento: Confirmados, Pendientes, Rechazados
+module.exports.getAsistenciaSiguienteEvento = async (request, response, next) => {
+  try {
+    const result = await prisma.$queryRaw(
+      Prisma.sql`SELECT e.titulo, e.fecha, (SELECT COUNT(*) FROM asistencia a WHERE a.idEstadoConfir = 1 AND a.idEvento = e.idEvento) AS Confirmacion, (SELECT COUNT(*) FROM asistencia a WHERE a.idEstadoConfir = 2 AND a.idEvento = e.idEvento) AS Rechazado, (SELECT COUNT(*) FROM asistencia a WHERE a.idEstadoConfir = 3 AND a.idEvento = e.idEvento) AS Pendiente FROM evento e WHERE e.fecha >=  CURDATE() ORDER BY e.fecha ASC LIMIT 1`
+    )
+  
+    //Modificar tipo Fecha --> Int to String
+    const conversion_BigInt_String = result.map(item => {
+      const data = { ...item };
+      Object.keys(data).forEach(key => {
+        if (typeof data[key] === 'bigint') {
+          data[key] = data[key].toString();
+        }
+      });
+      return data;
+    });
+    response.json(conversion_BigInt_String);
+  }catch (error) {
+    response.status(500).json({ message: "Error" });
+  }
+};
+
+//Evento 
+
+//Menor Asistencia
+module.exports.getMenorAsistencia = async (request, response, next) => {
+  try {
+    const result = await prisma.$queryRaw(
+      Prisma.sql`SELECT a.idEvento, e.titulo, e.fecha, (SELECT COUNT(*) FROM asistencia WHERE idEstadoConfir = 1 AND idEvento = a.idEvento) AS Confirmacion, (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 1 AND idEvento = a.idEvento) AS Asistencia, (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 2 AND idEvento = a.idEvento) AS Ausentes, FORMAT(( (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 1 AND idEvento = a.idEvento) / (SELECT COUNT(*) FROM asistencia WHERE (idEstadoConfir = 1 AND idEvento = a.idEvento)) * 100), 0) AS Tasa FROM asistencia a JOIN evento e ON a.idEvento = e.idEvento WHERE e.fecha <= CURDATE() GROUP BY a.idEvento, e.fecha ORDER BY Asistencia ASC LIMIT 1`
+    )
+  
+    //Modificar tipo Fecha --> Int to String
+    const conversion_BigInt_String = result.map(item => {
+      const data = { ...item };
+      Object.keys(data).forEach(key => {
+        if (typeof data[key] === 'bigint') {
+          data[key] = data[key].toString();
+        }
+      });
+      return data;
+    });
+    response.json(conversion_BigInt_String);
+  } catch (error) {
+    response.status(500).json({ message: "Error" });
+  }
+};
+
+//Mayor Asistencia
+module.exports.getMayorAsistencia = async (request, response, next) => {
+  try {
+    const result = await prisma.$queryRaw(
+      Prisma.sql`SELECT a.idEvento, e.titulo, e.fecha, (SELECT COUNT(*) FROM asistencia WHERE idEstadoConfir = 1 AND idEvento = a.idEvento) AS Confirmacion, (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 1 AND idEvento = a.idEvento) AS Asistencia, (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 2 AND idEvento = a.idEvento) AS Ausentes, FORMAT(( (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 1 AND idEvento = a.idEvento) / (SELECT COUNT(*) FROM asistencia WHERE (idEstadoConfir = 1 AND idEvento = a.idEvento)) * 100), 0) AS Tasa FROM asistencia a JOIN evento e ON a.idEvento = e.idEvento WHERE e.fecha <= CURDATE() GROUP BY a.idEvento, e.fecha ORDER BY Asistencia DESC LIMIT 1`
+    )
+  
+    //Modificar tipo Fecha --> Int to String
+    const conversion_BigInt_String = result.map(item => {
+      const data = { ...item };
+      Object.keys(data).forEach(key => {
+        if (typeof data[key] === 'bigint') {
+          data[key] = data[key].toString();
+        }
+      });
+      return data;
+    });
+    response.json(conversion_BigInt_String);
+  } catch (error) {
+    response.status(500).json({ message: "Error" });
+  }
+};
+
+//Listado: Eventos con mayor y menor asistencia
+module.exports.getCantidadMayorMenor = async (request, response, next) => {
+try {
   const result = await prisma.$queryRaw(
-    Prisma.sql`SELECT u.cedula, u.nombreCompleto, u.correo, u.telefono FROM usuario u, asistencia a WHERE (u.idEstUsuario = 1 AND u.idUsuario = a.idAsociado) AND (idEstadoConfir = 1 AND idAsistencia = 1) GROUP BY u.cedula`
+    Prisma.sql`SELECT a.idEvento, e.titulo, e.fecha, (SELECT COUNT(*) FROM asistencia WHERE idEstadoConfir = 1 AND idEvento = a.idEvento) AS Confirmacion, (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 1 AND idEvento = a.idEvento) AS Asistencia, (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 2 AND idEvento = a.idEvento) AS Ausentes, FORMAT(( (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 1 AND idEvento = a.idEvento) / (SELECT COUNT(*) FROM asistencia WHERE (idEstadoConfir = 1 AND idEvento = a.idEvento)) * 100), 0) AS Tasa FROM asistencia a JOIN evento e ON a.idEvento = e.idEvento WHERE e.fecha <= CURDATE() GROUP BY a.idEvento, e.fecha ORDER BY Asistencia DESC`
   )
-  response.json(result);
+
+  //Modificar tipo Fecha --> Int to String
+  const conversion_BigInt_String = result.map(item => {
+    const data = { ...item };
+    Object.keys(data).forEach(key => {
+      if (typeof data[key] === 'bigint') {
+        data[key] = data[key].toString();
+      }
+    });
+    return data;
+  });
+  response.json(conversion_BigInt_String);
+} catch (error) {
+  response.status(500).json({ message: "Error" });
+}
 };
 
-//Ausencia
-module.exports.getAusencia = async (request, response, next) => {
-  const result = await prisma.$queryRaw(
-    Prisma.sql`SELECT u.cedula, u.nombreCompleto, u.correo, u.telefono FROM usuario u, asistencia a WHERE (u.idEstUsuario = 1 AND u.idUsuario = a.idAsociado) AND (idEstadoConfir = 2 AND idAsistencia = 2) GROUP BY u.cedula`
-  );
-
-  response.json(result);
-};
-
-//Aceptaron ir pero no llegaron
-module.exports.getNollegaron = async (request, response, next) => {
-  const result = await prisma.$queryRaw(
-    Prisma.sql`SELECT u.cedula, u.nombreCompleto, u.correo, u.telefono FROM usuario u, asistencia a WHERE (u.idEstUsuario = 1 AND u.idUsuario = a.idAsociado) AND (idEstadoConfir = 1 AND idAsistencia = 2) GROUP BY u.cedula`
-  );
-
-  response.json(result);
-};
-
-//No han asistido 0 veces
-module.exports.getNoAsistencia = async (request, response, next) => {
-  const result = await prisma.$queryRaw(
-    Prisma.sql`SELECT u.cedula, u.nombreCompleto, u.correo, u.telefono, count(idAsociado) AS totalAusencias FROM usuario u, asistencia a WHERE (u.idEstUsuario = 1 AND u.idUsuario = a.idAsociado) AND ((idEstadoConfir = 1 OR idEstadoConfir = 2) AND idAsistencia = 2) GROUP BY u.cedula HAVING totalAusencias >= 3`
-  );
-
-  response.json(result);
-};
