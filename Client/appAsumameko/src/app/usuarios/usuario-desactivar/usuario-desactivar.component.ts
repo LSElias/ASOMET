@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -20,6 +20,9 @@ export class UsuarioDesactivarComponent {
   respuesta: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
   userForm: FormGroup;
+  /* @Output() usuarioModificado: EventEmitter<void> = new EventEmitter<void>(); */
+  @Output() usuarioModificado: EventEmitter<number> =
+    new EventEmitter<number>();
 
   constructor(
     public fb: FormBuilder,
@@ -29,13 +32,8 @@ export class UsuarioDesactivarComponent {
   ) {
     // Inicializar el formulario aquí en el constructor
     this.userForm = this.fb.group({
-      idRol: ['', Validators.required],
+      id: ['', Validators.required],
       idEstUsuario: ['', Validators.required],
-      cedula: ['', Validators.required],
-      nombreCompleto: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]],
-      contrasena: ['', Validators.required],
-      telefono: ['', Validators.required],
     });
   }
 
@@ -55,38 +53,42 @@ export class UsuarioDesactivarComponent {
   // Método para manejar el envío del formulario
   onSubmit() {
     if (this.userForm.value) {
+      console.log(`usuario/idUser/${this.idUser}`);
+
       this.gService
-        .create(`usuario/idUser/${this.idUser}`, this.userForm.value)
+        .update(`usuario/idUser`, this.userForm.value)
         .pipe(takeUntil(this.destroy$))
-        .subscribe((data: any) => {
-          this.respuesta = data;
-          this.noti.mensajeRedirect(
-            'Usuarios • Mofificación de estado',
-            `Usuario: ${data.nombreCompleto} ha exitosa.`,
-            TipoMessage.success,
-            'usuario'
-          );
-          console.log(this.respuesta);
-        });
+        .subscribe(
+          (data: any) => {
+            this.respuesta = data;
+            this.noti.mensajeRedirect(
+              'Usuarios • Modificación de estado',
+              `Usuario: ${data.nombreCompleto} ha sido actualizado exitosamente.`,
+              TipoMessage.success,
+              'usuario'
+            );
+            /* this.usuarioModificado.emit(); */
+            this.usuarioModificado.emit(this.userForm.value.idEstUsuario);
+          },
+          (error) => {
+            console.error('Error en la petición:', error);
+          }
+        );
     }
     this.closeModal();
   }
 
   loadUser(id: any): void {
     this.gService
-      .get('usuario/IdU', id)
+      .get('usuario/idU', id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
         this.userData = data;
         console.log(this.userData);
+        let idEstUsuario = this.userData.idEstUsuario === 1 ? 2 : 1;
         this.userForm.setValue({
-          idRol: this.userData.idRol,
-          idEstUsuario: 2,
-          cedula: this.userData.cedula,
-          nombreCompleto: this.userData.nombreCompleto,
-          correo: this.userData.correo,
-          contrasena: this.userData.contrasena,
-          telefono: this.userData.telefono,
+          id: this.userData.id,
+          idEstUsuario: idEstUsuario,
         });
       });
   }

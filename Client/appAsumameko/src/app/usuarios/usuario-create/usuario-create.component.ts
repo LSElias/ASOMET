@@ -174,9 +174,9 @@ export class UsuarioCreateComponent {
       this.userForm.get('contrasena')?.updateValueAndValidity();
     }
 
-    if (this.userForm.invalid) {
+    /*     if (this.userForm.invalid) {
       return;
-    }
+    } */
 
     if (this.isCreate) {
       if (this.userForm.value) {
@@ -192,6 +192,7 @@ export class UsuarioCreateComponent {
               'usuario'
             );
             console.log(data);
+            this.usuarioCreado.emit();
             this.router.navigate(['usuario/']);
           });
       }
@@ -200,16 +201,15 @@ export class UsuarioCreateComponent {
         .update('usuario', formData)
         .pipe(takeUntil(this.destroy$))
         .subscribe((data: any) => {
-          //Obtener respuesta
           this.respuesta = data;
 
-          
           this.noti.mensajeRedirect(
             'Usuarios • Actualización de Usuario',
             `Usuario: ${data.nombreCompleto} ha sido actualizado con éxito.`,
             TipoMessage.success,
             'usuarios'
           );
+          this.usuarioCreado.emit();
           this.router.navigate(['/usuario/']);
         });
     }

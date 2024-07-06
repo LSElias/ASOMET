@@ -37,8 +37,15 @@ export class EventoIndexComponent {
     this.selectedStatus = 1;
   }
 
-  ngAfterViewInit() {
+  ngOnInit(): void {
     this.fetch();
+  }
+
+  ngAfterViewInit() {
+    /*     this.fetchUsuarios(); */
+    this.eventModal.eventoCreado.subscribe(() => {
+      this.fetch();
+    });
   }
 
   fetch() {
@@ -97,7 +104,7 @@ export class EventoIndexComponent {
     this.router.navigate(['/usuario/actualizar', id], {
       relativeTo: this.route,
     });*/
-     this.eventModal.openModal(id);
+    this.eventModal.openModal(id);
   }
 
   deactivate(id: any) {
