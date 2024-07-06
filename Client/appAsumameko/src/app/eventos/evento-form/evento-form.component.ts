@@ -26,7 +26,6 @@ export class EventoFormComponent {
   makeSubmit: boolean = false;
   submitted = false;
 
-
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -34,16 +33,22 @@ export class EventoFormComponent {
     private noti: NotificacionService
   ) {
     this.eventForm = this.fb.group({
-      idEvento: [null,null],
+      idEvento: [null, null],
       idCreador: [30, Validators.required],
       titulo: [
         '',
         Validators.compose([Validators.required, Validators.minLength(5)]),
       ],
-      localizacion: ['',     Validators.compose([Validators.required, Validators.minLength(5)])],
+      localizacion: [
+        '',
+        Validators.compose([Validators.required, Validators.minLength(5)]),
+      ],
       fecha: ['', Validators.required],
       hora: ['', Validators.required],
-      descripcion: ['',     Validators.compose([Validators.required, Validators.minLength(5)])],
+      descripcion: [
+        '',
+        Validators.compose([Validators.required, Validators.minLength(5)]),
+      ],
     });
   }
 
@@ -52,9 +57,9 @@ export class EventoFormComponent {
     this.isVisible = true;
     if (id != undefined && !isNaN(Number(id))) {
       this.loadData(id);
-    }else{
-    this.titleForm = 'Creación';
-    this.isCreate = true;
+    } else {
+      this.titleForm = 'Creación';
+      this.isCreate = true;
     }
   }
 
@@ -81,7 +86,6 @@ export class EventoFormComponent {
       });
   }
 
-
   // Método para cerrar el modal
   closeModal() {
     this.submitted = false;
@@ -104,7 +108,7 @@ export class EventoFormComponent {
       return;
     }
 
-    if(this.isCreate){
+    if (this.isCreate) {
       if (this.eventForm.value) {
         this.gService
           .create('eventos/crear', this.eventForm.value)
@@ -117,25 +121,26 @@ export class EventoFormComponent {
               TipoMessage.success,
               'evento'
             );
-          this.router.navigate(['/eventos/']);
-
+            this.router.navigate(['/eventos/']);
+            this.eventoCreado.emit();
           });
       }
-    }else{
-        this.gService
-          .update('eventos/actualizar', this.eventForm.value)
-          .pipe(takeUntil(this.destroy$))
-          .subscribe((data: any) => {
-            //Obtener respuesta
-            this.respuesta = data;
-            this.noti.mensajeRedirect(
-              'Usuarios • Actualización de Evento',
-              `Usuario: ${data.titulo} ha sido actualizado con éxito.`,
-              TipoMessage.success,
-              'usuarios'
-            );
-            this.router.navigate(['/eventos/']);
-          });
+    } else {
+      this.gService
+        .update('eventos/actualizar', this.eventForm.value)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((data: any) => {
+          //Obtener respuesta
+          this.respuesta = data;
+          this.noti.mensajeRedirect(
+            'Usuarios • Actualización de Evento',
+            `Usuario: ${data.titulo} ha sido actualizado con éxito.`,
+            TipoMessage.success,
+            'usuarios'
+          );
+          this.router.navigate(['/eventos/']);
+          this.eventoCreado.emit();
+        });
     }
     this.eventoCreado.emit();
     this.closeModal();
@@ -153,6 +158,4 @@ export class EventoFormComponent {
       (this.makeSubmit || this.eventForm.controls[control].touched)
     );
   };
-
-
 }

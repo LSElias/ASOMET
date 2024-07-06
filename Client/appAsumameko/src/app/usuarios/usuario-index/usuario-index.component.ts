@@ -56,7 +56,8 @@ export class UsuarioIndexComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   dataSource = new MatTableDataSource<any>();
   @ViewChild('userFormModal') userFormModal!: UsuarioCreateComponent;
-  @ViewChild('hideUserFormModal') hideUserFormModal!: UsuarioDesactivarComponent;
+  @ViewChild('hideUserFormModal')
+  hideUserFormModal!: UsuarioDesactivarComponent;
   @ViewChild('userDetalleModal') userDetalleModal!: UsuarioDetalleComponent;
 
   constructor(
@@ -69,6 +70,18 @@ export class UsuarioIndexComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+    /*     this.fetchUsuarios(); */
+    this.userFormModal.usuarioCreado.subscribe(() => {
+      this.fetchUsuarios();
+    });
+    this.hideUserFormModal.usuarioModificado.subscribe((newStatus: number) => {
+      this.fetchUsuarios();
+      this.selectedStatus = newStatus === 1 ? 2 : 1;
+      this.statusChangeDeactivate(this.selectedStatus.toString());
+    });
+  }
+
+  ngOnInit(): void {
     this.fetchUsuarios();
   }
 
@@ -79,16 +92,17 @@ export class UsuarioIndexComponent implements AfterViewInit {
       .subscribe((response: any) => {
         this.datos = response;
         this.dataSource = new MatTableDataSource(response);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
+
+        if (this.sort) {
+          this.dataSource.sort = this.sort;
+        }
+        if (this.paginator) {
+          this.dataSource.paginator = this.paginator;
+        }
         this.setCantUsuarios();
+        this.dataSource.data = response;
       });
   }
-
-  onUsuarioCreado() {
-    this.fetchUsuarios();
-  }
-
 
   // Redefinir cuando tengamos en el backend la función para traer los tipos de usuario -- ERG
   setSelectedRole() {
@@ -114,9 +128,30 @@ export class UsuarioIndexComponent implements AfterViewInit {
     this.admins = this.datos.filter((data: any) => data.idRol === 1);
   }
 
-  statusChange(value: any) {
-    console.log(value.value);
+  statusChange(value: any, valueDeactivate?: any) {
     switch (value.value) {
+      case '2': {
+        this.filteredData = this.datos.filter(
+          (data: any) => data.idEstUsuario === 2
+        );
+        this.updateTable(this.filteredData);
+        break;
+      }
+      case '1': {
+        this.filteredData = this.datos.filter(
+          (data: any) => data.idEstUsuario === 1
+        );
+        this.updateTable(this.filteredData);
+        break;
+      }
+      default: {
+        this.updateTable(this.datos);
+        break;
+      }
+    }
+  }
+  statusChangeDeactivate(valueDeactivate?: any) {
+    switch (valueDeactivate) {
       case '2': {
         this.filteredData = this.datos.filter(
           (data: any) => data.idEstUsuario === 2
@@ -177,14 +212,13 @@ export class UsuarioIndexComponent implements AfterViewInit {
   }
 
   updateTable(data: any) {
-    this.dataSource = new MatTableDataSource<any>(data);
-    this.dataSource.paginator = this.paginator;
+    this.dataSource.data = data;
+    if (this.paginator) {
+      this.dataSource.paginator = this.paginator;
+    }
   }
 
   crear() {
-    /*   this.router.navigate(['/usuario/form/', 0], {
-      relativeTo: this.route,
-    }); */
     this.userFormModal.openModal();
   }
 
@@ -193,18 +227,10 @@ export class UsuarioIndexComponent implements AfterViewInit {
   }
 
   update(id: any) {
-    /*
-    this.router.navigate(['/usuario/actualizar', id], {
-      relativeTo: this.route,
-    });*/
     this.userFormModal.openModal(id);
   }
 
   deactivate(id: any) {
-    /*  this.router.navigate(['/usuario/deactivar', id], {
-      relativeTo: this.route,
-    }); */
-
     this.hideUserFormModal.openModal(id);
   }
 

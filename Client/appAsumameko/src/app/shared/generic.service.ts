@@ -4,20 +4,17 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GenericService {
-
   // URL del API, definida en enviroments->enviroment.ts
   urlAPI: string = environment.apiURL;
   //Información usuario actual
   currentUser: any;
 
   //Inyectar cliente HTTP para las solicitudes al API
-  constructor(private http: HttpClient) {
-   
-  }
- 
+  constructor(private http: HttpClient) {}
+
   // Listar
   //http://localhost:3000/videojuego
   list(endopoint: string): Observable<any> {
@@ -29,17 +26,16 @@ export class GenericService {
   }
   // crear
   create(endopoint: string, objCreate: any | any): Observable<any | any[]> {
-
-    
-    return this.http.post<any | any[]>(this.urlAPI + endopoint, objCreate,);
+    return this.http.post<any | any[]>(this.urlAPI + endopoint, objCreate);
   }
   // actualizar
   update(endopoint: string, objUpdate: any | any): Observable<any | any[]> {
-
     return this.http.put<any | any[]>(
       this.urlAPI + endopoint + `/${objUpdate.id}`,
-      objUpdate, 
+      objUpdate
     );
   }
-
+  /*   update(endopoint: string, objUpdate: any | any): Observable<any | any[]> {
+    return this.http.put<any | any[]>(this.urlAPI + endopoint, objUpdate);
+  } */
 }
