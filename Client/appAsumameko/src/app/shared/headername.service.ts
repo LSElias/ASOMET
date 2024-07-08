@@ -21,9 +21,12 @@ export class HeaderNameService {
              } 
              case '/dashboard': { 
                 return 'Dashboard'
-         } 
+         }
+            case '/reportes': {
+                return 'Reportes'
+            } 
              default: { 
-                return 'Asumameko';
+                return 'Asomameco';
             } 
         }
     }
