@@ -34,14 +34,29 @@ module.exports.sendEventNotification = async (request, response, next) => {
       usuarios = await prisma.usuario.findMany({
         select: {
           correo: true,
+          idEstUsuario:1
         },
       });
     }
 
     // Enviar correos electrónicos a los usuarios
-    const promises = usuarios.map(usuario => {
+    const promises = usuarios.map(async usuario => {
       const mailText = `Hola, se ha creado un nuevo evento: ${evento.titulo}\nDescripción: ${evento.descripcion}\nFecha: ${evento.fecha}\nHora: ${evento.hora}\nLocalización: ${evento.localizacion}`;
-      return sendMail(usuario.correo, 'Nuevo Evento Creado', mailText);
+      await sendMail(usuario.correo, 'Nuevo Evento Creado', mailText);
+
+      await prisma.asistencia.updateMany({
+        where: {
+          idEvento: parseInt(evento.idEvento, 10),
+          idAsociado: usuarios.idUsuario,
+        },
+        data: {
+          idEstadoConfir: 3,
+          idAsistencia: 3,
+          contador: {
+            increment: 1,
+          },
+        },
+      });
     });
 
     await Promise.all(promises);
