@@ -7,5 +7,8 @@ export const estadoconfirm = [
     },
     {
         nombre: "Pendiente",
+    },
+    {
+        nombre: "No Enviada",
     }
 ];
