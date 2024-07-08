@@ -128,7 +128,8 @@ await prisma.evento.create({
         idEvento: asistencia.idEvento, 
         idAsociado: asistencia.idAsociado,
         idEstadoConfir: asistencia.idEstadoConfir,
-        idAsistencia: asistencia.idAsistencia
+        idAsistencia: asistencia.idAsistencia,
+        contEnvios: asistencia.contEnvios
       },
     });
   }
