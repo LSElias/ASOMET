@@ -17,7 +17,13 @@ export class EventoDetalleComponent {
   eventId: number | null = null;
   datos: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
-  displayedColumns = ['asociado', 'estado', 'accion'];
+  displayedColumns = [
+    'cedula',
+    'asociado',
+    'confirmacion',
+    'asistencia',
+    'accion',
+  ];
   filteredData: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -47,27 +53,30 @@ export class EventoDetalleComponent {
       .subscribe((response: any) => {
         this.datos = response;
         console.log(response);
-        /*         this.dataSource = new MatTableDataSource(response);
+        this.dataSource = new MatTableDataSource(response.asistencia);
         this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator; */
+        this.dataSource.paginator = this.paginator;
       });
   }
 
   nombreChange(event: any) {
-    console.log(this.datos[0].titulo);
-    const titulae = event.value;
-    if (titulae !== '') {
+    console.log(this.datos[0].asistencia);
+    const datos = this.datos[0].asistencia; 
+    if (datos !== '') {
       this.filteredData = this.datos.filter((i: any) =>
-        String(i.titulo.toLowerCase()).includes(String(titulae.toLowerCase()))
+        String(i.datos.asociado.nombreCompleto.toLowerCase()).includes(String(datos.asociado.nombreCompleto.toLowerCase()))
       );
       this.updateTable(this.filteredData);
     } else {
-      this.updateTable(this.datos);
+      this.updateTable(this.datos.asistencia);
     }
   }
 
   updateTable(data: any) {
     this.dataSource = new MatTableDataSource<any>(data);
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
+
+  enviarInvitaciones() {}
 }

@@ -30,12 +30,15 @@ module.exports.getById = async (request, response, next) => {
         idEvento: parseInt(id, 10),
       },
       include: {
+        administrador: true,
         asistencia: {
           include: {
             asociado: {
               select: {
                 nombreCompleto: true,
-                idEstUsuario: true 
+                idEstUsuario: true,
+                cedula: true,
+                correo: true,  
               }
             },
             estadoConfir: {
@@ -67,9 +70,12 @@ module.exports.getById = async (request, response, next) => {
       fecha: evento.fecha,
       hora: evento.hora,
       localizacion: evento.localizacion,
+      administrador: evento.administrador.nombreCompleto,
       asistencia: asistenciaActiva.map(asistencia => ({
         asociado: {
           nombreCompleto: asistencia.asociado.nombreCompleto,
+          cedula: asistencia.asociado.cedula,
+          correo: asistencia.asociado.correo,
         },
         estadoConfirmacion: {
           nombre: asistencia.estadoConfir.nombre
