@@ -97,10 +97,10 @@
           <div>
             <button
               type="button"
-              (click)="enviarInvitaciones()"
+              (click)="sendEmail_General()"
               class="py-2.5 px-3 me-2 mb-2 text-sm h-fit flex gap-1 font-medium text-white rounded-lg bg-[#8197B1] hover:bg-[#6E749B] transition duration-200"
             >
-              <ng-icon name="heroPlus" size="1.4em"></ng-icon>
+              <ng-icon name="heroPaperAirplaneSolid" size="1.4em"></ng-icon>
               <p>Enviar invitaciones</p>
             </button>
           </div>
@@ -130,7 +130,7 @@
                 </svg>
               </div>
               <input
-                (change)="nombreChange($event.target)"
+                (change)="nombreChange($event)"
                 type="search"
                 id="default-search"
                 class="block w-full h-11 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-transparent focus:ring-indigo-600 focus:border-indigo-600"
@@ -229,6 +229,26 @@
               </td>
             </ng-container>
 
+            <ng-container matColumnDef="contador">
+              <th
+                scope="col"
+                class="border text-xs text-black border-white colcolor"
+                mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header
+              >
+                Correos enviados
+              </th>
+              <td
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                mat-cell
+                *matCellDef="let row"
+              >
+                {{ row.contador }}
+              </td>
+            </ng-container>
+
             <ng-container matColumnDef="accion">
               <th
                 scope="col"
@@ -245,8 +265,8 @@
                 <div class="flex gap-5">
                   <button
                     mat-mini-fab
-                    class="bt-detalle h-5 w-5"
-                    matTooltip="Ir a Detalle"
+                    class="bt-invitaciones h-5 w-5"
+                    matTooltip="Enviar invitación"
                     aria-label="Enviar invitación"
                   ></button>
                 </div>
@@ -254,7 +274,8 @@
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"
+             [class.desactivado]="row.desactivado"></tr>
           </table>
           <div>
             <mat-paginator

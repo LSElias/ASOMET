@@ -43,6 +43,7 @@ module.exports.getById = async (request, response, next) => {
             },
             estadoConfir: {
               select: {
+                idEstadoConfir: true,
                 nombre: true
               }
             },
@@ -78,11 +79,13 @@ module.exports.getById = async (request, response, next) => {
           correo: asistencia.asociado.correo,
         },
         estadoConfirmacion: {
+          idEstadoConfir: asistencia.estadoConfir.idEstadoConfir,
           nombre: asistencia.estadoConfir.nombre
         },
         estadoAsistencia: {
           nombre: asistencia.estadoAsistencia.nombre
-        }
+        },
+        contador: asistencia.contEnvios
       }))
     };
 
