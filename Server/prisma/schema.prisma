@@ -71,6 +71,7 @@ model Asistencia{
   idAsociado Int
   idEstadoConfir Int
   idAsistencia Int
+  contEnvios Int
   evento Evento @relation(fields: [idEvento],references: [idEvento])
   asociado Usuario @relation(fields: [idAsociado],references: [idUsuario])
   estadoConfir EstadoConfirm @relation(fields: [idEstadoConfir],references: [idEstadoConfir])
