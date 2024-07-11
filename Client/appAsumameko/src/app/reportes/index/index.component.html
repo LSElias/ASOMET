@@ -1,36 +1,67 @@
 <div class="flex">
-    <app-menu> </app-menu>
-    <div class="w-full">
-      <app-header></app-header>
-      <div class="bg-gray-100 w-full h-full py-1">
-        <div class="flex bg-white mx-5 my-5 h-34 rounded-lg drop-shadow-md items-center">
-           <div class="flex items-center">
-            <div class="my-5 ml-5 mx-2 py-4 px-2 w-14 h-fit bg-orange-50 rounded-lg text-center flex flex-col">
-              <img class="self-center pb-1 " src="../../../assets/images/userIcon.png" />
+  <app-menu> </app-menu>
+  <div class="w-full">
+    <app-header></app-header>
+    <div class="bg-gray-100 w-full h-full py-1">
+      <div class="flex bg-white mx-5 my-5 h-34 rounded-lg drop-shadow-md items-center">
+        <div class="flex items-center">
+          <div class="my-5 ml-5 mx-2 py-4 px-2 w-14 h-fit bg-orange-50 rounded-lg text-center flex flex-col">
+            <img class="self-center pb-1" src="../../../assets/images/userIcon.png" />
+          </div>
+          <div class="my-5 py-4 px-7 h-fit flex flex-col items-center gap-2 border-r-2">
+            <p class="text-xs text-gray-500">Asociados totales</p>
+            <h2 class="text-sm text-black text-left">{{ asociados.length }}</h2>
+          </div>
+        </div>
+        <div class="flex items-center">
+          <div class="my-5 ml-5 mx-2 py-4 px-2 w-14 h-fit bg-orange-50 rounded-lg text-center flex flex-col">
+            <img class="self-center pb-1" src="../../../assets/images/calendarEventIcon.png" />
+          </div>
+          <div class="my-5 py-4 px-7 h-fit flex flex-col items-center gap-2 border-r-2">
+            <p class="text-xs text-gray-500">Eventos totales</p>
+            <h2 class="text-sm text-black text-left">{{ event.length }}</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white mx-5 my-5 h-34 rounded-lg drop-shadow-md">
+        <div class="w-full flex py-8 justify-center">
+          <h1 class="font-light border-b-orange-300 border-b-2 w-fit">
+            Reportes de evento
+          </h1>
+        </div>
+
+        <div class="grid grid-cols-2 p-8">
+          <div class="flex flex-col gap-8">
+            <div class="chart-container flex">
+              <canvas #mayorAsistencia width="400" height="160" id="MyChart" class="chart"></canvas>
+              <button type="button" (click)="mayorAsistenciaRporte()"
+                class="py-2 px-6 me-2 mb-2 text-xs h-fit flex gap-1 font-medium text-[#5A6ACF] rounded-md bg-[#FBFCFE] hover:bg-[#6E749B] hover:text-white transition duration-200 border drop-shadow-sm">Ver
+                reporte
+              </button>
             </div>
-            <div class="my-5 py-4 px-7 h-fit flex flex-col  items-center gap-2 border-r-2 ">
-              <p class="text-xs text-gray-500"> Asociados totales </p>
-              <h1 class="text-sm text-black text-left"> {{'rTitulo'}}</h1>
+            <div class="chart-container flex">
+              <canvas #menorAsistencia width="400" height="160" id="menorAsistencia" class="chart"></canvas>
+              <button type="button" (click)="menorAsistenciaRporte()"
+                class="py-2 px-6 me-2 mb-2 text-xs h-fit flex gap-1 font-medium text-[#5A6ACF] rounded-md bg-[#FBFCFE] hover:bg-[#6E749B] hover:text-white transition duration-200 border drop-shadow-sm">Ver
+                reporte
+              </button>
             </div>
-         </div>
-         <div class="flex items-center">
-            <div class="my-5 ml-5 mx-2 py-4 px-2 w-14 h-fit bg-orange-50 rounded-lg text-center flex flex-col">
-              <img class="self-center pb-1" src="../../../assets/images/calendarEventIcon.png" />
-            </div>
-            <div class="my-5 py-4 px-7 h-fit flex flex-col  items-center gap-2 border-r-2 ">
-              <p class="text-xs text-gray-500"> Eventos totales </p>
-              <h1 class="text-sm text-black text-left"> {{'rTitulo'}}</h1>
-            </div>
-         </div>
           </div>
 
-          <div class=" bg-white mx-5 my-5 h-34 rounded-lg drop-shadow-md ">
-            <div class="w-full flex py-2 justify-center">
-                <h1 class="font-semibold border-b-orange-300 border-b-2 w-fit"> Eventos </h1>
+          <div>
+            <div class="chart-container ml-2 p-2 h-2/3">
+              <div class="flex justify-end">
+                <button type="button"
+                  class="py-2 px-6 me-2 mb-2 text-xs h-fit flex gap-1 font-medium text-[#5A6ACF] rounded-md bg-[#FBFCFE] hover:bg-[#6E749B] hover:text-white transition duration-200 border drop-shadow-sm">Ver
+                  reporte
+                </button>
+              </div>
+              <canvas #lineChart width="500" height="500" id="linechart" class="chart"></canvas>
             </div>
-
-           </div>
-
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>
