@@ -83,7 +83,7 @@ export class EventoDetalleComponent {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-//En proceso 
+  //En proceso
   sendEmail_General() {
     let correos: string[] = [];
 
@@ -98,7 +98,7 @@ export class EventoDetalleComponent {
         }
 
         if (
-          i.contador === 3 ||
+          i.contador >= 3 ||
           i.estadoConfirmacion.idEstadoConfir === 1 ||
           i.estadoConfirmacion.idEstadoConfir === 2
         ) {
@@ -116,27 +116,18 @@ export class EventoDetalleComponent {
 
     console.log(info);
 
-    this.updateTable(this.datos.asistencia);
-    this.fetch(); 
     this.gService
-      .create('mail/sendEventNotification', info)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        (response: any) => {
-          this.datos = response;
-          console.log(response);
-        
-        },
-        (error) => {
-          console.error('Error al enviar correos:', error);
-          this.noti.mensajeRedirect(
-            'Error al enviar correos',
-            'Por favor, intente nuevamente',
-            TipoMessage.error,
-            'evento'
-          );
-        }
-      );
+    .create('mail/sendEventNotification', info)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
+      (response: any) => {
+        this.datos  = response; 
+        console.log(response);
+      }
+    );
+
+    this.updateTable(this.datos); 
+    this.fetch(); 
   }
   /*
   sendEmail_General() {
