@@ -6,18 +6,8 @@
   text-align: center;
 }
 
-.bt-detalle {
-  background-image: url("../../../assets/images/detailUserIcon.png");
-  background-repeat: no-repeat;
-}
-
-.bt-editar {
-  background-image: url("../../../assets/images/editUserIcon.png");
-  background-repeat: no-repeat;
-}
-
-.bt-desactivar {
-  background-image: url("../../../assets/images/hideUserIcon.png");
+.bt-invitaciones {
+  background-image: url("../../../assets/images/emailIcon.png");
   background-repeat: no-repeat;
 }
 
@@ -38,4 +28,9 @@ tr {
 td {
   color: #6b7280;
   border: none;
+}
+
+.desactivado {
+  opacity: 0.5;
+  pointer-events: none;
 }
