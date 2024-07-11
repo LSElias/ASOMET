@@ -51,10 +51,7 @@ module.exports.sendEventNotification = async (request, response, next) => {
         },
         data: {
           idEstadoConfir: 3,
-          idAsistencia: 3,
-          contador: {
-            increment: 1,
-          },
+          idAsistencia: 3
         },
       });
     });
