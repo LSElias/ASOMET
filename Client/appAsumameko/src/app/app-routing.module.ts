@@ -7,6 +7,7 @@ import { DashboardIndexComponent } from './dashboard/dashboard-index/dashboard-i
 import { EventoIndexComponent } from './eventos/evento-index/evento-index.component';
 import { EventoDetalleComponent } from './eventos/evento-detalle/evento-detalle.component';
 import { IndexComponent } from './reportes/index/index.component';
+import { ReporteMayorAsistenciaComponent } from './reportes/reporte-mayor-asistencia/reporte-mayor-asistencia.component';
 
 /* const routes: Routes = [
   {
@@ -21,14 +22,18 @@ import { IndexComponent } from './reportes/index/index.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  
+
   { path: 'usuario', component: UsuarioIndexComponent },
   { path: 'dashboard', component: DashboardIndexComponent },
   { path: 'eventos', component: EventoIndexComponent },
   { path: 'reportes', component: IndexComponent },
+  {
+    path: 'reportes/mayor-asistencia',
+    component: ReporteMayorAsistenciaComponent,
+  },
 
   { path: 'eventos/:id', component: EventoDetalleComponent },
-/*  { path: 'ajustes', component: AjustesComponent },
+  /*  { path: 'ajustes', component: AjustesComponent },
   { path: 'logout', component: LogoutComponent }, */
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Ruta predeterminada
 ];
