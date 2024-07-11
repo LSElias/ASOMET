@@ -27,17 +27,19 @@ export class UsuarioIndexComponent implements AfterViewInit {
   admins = [];
 
   statuses = [
-    {
-      id: 2,
-      name: 'Inactivo',
-    },
+    { id: 0, name: 'Seleccione un estado' },
     {
       id: 1,
       name: 'Activo',
     },
+    {
+      id: 2,
+      name: 'Inactivo',
+    },
   ];
 
   roles = [
+    { id: 0, name: 'Seleccione un rol' },
     {
       id: 1,
       name: 'Administrador',
@@ -73,10 +75,14 @@ export class UsuarioIndexComponent implements AfterViewInit {
     /*     this.fetchUsuarios(); */
     this.userFormModal.usuarioCreado.subscribe(() => {
       this.fetchUsuarios();
+      this.selectedStatus = this.statuses[0];
+      this.selectedRole = this.roles[0];
     });
     this.hideUserFormModal.usuarioModificado.subscribe((newStatus: number) => {
       this.fetchUsuarios();
-      this.selectedStatus = newStatus === 1 ? 2 : 1;
+      //      this.selectedStatus = newStatus === 1 ? 2 : 1;
+      this.selectedStatus = this.statuses[0];
+      this.selectedRole = this.roles[0];
       this.statusChangeDeactivate(this.selectedStatus.toString());
     });
   }
