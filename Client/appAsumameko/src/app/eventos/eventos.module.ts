@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { heroPlus } from '@ng-icons/heroicons/outline';
+import { heroPaperAirplaneSolid} from '@ng-icons/heroicons/solid';
 import { EventoDetalleComponent } from './evento-detalle/evento-detalle.component';
 import { EventoFormComponent } from './evento-form/evento-form.component';
 
@@ -28,7 +29,7 @@ import { EventoFormComponent } from './evento-form/evento-form.component';
     CommonModule,
     UsuariosRoutingModule,
     SharedModule,
-    NgIconsModule.withIcons({ heroPlus }),
+    NgIconsModule.withIcons({ heroPlus, heroPaperAirplaneSolid }),
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
