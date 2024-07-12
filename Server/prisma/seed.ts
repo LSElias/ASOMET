@@ -84,7 +84,7 @@ await prisma.evento.create({
     idCreador: 30,
     titulo: "Prueba 3",
     descripcion: "Asomameco, les invita a asistir a la primera asamblea del año. Catering:  Información",
-    fecha: "2024-07-25",
+    fecha: "2024-06-25",
     hora: "17:30",
     localizacion: "Auditorio General"
   
@@ -95,7 +95,7 @@ await prisma.evento.create({
     idCreador: 30,
     titulo: "Prueba 4",
     descripcion: "Asomameco, les invita a asistir a la primera asamblea del año. Catering:  Información",
-    fecha: "2024-07-26",
+    fecha: "2024-06-26",
     hora: "17:30",
     localizacion: "Auditorio General"
   

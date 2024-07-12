@@ -6,705 +6,825 @@ Datos prueba de asistencia para cargarlos en Postman --> Pruebas de Reportes
         "idEvento": 2,
         "idAsociado": 1,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 2,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 3,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 4,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 5,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 6,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 7,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 8,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 9,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 10,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 11,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 12,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 13,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 14,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 15,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 16,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 17,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 18,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 19,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 20,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 21,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 22,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 23,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 24,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 25,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 26,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 27,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 28,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 2,
         "idAsociado": 29,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     }
 ]
-//Asistencia - Evento 3 
+
+// Asistencia - Evento 3 
 [
     {
         "idEvento": 3,
         "idAsociado": 1,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 2,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 3,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 4,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 5,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 6,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 7,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 8,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 9,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 10,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 11,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 12,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 13,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 14,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 15,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 16,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 17,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 18,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 19,
         "idEstadoConfir": 1,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 20,
         "idEstadoConfir": 1,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 21,
         "idEstadoConfir": 1,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 22,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 23,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 24,
         "idEstadoConfir": 1,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 25,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 26,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 27,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 28,
         "idEstadoConfir": 2,
-        "idAsistencia": 2
+        "idAsistencia": 2,
+        "contEnvios": 0
     },
     {
         "idEvento": 3,
         "idAsociado": 29,
         "idEstadoConfir": 1,
-        "idAsistencia": 1
+        "idAsistencia": 1,
+        "contEnvios": 0
     }
 ]
-//Asistencia - Evento 4
+
+// Asistencia - Evento 4 
 [
     {
         "idEvento": 4,
         "idAsociado": 1,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 2,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 3,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 4,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 5,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 6,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 7,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 8,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 9,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 10,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 11,
         "idEstadoConfir": 3,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 12,
         "idEstadoConfir": 3,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 13,
         "idEstadoConfir": 3,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 14,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 15,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 16,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 17,
-        "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idEstadoConfir": 1,
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 18,
         "idEstadoConfir": 3,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 19,
         "idEstadoConfir": 3,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 20,
-        "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idEstadoConfir": 1,
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 21,
         "idEstadoConfir": 3,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 22,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 23,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 1,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 24,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 25,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 26,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 27,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 28,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 4,
         "idAsociado": 29,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     }
 ]
-//Asistencia - Evento 5
+
+
+// Asistencia - Evento 5
 [
     {
         "idEvento": 5,
         "idAsociado": 1,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 2,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 3,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 4,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 5,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 6,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 7,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 8,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 9,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 10,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 11,
         "idEstadoConfir": 3,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 12,
         "idEstadoConfir": 3,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 13,
         "idEstadoConfir": 3,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 14,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 15,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 16,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 17,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 18,
         "idEstadoConfir": 3,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 19,
         "idEstadoConfir": 3,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 20,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 21,
         "idEstadoConfir": 3,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 22,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 23,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 24,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 25,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 26,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 27,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 28,
         "idEstadoConfir": 2,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     },
     {
         "idEvento": 5,
         "idAsociado": 29,
         "idEstadoConfir": 1,
-        "idAsistencia": 3
+        "idAsistencia": 3,
+        "contEnvios": 0
     }
 ]
