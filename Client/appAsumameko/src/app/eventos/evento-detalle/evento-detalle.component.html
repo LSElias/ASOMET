@@ -268,14 +268,16 @@
                     class="bt-invitaciones h-5 w-5"
                     matTooltip="Enviar invitación"
                     aria-label="Enviar invitación"
+                    [disabled]="row.desactivado"
+                    [class.desactivado]="row.desactivado"
+                    (click)="sendEmail_Individual(datos.idEvento, row.asociado.correo)"
                   ></button>
                 </div>
               </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns"
-             [class.desactivado]="row.desactivado"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
           </table>
           <div>
             <mat-paginator

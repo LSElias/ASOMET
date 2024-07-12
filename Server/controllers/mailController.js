@@ -27,6 +27,7 @@ module.exports.sendEventNotification = async (request, response, next) => {
         },
         select: {
           correo: true,
+          idUsuario: true,
         },
       });
     } else {
@@ -47,11 +48,14 @@ module.exports.sendEventNotification = async (request, response, next) => {
       await prisma.asistencia.updateMany({
         where: {
           idEvento: parseInt(evento.idEvento, 10),
-          idAsociado: usuarios.idUsuario,
+          idAsociado: usuario.idUsuario,
         },
         data: {
           idEstadoConfir: 3,
-          idAsistencia: 3
+          idAsistencia: 3,
+          contEnvios:{
+            increment: 1,
+          },
         },
       });
     });
