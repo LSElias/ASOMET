@@ -56,7 +56,7 @@ module.exports.getAsistenciaSiguienteEvento = async (request, response, next) =>
 module.exports.getMenorAsistencia = async (request, response, next) => {
   try {
     const result = await prisma.$queryRaw(
-      Prisma.sql`SELECT a.idEvento, e.titulo, e.fecha, (SELECT COUNT(*) FROM asistencia WHERE idEstadoConfir = 1 AND idEvento = a.idEvento) AS Confirmacion, (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 1 AND idEvento = a.idEvento) AS Asistencia, (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 2 AND idEvento = a.idEvento) AS Ausentes, FORMAT(( (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 1 AND idEvento = a.idEvento) / (SELECT COUNT(*) FROM asistencia WHERE (idEstadoConfir = 1 AND idEvento = a.idEvento)) * 100), 0) AS Tasa FROM asistencia a JOIN evento e ON a.idEvento = e.idEvento WHERE e.fecha <= CURDATE() GROUP BY a.idEvento, e.fecha ORDER BY Asistencia ASC`
+      Prisma.sql`SELECT a.idEvento, e.titulo, e.fecha, (SELECT COUNT(*) FROM asistencia WHERE idEstadoConfir = 1 AND idEvento = a.idEvento) AS Confirmacion, (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 1 AND idEvento = a.idEvento) AS Asistencia, (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 2 AND idEvento = a.idEvento) AS Ausentes, FORMAT(( (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 1 AND idEvento = a.idEvento) / (SELECT COUNT(*) FROM asistencia WHERE (idEstadoConfir = 1 AND idEvento = a.idEvento)) * 100), 0) AS Tasa FROM asistencia a JOIN evento e ON a.idEvento = e.idEvento WHERE e.fecha <= CURDATE() GROUP BY a.idEvento, e.fecha ORDER BY Asistencia ASC LIMIT 5`
     )
   
     //Modificar tipo Fecha --> Int to String
@@ -79,7 +79,7 @@ module.exports.getMenorAsistencia = async (request, response, next) => {
 module.exports.getMayorAsistencia = async (request, response, next) => {
   try {
     const result = await prisma.$queryRaw(
-      Prisma.sql`SELECT a.idEvento, e.titulo, e.fecha, (SELECT COUNT(*) FROM asistencia WHERE idEstadoConfir = 1 AND idEvento = a.idEvento) AS Confirmacion, (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 1 AND idEvento = a.idEvento) AS Asistencia, (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 2 AND idEvento = a.idEvento) AS Ausentes, FORMAT(( (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 1 AND idEvento = a.idEvento) / (SELECT COUNT(*) FROM asistencia WHERE (idEstadoConfir = 1 AND idEvento = a.idEvento)) * 100), 0) AS Tasa FROM asistencia a JOIN evento e ON a.idEvento = e.idEvento WHERE e.fecha <= CURDATE() GROUP BY a.idEvento, e.fecha ORDER BY Asistencia DESC`
+      Prisma.sql`SELECT a.idEvento, e.titulo, e.fecha, (SELECT COUNT(*) FROM asistencia WHERE idEstadoConfir = 1 AND idEvento = a.idEvento) AS Confirmacion, (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 1 AND idEvento = a.idEvento) AS Asistencia, (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 2 AND idEvento = a.idEvento) AS Ausentes, FORMAT(( (SELECT COUNT(*) FROM asistencia WHERE idAsistencia = 1 AND idEvento = a.idEvento) / (SELECT COUNT(*) FROM asistencia WHERE (idEstadoConfir = 1 AND idEvento = a.idEvento)) * 100), 0) AS Tasa FROM asistencia a JOIN evento e ON a.idEvento = e.idEvento WHERE e.fecha <= CURDATE() GROUP BY a.idEvento, e.fecha ORDER BY Asistencia DESC LIMIT 5`
     )
   
     //Modificar tipo Fecha --> Int to String
