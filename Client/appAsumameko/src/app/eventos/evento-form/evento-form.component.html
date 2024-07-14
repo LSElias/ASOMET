@@ -35,7 +35,7 @@
               <mat-error *ngIf="errorHandling('titulo', 'required')">
                 El título es <strong>requerido</strong>.
               </mat-error>
-              <mat-error *ngIf="errorHandling('titulo', 'minLength')">
+              <mat-error *ngIf="errorHandling('titulo', 'minlength')">
                 El título <strong> debe de tener más de 5 carácteres</strong>.
               </mat-error>
           </div>
@@ -49,7 +49,7 @@
               <mat-error *ngIf="errorHandling('localizacion', 'required')">
                 La localización es <strong>requerida</strong>.
               </mat-error>
-              <mat-error *ngIf="errorHandling('localizacion', 'minLength')">
+              <mat-error *ngIf="errorHandling('localizacion', 'minlength')">
                 La localización <strong> debe de tener más de 5 carácteres</strong>.
               </mat-error>
           </div>
@@ -98,7 +98,7 @@
               <mat-error *ngIf="errorHandling('descripcion', 'required')">
                 La descripción es <strong>requerida</strong>.
               </mat-error>
-              <mat-error *ngIf="errorHandling('descripcion', 'minLength')">
+              <mat-error *ngIf="errorHandling('descripcion', 'minlength')">
                 La descripción <strong> debe de tener más de 5 carácteres</strong>.
               </mat-error>
           </div>
