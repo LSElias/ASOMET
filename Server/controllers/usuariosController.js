@@ -152,8 +152,7 @@ module.exports.getByCedula = async (request, response, next) => {
 
     if (usuario.length === 0) {
       return response.status(404).json({
-        message:
-          "El número de cédula ingresado es incorrecto",
+        message: "El número de cédula ingresado es incorrecto",
       });
     }
 
@@ -175,7 +174,7 @@ module.exports.getByCedula = async (request, response, next) => {
   }
 };
 
-//GetInfoAsociados 
+//GetInfoAsociados
 module.exports.getInfoAsociados = async (request, response, next) => {
   try {
     const usuarios = await prisma.usuario.findMany({
@@ -210,7 +209,7 @@ module.exports.getInfoAsociados = async (request, response, next) => {
     response.status(500).json({ message: "Error en la solicitud", error });
   }
 };
-
+//En Proceso
 //Create
 module.exports.create = async (request, response, next) => {
   try {
@@ -227,6 +226,43 @@ module.exports.create = async (request, response, next) => {
         telefono: infoUsuario.telefono,
       },
     });
+
+    if (infoUsuario.enviarInfo) {
+      const eventoVigente = await prisma.evento.findMany({
+        where: {
+          fecha: {
+            gt: new Date(),
+          },
+        },
+        orderBy: {
+          fecha: "asc",
+        },
+        take: 1,
+      });
+
+      if (eventoVigente.length > 0) {
+
+        const eventoFuturo = eventoVigente[0]; 
+
+        await prisma.asistencia.create({
+          data: {
+            idEvento: eventosFuturo.idEvento,
+            idAsociado: newUsuario.idUsuario,
+            idEstadoConfir: 3,
+            idAsistencia: 3,
+            contEnvios: 0,
+          },
+        });
+
+        await prisma.sendEventNotification({
+          body: {
+            eventId: eventosFuturo.idEvento,
+            selectedEmails: newUsuario.correo,
+          },
+        }, response, next);
+      }
+    }
+
     response.status(200).json({
       status: true,
       message: "Creado exitosamente",
@@ -268,7 +304,9 @@ module.exports.update = async (request, response, next) => {
 
     response.json(newUser);
   } catch (error) {
-    response.status(500).json({ message: "Error en la actualización del usuario" });
+    response
+      .status(500)
+      .json({ message: "Error en la actualización del usuario" });
   }
 };
 
@@ -296,7 +334,9 @@ module.exports.updateEstadoUsuario = async (request, response, next) => {
 
     response.json(newUser);
   } catch (error) {
-    response.status(500).json({ message: "Error en la actualización del estado" });
+    response
+      .status(500)
+      .json({ message: "Error en la actualización del estado" });
   }
 };
 

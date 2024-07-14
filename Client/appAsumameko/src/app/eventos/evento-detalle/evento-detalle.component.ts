@@ -58,11 +58,26 @@ export class EventoDetalleComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: any) => {
         this.datos = response;
+        this.disableButton();
         console.log(response);
         this.dataSource = new MatTableDataSource(response.asistencia);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
+  }
+
+  disableButton() {
+    if (this.datos && this.datos.asistencia) {
+      this.datos.asistencia.forEach((i: any) => {
+        if (
+          i.contador >= 3 ||
+          i.estadoConfirmacion.idEstadoConfir === 1 ||
+          i.estadoConfirmacion.idEstadoConfir === 2
+        ) {
+          i.desactivado = true;
+        }
+      });
+    }
   }
 
   nombreChange(event: any) {
@@ -83,29 +98,15 @@ export class EventoDetalleComponent {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  //En proceso
+
   sendEmail_General() {
     let correos: string[] = [];
 
     this.datos.asistencia.forEach((i: any) => {
-      if (i.contador < 3) {
-        //Valida Estado Confirmación
-        if (
-          i.estadoConfirmacion.idEstadoConfir === 4 ||
-          i.estadoConfirmacion.idEstadoConfir === 3
-        ) {
-          correos.push(i.asociado.correo);
-        }
-
-        if (
-          i.contador >= 3 ||
-          i.estadoConfirmacion.idEstadoConfir === 1 ||
-          i.estadoConfirmacion.idEstadoConfir === 2
-        ) {
-          i.desactivado = true;
-        }
-      } else {
-        i.desactivado = true;
+      if (i.estadoConfirmacion.idEstadoConfir === 4 ||
+        i.estadoConfirmacion.idEstadoConfir === 3 && i.contador < 3) {
+            correos.push(i.asociado.correo);
+       
       }
     });
 
@@ -117,49 +118,30 @@ export class EventoDetalleComponent {
     console.log(info);
 
     this.gService
-    .create('mail/sendEventNotification', info)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(
-      (response: any) => {
-        this.datos  = response; 
+      .create('mail/sendEventNotification', info)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((response: any) => {
+        this.datos = response;
         console.log(response);
-      }
-    );
-
-    this.updateTable(this.datos); 
-    this.fetch(); 
+        this.updateTable(this.datos);
+        this.fetch();
+      });
   }
-  /*
-  sendEmail_General() {
-    let info: { correo: string; idEstadoConfir: number; contador: number }[] =
-      [];
 
-    this.datos.asistencia.forEach((i: any) => {
-      if (i.contador < 3) {
-        //Valida Estado Confirmación
-        if (i.estadoConfirmacion.idEstadoConfir === 4 || i.estadoConfirmacion.idEstadoConfir === 3) {
-          i.estadoConfirmacion.idEstadoConfir = 3; 
-          i.contador++;
-
-          info.push({
-            correo: i.asociado.correo,
-            idEstadoConfir: i.estadoConfirmacion.idEstadoConfir,
-            contador: i.contador,
-          });
-        }
-        
-        if (i.contador === 3 || i.estadoConfirmacion.idEstadoConfir === 1 || i.estadoConfirmacion.idEstadoConfir === 2) {
-          i.desactivado = true;
-        }
-      } else
-      {
-        i.desactivado = true;
-      }
-    });
+  sendEmail_Individual(idEvento: number, correo: string){
+    const info = { eventId: idEvento, selectedEmails: [correo]};
 
     console.log(info);
+     
+    this.gService
+    .create('mail/sendEventNotification', info)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((response: any) => {
+      this.datos = response;
+      console.log(response);
+      this.updateTable(this.datos);
+      this.fetch();
+    });
 
-    this.updateTable(this.datos.asistencia);
   }
-*/
 }
