@@ -1,0 +1,185 @@
+<!-- border-b-2 border-gray-500 -->
+<div class="flex">
+  <app-menu class="hidePrint"> </app-menu>
+  <div class="w-full">
+    <app-header class="hidePrint"></app-header>
+    <div class="bg-gray-100 w-full h-full py-1 " id="imprimir">
+
+      <div class=" bg-white mx-8 my-5  rounded-lg drop-shadow-md ">
+        <div class="flex items-center border-b-2 border-gray-300 rounded-lg ">
+
+          <div class="flex items-center border-r-2 border-gray-300 ">
+            <div class="flex my-2 mx-5 divLogo">
+              <img class="logo" src="../../../assets/images/logo.png" alt="Logo" />
+              <p class="asumameko px-2">Asoma<span class="meko">meco</span></p>
+            </div>
+          </div>
+          <div class="my-5 py-4 px-7 h-fit flex flex-col items-center gap-2 divH1">
+            <h1 class="text-xl text-black">Informe Comparación de Confirmaciones y Asistencias en Eventos </h1>
+          </div>
+        </div>
+
+        <div class="flex items-center text-[#666666] py-5 px-8 ">
+          <p class="text-sm">Este informe analiza los eventos de mayor participación organizados por Asomameko en
+            2024, evaluando la relación entre
+            las confirmaciones y las asistencias registradas. Durante el periodo del 1 de enero al 12 de diciembre, se
+            identificaron
+            los eventos más exitosos en términos de participación efectiva, buscando entender los factores que
+            impulsaron tanto la
+            confirmación como la asistencia. El propósito es proporcionar información clave para mejorar la
+            planificación y ejecución de futuros eventos, maximizando
+            así su impacto positivo en la comunidad.
+          </p>
+        </div>
+
+
+
+        <div class="text-[#666666] pt-5  px-8 ">
+          <span class="font-semibold">Gráfico de Barras:</span>
+          <p class="text-sm">A continuación, se presenta un gráfico de barras que muestra los eventos a lo largo del
+            tiempo con tres variables:
+            "Confirmaciones", "Asistencias" y "No asistieron". Este gráfico permite visualizar cómo se distribuyen
+            estas variables a
+            lo largo del año, proporcionando una visión clara de la participación en los eventos.</p>
+        </div>
+
+
+        <div class="text-[#666666] pt-5  px-8 ">
+          <div class="chart-container ml-2 p-2">
+            <canvas #lineChart width="500" height="300" id="linechart" class="chart"></canvas>
+          </div>
+        </div>
+
+
+
+        <!--           <div class="text-[#666666] pt-5  px-8 ">
+            <span class="font-semibold">Listado de Eventos:</span>
+            <p class="text-sm">A continuación, se muestra una tabla con la información detallada de los eventos
+              ordenados por la fecha del evento. Cada
+              evento está acompañado de detalles sobre la cantidad de confirmaciones, la asistencia real, el número de
+              no asistencias
+              y la tasa de asistencia.</p>
+          </div> -->
+
+
+
+        <!--      
+          <div class="relative overflow-x-auto py-5 px-8 divTable">
+            <table mat-table [dataSource]="dataSource" matSort class="w-full text-sm text-left rtl:text-right ">
+              <ng-container matColumnDef="evento">
+                <th scope="col" class=" border text-xs text-black border-white colcolor rounded-tl-md" mat-header-cell
+                  *matHeaderCellDef mat-sort-header>
+                  Evento
+                </th>
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" mat-cell
+                  *matCellDef="let row">
+                  {{ row.titulo }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="fecha">
+                <th scope="col" class=" border text-xs text-black border-white colcolor" mat-header-cell
+                  *matHeaderCellDef mat-sort-header>
+                  Fecha del evento
+                </th>
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" mat-cell
+                  *matCellDef="let row">
+                  {{ row.fecha }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="confirmaciones">
+                <th scope="col" class=" border text-xs text-black border-white colcolor" mat-header-cell
+                  *matHeaderCellDef mat-sort-header>
+                  Confirmaciones
+                </th>
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" mat-cell
+                  *matCellDef="let row">
+                  {{ row.Confirmacion }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="asistencias">
+                <th scope="col" class="border text-xs text-black border-white colcolor" mat-header-cell
+                  *matHeaderCellDef mat-sort-header>
+                  Asistencias
+                </th>
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" mat-cell
+                  *matCellDef="let row">
+                  {{ row.Asistencia }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="ausentes">
+                <th scope="col" class="border text-xs text-black border-white colcolor" mat-header-cell
+                  *matHeaderCellDef mat-sort-header>
+                  Ausentes
+                </th>
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" mat-cell
+                  *matCellDef="let row">
+                  {{ row.Ausentes }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="tasa">
+                <th scope="col" class="border text-xs text-black border-white colcolor" mat-header-cell
+                  *matHeaderCellDef mat-sort-header>
+                  Tasa de asistencia
+                </th>
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" mat-cell
+                  *matCellDef="let row">
+                  {{ row.Tasa }}%
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+          </div> -->
+        <div class="text-[#666666] pt-5  px-8">
+          <span class="font-semibold">Análisis Detallado:</span>
+          <p class="text-sm">En primer lugar, destaca el evento <b>"Asamblea General - Prueba"</b> que tuvo lugar el 26
+            de
+            junio. Este evento registró un
+            total de 22 confirmaciones y una asistencia del 100%. La alineación perfecta entre las confirmaciones y la
+            asistencia
+            sugiere una planificación efectiva y una ejecución exitosa. Este resultado refleja una fuerte respuesta por
+            parte de los
+            participantes, indicando un alto grado de compromiso y un interés significativo en el contenido y propósito
+            del evento.
+          </p>
+          <br>
+
+          <p class="text-sm">Otro evento destacado es <b>"Prueba 2"</b>, celebrado el 28 de junio, con 18 confirmaciones
+            y 18
+            asistentes, también alcanzando
+            una tasa de asistencia del 100%. Este éxito sugiere una adecuada gestión logística y una comunicación eficaz
+            que resonó
+            con los invitados. La alta correlación entre las confirmaciones y la asistencia real subraya la efectividad
+            de las
+            estrategias de promoción empleadas y la relevancia del tema abordado en el evento. Por otro lado, <b>"Prueba
+              3"</b>, realizado el 25 de junio, mostró una tasa de asistencia del 76%. Con 17 confirmaciones y 13
+            asistentes, este evento también captó un interés significativo, aunque con un nivel ligeramente menor de
+            participación
+            comparado con los eventos anteriores. Esto sugiere una respuesta positiva pero podría indicar áreas donde
+            mejorar las
+            estrategias de promoción o logística para optimizar la asistencia.
+          </p>
+          <br>
+
+
+
+        </div>
+        <div class="py-5 px-8 text-center no-print">
+          <button id="printButton" type="button" (click)="printDiv()"
+            class="py-2 px-6 me-2 mb-2 text-xs h-fit flex gap-1 font-medium text-white rounded-md bg-[#DBA36D] hover:bg-[#6E749B] hover:text-white transition duration-200 border drop-shadow-sm w-full">
+            <ng-icon name="heroPrinter" size="1.4em"></ng-icon>
+            <p>Imprimir</p>
+          </button>
+        </div>
+
+
+
+      </div>
+
+    </div>

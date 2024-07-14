@@ -13,9 +13,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { NgIconsModule } from '@ng-icons/core';
 import { heroPlus, heroPrinter } from '@ng-icons/heroicons/outline';
+import { ReporteMenorAsistenciaComponent } from './reporte-menor-asistencia/reporte-menor-asistencia.component';
+import { ReporteConfirmacionesAsistenciaComponent } from './reporte-confirmaciones-asistencia/reporte-confirmaciones-asistencia.component';
 
 @NgModule({
-  declarations: [IndexComponent, ReporteMayorAsistenciaComponent],
+  declarations: [IndexComponent, ReporteMayorAsistenciaComponent, ReporteMenorAsistenciaComponent, ReporteConfirmacionesAsistenciaComponent],
   imports: [
     CommonModule,
     ReportesRoutingModule,

@@ -120,17 +120,40 @@ export class IndexComponent implements AfterViewInit {
           ],
         },
         options: {
-          responsive: false,
+          responsive: true,
           maintainAspectRatio: false,
+
+          layout: {
+            padding: {
+              right: 80,
+            },
+          },
           plugins: {
             legend: {
               position: 'right',
+              labels: {
+                padding: 10,
+                boxPadding: 0,
+                boxWidth: 13,
+                borderRadius: 0,
+                pointStyle: 'rectRounded',
+                usePointStyle: true,
+              },
+              fullSize: true,
+              maxWidth: 1300,
             },
             title: {
               display: true,
               text: 'Eventos con mayor asistencia',
               position: 'left',
-              align: 'start',
+              align: 'center',
+              fullSize: true,
+              font: {
+                family: 'Arial', // Cambia 'Arial' por la fuente que desees
+                size: 21, // Tamaño de la fuente
+                weight: 'bolder', // Peso de la fuente
+                style: 'italic', // Estilo de la fuente (opcional)
+              },
             },
           },
         },
@@ -210,17 +233,40 @@ export class IndexComponent implements AfterViewInit {
           ],
         },
         options: {
-          responsive: false,
+          responsive: true,
           maintainAspectRatio: false,
+
+          layout: {
+            padding: {
+              right: 80,
+            },
+          },
           plugins: {
             legend: {
               position: 'right',
+              labels: {
+                padding: 10,
+                boxPadding: 0,
+                boxWidth: 13,
+                borderRadius: 0,
+                pointStyle: 'rectRounded',
+                usePointStyle: true,
+              },
+              fullSize: true,
+              maxWidth: 1300,
             },
             title: {
               display: true,
-              text: 'Eventos con menor asistencia',
+              text: 'Eventos con mayor asistencia',
               position: 'left',
-              align: 'start',
+              align: 'center',
+              fullSize: true,
+              font: {
+                family: 'Arial', // Cambia 'Arial' por la fuente que desees
+                size: 21, // Tamaño de la fuente
+                weight: 'bolder', // Peso de la fuente
+                style: 'italic', // Estilo de la fuente (opcional)
+              },
             },
           },
         },
@@ -279,7 +325,7 @@ export class IndexComponent implements AfterViewInit {
     const data2 = this.linear.map((x: { Confirmacion: any }) => x.Confirmacion);
     const data3 = this.linear.map((x: { Ausentes: any }) => x.Ausentes);
 
-    const colors = ['#5a6acf', '#e6e8ec', '#e2cd89'];
+    const colors = ['#335C85', '#e6e8ec', '#e2cd89'];
 
     if (grafico && grafico != undefined && grafico != null) {
       this.updateDataBar(grafico);
@@ -291,7 +337,7 @@ export class IndexComponent implements AfterViewInit {
           labels: months, // X-axis labels (months)
           datasets: [
             {
-              label: 'Atendieron',
+              label: 'Asistieron',
               data: data1,
               backgroundColor: colors[0], // Color for Dataset 1
               borderColor: colors[0],
@@ -319,10 +365,16 @@ export class IndexComponent implements AfterViewInit {
           plugins: {
             legend: {
               position: 'top',
+              labels: {
+                padding: 10,
+                boxWidth: 13,
+                pointStyle: 'rectRounded',
+                usePointStyle: true,
+              },
             },
             title: {
               display: true,
-              text: 'Confirmación vs Asistencia',
+              text: 'Comparación de Confirmaciones y Asistencias en Eventos',
             },
           },
           scales: {
@@ -338,6 +390,12 @@ export class IndexComponent implements AfterViewInit {
               title: {
                 display: true,
                 text: 'Asistencia y confirmación',
+                font: {
+                  family: 'Arial', // Cambia 'Arial' por la fuente que desees
+                  size: 16, // Tamaño de la fuente
+                  weight: 'bold', // Peso de la fuente
+                  style: 'italic', // Estilo de la fuente (opcional)
+                },
               },
               beginAtZero: true,
             },
@@ -388,10 +446,13 @@ export class IndexComponent implements AfterViewInit {
     chart2.update();
   }
 
-  mayorAsistenciaRporte() {
+  mayorAsistenciaReporte() {
     this.router.navigate(['/reportes/mayor-asistencia'], {});
   }
-  menorAsistenciaRporte() {
+  menorAsistenciaReporte() {
     this.router.navigate(['/reportes/menor-asistencia'], {});
+  }
+  confirmacionesAsistenciaReporte() {
+    this.router.navigate(['/reportes/confirmaciones-asistencia'], {});
   }
 }

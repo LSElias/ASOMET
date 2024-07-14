@@ -8,6 +8,8 @@ import { EventoIndexComponent } from './eventos/evento-index/evento-index.compon
 import { EventoDetalleComponent } from './eventos/evento-detalle/evento-detalle.component';
 import { IndexComponent } from './reportes/index/index.component';
 import { ReporteMayorAsistenciaComponent } from './reportes/reporte-mayor-asistencia/reporte-mayor-asistencia.component';
+import { ReporteMenorAsistenciaComponent } from './reportes/reporte-menor-asistencia/reporte-menor-asistencia.component';
+import { ReporteConfirmacionesAsistenciaComponent } from './reportes/reporte-confirmaciones-asistencia/reporte-confirmaciones-asistencia.component';
 
 /* const routes: Routes = [
   {
@@ -30,6 +32,14 @@ const routes: Routes = [
   {
     path: 'reportes/mayor-asistencia',
     component: ReporteMayorAsistenciaComponent,
+  },
+  {
+    path: 'reportes/menor-asistencia',
+    component: ReporteMenorAsistenciaComponent,
+  },
+  {
+    path: 'reportes/confirmaciones-asistencia',
+    component: ReporteConfirmacionesAsistenciaComponent,
   },
 
   { path: 'eventos/:id', component: EventoDetalleComponent },

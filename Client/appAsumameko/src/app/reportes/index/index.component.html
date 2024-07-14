@@ -33,26 +33,38 @@
 
         <div class="grid grid-cols-2 p-8">
           <div class="flex flex-col gap-8">
-            <div class="chart-container flex">
-              <canvas #mayorAsistencia width="400" height="160" id="MyChart" class="chart"></canvas>
-              <button type="button" (click)="mayorAsistenciaRporte()"
-                class="py-2 px-6 me-2 mb-2 text-xs h-fit flex gap-1 font-medium text-[#5A6ACF] rounded-md bg-[#FBFCFE] hover:bg-[#6E749B] hover:text-white transition duration-200 border drop-shadow-sm">Ver
-                reporte
-              </button>
+            <div class=" grid grid-cols-[5fr_1fr]">
+              <div class="chart-container w-full h-[160px]">
+                <canvas #mayorAsistencia width="400" id="MyChart" class="chart "></canvas>
+              </div>
+              <div>
+                <button type="button" (click)="mayorAsistenciaReporte()"
+                  class="py-2 px-6 me-2 mb-2 text-xs h-fit flex gap-1 font-medium text-[#5A6ACF] rounded-md bg-[#FBFCFE] hover:bg-[#6E749B] hover:text-white transition duration-200 border drop-shadow-sm">Ver
+                  reporte
+                </button>
+              </div>
             </div>
-            <div class="chart-container flex">
-              <canvas #menorAsistencia width="400" height="160" id="menorAsistencia" class="chart"></canvas>
-              <button type="button" (click)="menorAsistenciaRporte()"
-                class="py-2 px-6 me-2 mb-2 text-xs h-fit flex gap-1 font-medium text-[#5A6ACF] rounded-md bg-[#FBFCFE] hover:bg-[#6E749B] hover:text-white transition duration-200 border drop-shadow-sm">Ver
-                reporte
-              </button>
+
+
+
+            <div class=" grid grid-cols-[5fr_1fr]">
+              <div class="chart-container w-full h-[160px]">
+                <canvas #menorAsistencia width="400" id="MyChart" class="chart "></canvas>
+              </div>
+              <div>
+                <button type="button" (click)="menorAsistenciaReporte()"
+                  class="py-2 px-6 me-2 mb-2 text-xs h-fit flex gap-1 font-medium text-[#5A6ACF] rounded-md bg-[#FBFCFE] hover:bg-[#6E749B] hover:text-white transition duration-200 border drop-shadow-sm">Ver
+                  reporte
+                </button>
+              </div>
             </div>
+
           </div>
 
           <div>
             <div class="chart-container ml-2 p-2 h-2/3">
               <div class="flex justify-end">
-                <button type="button"
+                <button type="button" (click)="confirmacionesAsistenciaReporte()"
                   class="py-2 px-6 me-2 mb-2 text-xs h-fit flex gap-1 font-medium text-[#5A6ACF] rounded-md bg-[#FBFCFE] hover:bg-[#6E749B] hover:text-white transition duration-200 border drop-shadow-sm">Ver
                   reporte
                 </button>

@@ -7,11 +7,11 @@ import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/shared/generic.service';
 
 @Component({
-  selector: 'app-reporte-mayor-asistencia',
-  templateUrl: './reporte-mayor-asistencia.component.html',
-  styleUrls: ['./reporte-mayor-asistencia.component.css'],
+  selector: 'app-reporte-menor-asistencia',
+  templateUrl: './reporte-menor-asistencia.component.html',
+  styleUrls: ['./reporte-menor-asistencia.component.css'],
 })
-export class ReporteMayorAsistenciaComponent {
+export class ReporteMenorAsistenciaComponent {
   selectedStatus: any;
   datos: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -51,7 +51,7 @@ export class ReporteMayorAsistenciaComponent {
 
   fetch() {
     this.gService
-      .list('reporte/mayor')
+      .list('reporte/menor')
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: any) => {
         this.datos = response;
@@ -62,6 +62,7 @@ export class ReporteMayorAsistenciaComponent {
         this.fillReciente(this.datos[0]);
       });
   }
+
   onEventoCreado() {
     this.fetch();
   }
