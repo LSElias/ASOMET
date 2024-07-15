@@ -1,0 +1,160 @@
+<!-- border-b-2 border-gray-500 -->
+<div class="flex">
+  <app-menu> </app-menu>
+  <div class="w-full">
+    <app-header></app-header>
+    <div class="bg-gray-100 w-full h-full py-1 ">
+      <div>
+        <div class=" bg-white mx-8 my-5 h-34 rounded-lg drop-shadow-md ">
+          <div class="flex items-center border-b-2 border-gray-300 rounded-lg ">
+
+            <div class="flex items-center border-r-2 border-gray-300 ">
+              <div class="flex my-2 mx-5 ">
+                <img class="logo" src="../../../assets/images/logo.png" alt="Logo" />
+                <p class="asumameko px-2">Asoma<span class="meko">meco</span></p>
+              </div>
+            </div>
+            <div class="my-5 py-4 px-7 h-fit flex flex-col items-center gap-2 ">
+              <p class="text-xl text-black">Informe sobre los Eventos con Mayor Asistencia </p>
+            </div>
+          </div>
+
+          <div class="flex items-center text-[#666666] py-5 px-8 ">
+            <p class="text-sm">Este informe presenta un análisis detallado de los eventos organizados por Asomameko que
+              registraron la
+              mayor asistencia
+              durante el año 2024, abarcando el periodo del 1 de enero al 12 de diciembre. El objetivo principal es
+              identificar cuáles
+              fueron los eventos más exitosos en términos de participación, proporcionando información valiosa sobre los
+              factores que
+              contribuyeron a su éxito.</p>
+          </div>
+
+          <div class="text-[#666666] pt-5  px-8 ">
+            <span class="font-semibold">Listado de Eventos:</span>
+            <p class="text-sm">A continuación, se muestra una tabla con los cinco eventos que tuvieron la mayor
+              asistencia en 2024, ordenados por la
+              cantidad de asistentes reales. Cada evento está acompañado de detalles sobre la cantidad de
+              confirmaciones, la
+              asistencia real, el número de no asistencias y la tasa de asistencia.</p>
+          </div>
+          <!-- ========== Table Usuarios  ========== -->
+          <div class="relative overflow-x-auto py-5 px-8">
+            <table mat-table [dataSource]="dataSource" matSort class="w-full text-sm text-left rtl:text-right ">
+              <ng-container matColumnDef="evento">
+                <th scope="col" class=" border text-xs text-black border-white colcolor rounded-tl-md" mat-header-cell
+                  *matHeaderCellDef mat-sort-header>
+                  Evento
+                </th>
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" mat-cell
+                  *matCellDef="let row">
+                  {{ row.titulo }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="fecha">
+                <th scope="col" class=" border text-xs text-black border-white colcolor" mat-header-cell
+                  *matHeaderCellDef mat-sort-header>
+                  Fecha del evento
+                </th>
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" mat-cell
+                  *matCellDef="let row">
+                  {{ row.fecha }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="confirmaciones">
+                <th scope="col" class=" border text-xs text-black border-white colcolor" mat-header-cell
+                  *matHeaderCellDef mat-sort-header>
+                  Confirmaciones
+                </th>
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" mat-cell
+                  *matCellDef="let row">
+                  {{ row.Confirmacion }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="asistencias">
+                <th scope="col" class="border text-xs text-black border-white colcolor" mat-header-cell
+                  *matHeaderCellDef mat-sort-header>
+                  Asistencias
+                </th>
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" mat-cell
+                  *matCellDef="let row">
+                  {{ row.Asistencia }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="ausentes">
+                <th scope="col" class="border text-xs text-black border-white colcolor" mat-header-cell
+                  *matHeaderCellDef mat-sort-header>
+                  Ausentes
+                </th>
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" mat-cell
+                  *matCellDef="let row">
+                  {{ row.Ausentes }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="tasa">
+                <th scope="col" class="border text-xs text-black border-white colcolor" mat-header-cell
+                  *matHeaderCellDef mat-sort-header>
+                  Tasa de asistencia
+                </th>
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" mat-cell
+                  *matCellDef="let row">
+                  {{ row.Tasa }}%
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+          </div>
+          <div class="text-[#666666] pt-5  px-8">
+            <span class="font-semibold">Análisis Detallado:</span>
+            <p class="text-sm">En primer lugar, destaca <b>"Asamblea General - Prueba"</b> , que tuvo lugar el 26 de
+              junio. Este
+              evento registró un total de 22
+              confirmaciones y una asistencia del 100%. Este alto nivel de participación sugiere una efectiva
+              planificación y
+              promoción, donde tanto la temática como la gestión logística resonaron exitosamente con los participantes.
+              La alineación
+              entre las confirmaciones y la asistencia real refleja un fuerte compromiso por parte de los asistentes,
+              señalando una
+              ejecución exitosa y una experiencia positiva para los participantes.
+            </p>
+            <br>
+
+            <p class="text-sm">Otro evento destacado es <b>"Prueba 2"</b>, realizado el 28 de junio, que también alcanzó
+              una
+              tasa de asistencia del 100%. Con
+              18 confirmaciones y 18 asistentes, este evento demuestra una planificación efectiva y una gestión adecuada
+              de la
+              comunicación y logística. La alta correspondencia entre las confirmaciones y la asistencia subraya la
+              relevancia del
+              tema y la efectividad de las estrategias de promoción utilizadas.Por otro lado, <b>"Prueba 3"</b>
+              celebrado el 25 de junio, mostró una tasa de asistencia
+              del
+              76%. Aunque esta cifra es menor en
+              comparación con los eventos anteriores, aún refleja una buena respuesta por parte de los invitados. Con 17
+              confirmaciones y 13 asistentes, el evento sugiere una adecuada captación de interés, aunque podría
+              beneficiarse de
+              ajustes en la estrategia de promoción para mejorar aún más la participación.
+            </p>
+            <br>
+
+
+          </div>
+          <div class="py-5 px-8 text-center">
+            <button type="button"
+              class="py-2 px-6 me-2 mb-2 text-xs h-fit flex gap-1 font-medium text-white rounded-md bg-[#DBA36D] hover:bg-[#6E749B] hover:text-white transition duration-200 border drop-shadow-sm w-full">
+              <ng-icon name="heroPrinter" size="1.4em"></ng-icon>
+              <p>Imprimir</p>
+            </button>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
