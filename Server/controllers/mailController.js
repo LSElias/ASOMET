@@ -35,14 +35,30 @@ module.exports.sendEventNotification = async (request, response, next) => {
       usuarios = await prisma.usuario.findMany({
         select: {
           correo: true,
-          idEstUsuario:1
+          idEstUsuario:true,
+          nombreCompleto: true, 
         },
       });
     }
 
     // Enviar correos electrónicos a los usuarios
     const promises = usuarios.map(async usuario => {
-      const mailText = `Hola, se ha creado un nuevo evento: ${evento.titulo}\nDescripción: ${evento.descripcion}\nFecha: ${evento.fecha}\nHora: ${evento.hora}\nLocalización: ${evento.localizacion}`;
+      const mailText =
+      `Estimado(a) asociado,
+       
+      Nos complace informarle que se ha creado un nuevo evento, nos encantaría contar con su asistencia. Para confirmar o rechazar su asistencia puede ingresar al siguiente enlace.
+      **Agregar acá el url de la invitación** 
+
+      Información sobre el evento a realizar: \n
+      ${evento.titulo}
+      Descripción: ${evento.descripcion}
+      Fecha: ${evento.fecha},  ${evento.hora}
+      Localización: ${evento.localizacion}
+      
+      Esperamos contar con su participación.\n
+      Saludos cordiales,\n
+      Asomameco.`; 
+
       await sendMail(usuario.correo, 'Nuevo Evento Creado', mailText);
 
       await prisma.asistencia.updateMany({

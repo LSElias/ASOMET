@@ -104,7 +104,17 @@
               <p>Enviar invitaciones</p>
             </button>
           </div>
-
+          
+          <div>
+            <button
+              type="button"
+              (click)="crear(datos.idEvento)"
+              class="py-2.5 px-3 me-2 mb-2 text-sm h-fit flex gap-1 font-medium text-white rounded-lg bg-[#8197B1] hover:bg-[#6E749B] transition duration-200"
+            >
+              <ng-icon name="heroPlus" size="1.4em"></ng-icon>
+              <p>Asignar asociado</p>
+            </button>
+          </div>
           <span class="example-spacer"></span>
 
           <!-- ========== Search Nombre  ========== -->
@@ -295,3 +305,5 @@
     </div>
   </div>
 </div>
+
+<app-evento-asociado #asociadoModal></app-evento-asociado>
