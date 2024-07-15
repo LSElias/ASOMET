@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -11,13 +11,14 @@ import {
   NotificacionService,
   TipoMessage,
 } from 'src/app/shared/notification.service';
+import {EventoAsociadoComponent} from '../evento-asociado/evento-asociado.component'; 
 
 @Component({
   selector: 'app-evento-detalle',
   templateUrl: './evento-detalle.component.html',
   styleUrls: ['./evento-detalle.component.css'],
 })
-export class EventoDetalleComponent {
+export class EventoDetalleComponent implements AfterViewInit{
   eventId: number | null = null;
   datos: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -35,12 +36,20 @@ export class EventoDetalleComponent {
   @ViewChild(MatSort) sort!: MatSort;
   dataSource = new MatTableDataSource<any>();
   @ViewChild('eventModal') eventModal!: EventoFormComponent;
+  @ViewChild('asociadoModal') asociadoFormModal!: EventoAsociadoComponent;
+
   constructor(
     private gService: GenericService,
     private router: Router,
     private route: ActivatedRoute,
-    private noti: NotificacionService
+    private noti: NotificacionService,
   ) {}
+
+  ngAfterViewInit(): void {
+    this.asociadoFormModal.asociadoCreado.subscribe(() => {
+      this.fetch(); 
+    })
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
@@ -125,6 +134,14 @@ export class EventoDetalleComponent {
         console.log(response);
         this.updateTable(this.datos);
         this.fetch();
+        this.disableButton();
+        this.noti.mensajeRedirect(
+          'Correos Enviados Exitosamente',
+          `Invitaciones enviadas`,
+          TipoMessage.success,
+          'Correos Enviados'
+        );
+
       });
   }
 
@@ -141,7 +158,23 @@ export class EventoDetalleComponent {
       console.log(response);
       this.updateTable(this.datos);
       this.fetch();
+      this.noti.mensajeRedirect(
+        'Correo Enviado Exitosamente',
+        `Invitación enviada`,
+        TipoMessage.success,
+        'Correo Enviado'
+      );
     });
 
   }
+  
+  crear(idEvento: any){
+    this.asociadoFormModal.openModal();
+  }
+
+  ngOnDestroy(){
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe(); 
+  }
+
 }
