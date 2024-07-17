@@ -1,4 +1,4 @@
-Agregar a sus ".env" lo siguiente para que les funcione el méetodo de enviar por correo: 
+Agregar a sus ".env" lo siguiente para que les funcione el método de enviar por correo: 
 
 EMAIL_USER="notiasomet@gmail.com"
 EMAIL_PASS="itmpzgjlcxszspjx"
