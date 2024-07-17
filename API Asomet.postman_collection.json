@@ -108,13 +108,13 @@
 					"response": []
 				},
 				{
-					"name": "Crear",
+					"name": "Crear Normal",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idRol\": 3,\r\n    \"idEstUsuario\": 1,\r\n    \"cedula\": 11111143,\r\n    \"nombreCompleto\": \"NAVARRO LOPEZ Kair\",\r\n    \"correo\": \"100ab@aso.co.cr\",\r\n    \"contrasena\": \"123456A\",\r\n    \"telefono\": 888888220\r\n}",
+							"raw": "{\r\n    \"idRol\": 3,\r\n    \"idEstUsuario\": 1,\r\n    \"cedula\": 111111947,\r\n    \"nombreCompleto\": \"NAVARRO LOPEZ Kair\",\r\n    \"correo\": \"sus_correos\",\r\n    \"contrasena\": \"123456A\",\r\n    \"telefono\": 888888220, \r\n    \"enviarInv\": \"true\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -130,6 +130,34 @@
 							"path": [
 								"usuario",
 								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear en Asistencia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idRol\": 3,\r\n    \"idEstUsuario\": 1,\r\n    \"cedula\": 111111940,\r\n    \"nombreCompleto\": \"NAVARRO LOPEZ Kair\",\r\n    \"correo\": \"sus_correos\",\r\n    \"contrasena\": \"123456A\",\r\n    \"telefono\": 888888220, \r\n    \"idEvento\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/usuario/crearEnAsistencia",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"usuario",
+								"crearEnAsistencia"
 							]
 						}
 					},
@@ -187,34 +215,6 @@
 								"usuario",
 								"idUser",
 								"33"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Login",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"correo\": \"22ab@aso.co.cr\",\r\n    \"contrasena\": \"123456A\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/usuario/login",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"usuario",
-								"login"
 							]
 						}
 					},
@@ -282,7 +282,7 @@
 					"response": []
 				},
 				{
-					"name": "Crear",
+					"name": "Crear - Datos Fijos",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -304,6 +304,34 @@
 							"path": [
 								"eventos",
 								"crear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Evento + Asistencia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"idCreador\": 31,\n  \"titulo\": \"Prueba - Evento + Asistencia Creación\",\n  \"descripcion\": \"Esta es una descripción del evento de prueba23\",\n  \"fecha\": \"2024-07-20\",\n  \"hora\": \"18:20\",\n  \"localizacion\": \"Ciudad de Prueba\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/eventos/crearEventoAsis",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"eventos",
+								"crearEventoAsis"
 							]
 						}
 					},
@@ -637,152 +665,6 @@
 							"path": [
 								"reporte",
 								"mayor"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Asistencia",
-			"item": [
-				{
-					"name": "Correo",
-					"item": [
-						{
-							"name": "Enviar Mensaje",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:3000/asistencia/1",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"asistencia",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Mensaje Individual",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"idEvento\": 1,\r\n    \"usuariosId\": [1,2,3]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:3000/asistencia/individual",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"asistencia",
-										"individual"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Actualizar Estado Asistencia",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"idAsociado\": 2,\r\n    \"idAsistencia\": 3\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:3000/asistencia/asist/1",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"asistencia",
-										"asist",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Actualizar Confirmacion",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"idAsociado\": 2,\r\n    \"idAsistencia\": 3\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:3000/asistencia/confirm/1",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"asistencia",
-										"confirm",
-										"1"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Crear",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 1,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 2,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 3,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 4,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 5,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 6,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 7,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 8,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 9,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 10,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 11,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 12,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 13,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 14,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 15,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 16,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 17,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 18,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 19,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 20,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 21,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 22,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 23,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 24,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 25,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 26,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 27,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 28,\r\n        \"idEstadoConfir\": 2,\r\n        \"idAsistencia\": 2\r\n    },\r\n    {\r\n        \"idEvento\": 2,\r\n        \"idAsociado\": 29,\r\n        \"idEstadoConfir\": 1,\r\n        \"idAsistencia\": 1\r\n    }\r\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/asistencia/crear",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"asistencia",
-								"crear"
 							]
 						}
 					},

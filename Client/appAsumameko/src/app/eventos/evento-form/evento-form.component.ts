@@ -111,7 +111,7 @@ export class EventoFormComponent {
     if (this.isCreate) {
       if (this.eventForm.value) {
         this.gService
-          .create('eventos/crear', this.eventForm.value)
+          .create('eventos/crearEventoAsis', this.eventForm.value)
           .pipe(takeUntil(this.destroy$))
           .subscribe((data: any) => {
             this.respuesta = data;
