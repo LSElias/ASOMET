@@ -46,9 +46,19 @@ export class EventoDetalleComponent implements AfterViewInit{
   ) {}
 
   ngAfterViewInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
+      if (id !== null) {
+        this.eventId = +id;
+        if(this.asociadoFormModal){
+          this.asociadoFormModal.idEvento = this.eventId; 
+        }
+      }
+    });
+   
     this.asociadoFormModal.asociadoCreado.subscribe(() => {
       this.fetch(); 
-    })
+    });
   }
 
   ngOnInit() {
@@ -56,6 +66,9 @@ export class EventoDetalleComponent implements AfterViewInit{
       const id = params.get('id');
       if (id !== null) {
         this.eventId = +id;
+        if(this.asociadoFormModal){
+          this.asociadoFormModal.idEvento = this.eventId; 
+        }
       }
     });
     this.fetch();
@@ -87,6 +100,22 @@ export class EventoDetalleComponent implements AfterViewInit{
         }
       });
     }
+  }
+
+  disableButton_General(): boolean {
+    if (this.datos && this.datos.asistencia) {
+      for (let i of this.datos.asistencia) {
+        if (
+          i.contador >= 3 ||
+          i.estadoConfirmacion.idEstadoConfir === 1 ||
+          i.estadoConfirmacion.idEstadoConfir === 2
+        ) {
+          return true;
+        }
+      }
+    }
+    return false;
+
   }
 
   nombreChange(event: any) {
@@ -168,7 +197,7 @@ export class EventoDetalleComponent implements AfterViewInit{
 
   }
   
-  crear(idEvento: any){
+  crear(){
     this.asociadoFormModal.openModal();
   }
 
