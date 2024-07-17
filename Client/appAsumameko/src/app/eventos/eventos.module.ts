@@ -18,12 +18,14 @@ import { heroPlus } from '@ng-icons/heroicons/outline';
 import { heroPaperAirplaneSolid} from '@ng-icons/heroicons/solid';
 import { EventoDetalleComponent } from './evento-detalle/evento-detalle.component';
 import { EventoFormComponent } from './evento-form/evento-form.component';
+import { EventoAsociadoComponent } from './evento-asociado/evento-asociado.component';
 
 @NgModule({
   declarations: [
     EventoIndexComponent,
     EventoDetalleComponent,
     EventoFormComponent,
+    EventoAsociadoComponent,
   ],
   imports: [
     CommonModule,

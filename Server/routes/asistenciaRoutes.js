@@ -3,8 +3,11 @@ const router = express.Router();
 
 const  asistenciaControllers = require("../controllers/asistenciaControllers");
 
-//Prueba Reportes  
+//Múltiple 
 router.post("/crear", asistenciaControllers.create);
+
+//Simple 
+router.post("/crearSimple", asistenciaControllers.createSimple);
 
 
 module.exports = router;
