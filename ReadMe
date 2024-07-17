@@ -1,1 +1,4 @@
-Prueba de Creación
+Agregar a sus ".env" lo siguiente para que les funcione el méetodo de enviar por correo: 
+
+EMAIL_USER="notiasomet@gmail.com"
+EMAIL_PASS="itmpzgjlcxszspjx"
