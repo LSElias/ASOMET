@@ -2,6 +2,7 @@ const { PrismaClient, Prisma } = require("@prisma/client");
 const prisma = new PrismaClient();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const mailController = require("./mailController");
 
 //Get
 module.exports.get = async (request, response, next) => {
@@ -209,8 +210,8 @@ module.exports.getInfoAsociados = async (request, response, next) => {
     response.status(500).json({ message: "Error en la solicitud", error });
   }
 };
-//En Proceso
-//Create
+
+//Create Normal - Usuario-Create.Component
 module.exports.create = async (request, response, next) => {
   try {
     const infoUsuario = request.body;
@@ -227,11 +228,13 @@ module.exports.create = async (request, response, next) => {
       },
     });
 
-    if (infoUsuario.enviarInfo) {
-      const eventoVigente = await prisma.evento.findMany({
+    if (infoUsuario.enviarInv === "true") {
+      const fechaActual = new Date().toISOString().split("T")[0];
+
+      const eventosVigentes = await prisma.evento.findMany({
         where: {
           fecha: {
-            gt: new Date(),
+            gt: fechaActual,
           },
         },
         orderBy: {
@@ -240,13 +243,11 @@ module.exports.create = async (request, response, next) => {
         take: 1,
       });
 
-      if (eventoVigente.length > 0) {
-
-        const eventoFuturo = eventoVigente[0]; 
-
+      if (eventosVigentes[0]) {
+        
         await prisma.asistencia.create({
           data: {
-            idEvento: eventosFuturo.idEvento,
+            idEvento: eventosVigentes[0].idEvento,
             idAsociado: newUsuario.idUsuario,
             idEstadoConfir: 3,
             idAsistencia: 3,
@@ -254,16 +255,86 @@ module.exports.create = async (request, response, next) => {
           },
         });
 
-        await prisma.sendEventNotification({
+        const mailInfo = {
           body: {
-            eventId: eventosFuturo.idEvento,
-            selectedEmails: newUsuario.correo,
+            eventId: eventosVigentes[0].idEvento,
+            selectedEmails: [newUsuario.correo],
           },
-        }, response, next);
+        };
+        const mailResponse = {
+          status: (code) => ({
+            json: (message) => console.log(`Mail Response Status: ${code}, Message: ${message}`),
+          }),
+        }; 
+        
+        await mailController.sendEventNotification(mailInfo, mailResponse,next);
+
       }
     }
 
-    response.status(200).json({
+    response.status(201).json({
+      status: true,
+      message: "Creado exitosamente",
+      data: newUsuario,
+    });
+  } catch (error) {
+    response.status(500).json({ message: "Error en la creación del usuario" });
+  }
+};
+
+//Create - Evento-Asociado.component
+module.exports.createEnAsistencia = async (request, response, next) => {
+  try {
+    const infoUsuario = request.body;
+
+    const newUsuario = await prisma.usuario.create({
+      data: {
+        idRol: infoUsuario.idRol,
+        idEstUsuario: infoUsuario.idEstUsuario,
+        cedula: infoUsuario.cedula,
+        nombreCompleto: infoUsuario.nombreCompleto,
+        correo: infoUsuario.correo,
+        contrasena: infoUsuario.contrasena,
+        telefono: infoUsuario.telefono,
+      },
+    });
+
+      const eventosVigentes = await prisma.evento.findUnique({
+        where: {
+          idEvento: infoUsuario.idEvento
+        },
+      });
+
+      if (eventosVigentes) {
+
+        await prisma.asistencia.create({
+          data: {
+            idEvento: eventosVigentes.idEvento,
+            idAsociado: newUsuario.idUsuario,
+            idEstadoConfir: 3,
+            idAsistencia: 3,
+            contEnvios: 0,
+          },
+        });
+
+        const mailInfo = {
+          body: {
+            eventId: eventosVigentes.idEvento,
+            selectedEmails: [newUsuario.correo],
+          },
+        };
+        const mailResponse = {
+          status: (code) => ({
+            json: (message) => console.log(`Mail Response Status: ${code}, Message: ${message}`),
+          }),
+        }; 
+  
+        await mailController.sendEventNotification(mailInfo, mailResponse,next);
+
+      }
+  
+
+    response.status(201).json({
       status: true,
       message: "Creado exitosamente",
       data: newUsuario,
@@ -339,49 +410,3 @@ module.exports.updateEstadoUsuario = async (request, response, next) => {
       .json({ message: "Error en la actualización del estado" });
   }
 };
-
-/*
-//Login
-module.exports.login = async (request, response, next) => {
-    let userData = request.body;
-  
-    const usuario = await prisma.usuario.findUnique({
-      where: {
-        correo: userData.correo,
-      },
-    });
-  
-    if (!usuario) {
-      response.status(401).send({
-        success: false,
-        message: "Datos erróneos",
-      });
-    }
-  
-    const checkPassword = await bcrypt.compare(
-      userData.contrasena,
-      usuario.contrasena
-    );
-    if (checkPassword === false) {
-      response.status(401).send({
-        success: false,
-        message: "Credenciales no validas",
-      });
-    } else {
-      const payload = {
-        idUsuario: usuario.idUsuario,
-        correo: usuario.correo,
-        rol: usuario.idRol,
-      };
-  
-      const token = jwt.sign(payload, process.env.SECRET_KEY, {
-        expiresIn: process.env.JWT_EXPIRE,
-      });
-      response.json({
-        success: true,
-        message: "Bienvenido a Asomameco",
-        token,
-      });
-    }
-};
-*/

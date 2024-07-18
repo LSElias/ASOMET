@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -18,7 +18,7 @@ export class EventoAsociadoComponent {
   idRol: any;
   telefono: any;
   cedula: any;
-  eventId: number | null = null;
+  @Input() idEvento: number | null = null;  
   @Output() asociadoCreado: EventEmitter<void> = new EventEmitter<void>();
 
   makeSubmit: boolean = false;
@@ -105,12 +105,6 @@ export class EventoAsociadoComponent {
     }
   }
 
-  onUpdate(id: any) {
-    if (id !== null) {
-      this.idRol = parseInt(id, 10);
-    }
-  }
-
   // Método para abrir el modal
   openModal() {
     this.isVisible = true;
@@ -121,7 +115,6 @@ export class EventoAsociadoComponent {
   closeModal() {
     this.submitted = false;
     this.asociadoForm.reset();
-    this.asociadoCreado.emit();
     this.isVisible = false;
   }
 
@@ -137,36 +130,34 @@ export class EventoAsociadoComponent {
     formData.idRol = parseInt(formData.idRol, 10);
     formData.cedula = parseInt(formData.cedula, 10);
     formData.telefono = parseInt(formData.telefono, 10);
-    formData.idEvento = parseInt(formData.eventId, 10);
 
     if (formData.id != 2) {
       this.asociadoForm.get('contrasena')?.clearValidators();
       this.asociadoForm.get('contrasena')?.updateValueAndValidity();
     }
-
+    formData.idEvento = this.idEvento;
 
     if (this.isCreate) {
       if (this.asociadoForm.value) {
         this.gService
-          .create('usuario/registrar', formData)
+          .create('usuario/crearEnAsistencia', formData)
           .pipe(takeUntil(this.destroy$))
           .subscribe((data: any) => {
             this.respuesta = data;
             this.noti.mensajeRedirect(
               'Usuarios • Creación de Usuario',
-              `Usuario: ${data.nombreCompleto} ha sido creado con éxito.`,
+              `Usuario creado exitosamente.`,
               TipoMessage.success,
-              'usuario'
+              `/eventos/${this.idEvento}`
             );
             console.log(data);
             this.asociadoCreado.emit();
-            //Cambiar direccioòn + traer idEvento 
-            //this.router.navigate([`eventos/${this.eventId}`]);
           });
       }
+      this.asociadoCreado.emit();
+      this.closeModal();
     } 
-    this.asociadoCreado.emit();
-    this.closeModal();
+
   }
 
   onReset() {

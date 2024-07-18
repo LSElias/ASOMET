@@ -1,7 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-
 // Get all
 module.exports.getAll = async (request, response, next) => {
   try {
@@ -38,30 +37,32 @@ module.exports.getById = async (request, response, next) => {
                 nombreCompleto: true,
                 idEstUsuario: true,
                 cedula: true,
-                correo: true,  
-              }
+                correo: true,
+              },
             },
             estadoConfir: {
               select: {
                 idEstadoConfir: true,
-                nombre: true
-              }
+                nombre: true,
+              },
             },
             estadoAsistencia: {
               select: {
-                nombre: true
-              }
-            }
-          }
-        }
-      }
+                nombre: true,
+              },
+            },
+          },
+        },
+      },
     });
 
     if (!evento) {
       return response.status(404).json({ error: "Evento no encontrado" });
     }
 
-    const asistenciaActiva = evento.asistencia.filter(asistencia => asistencia.asociado.idEstUsuario === 1);
+    const asistenciaActiva = evento.asistencia.filter(
+      (asistencia) => asistencia.asociado.idEstUsuario === 1
+    );
 
     const newEventDetail = {
       idEvento: evento.idEvento,
@@ -72,7 +73,7 @@ module.exports.getById = async (request, response, next) => {
       hora: evento.hora,
       localizacion: evento.localizacion,
       administrador: evento.administrador.nombreCompleto,
-      asistencia: asistenciaActiva.map(asistencia => ({
+      asistencia: asistenciaActiva.map((asistencia) => ({
         asociado: {
           nombreCompleto: asistencia.asociado.nombreCompleto,
           cedula: asistencia.asociado.cedula,
@@ -80,13 +81,13 @@ module.exports.getById = async (request, response, next) => {
         },
         estadoConfirmacion: {
           idEstadoConfir: asistencia.estadoConfir.idEstadoConfir,
-          nombre: asistencia.estadoConfir.nombre
+          nombre: asistencia.estadoConfir.nombre,
         },
         estadoAsistencia: {
-          nombre: asistencia.estadoAsistencia.nombre
+          nombre: asistencia.estadoAsistencia.nombre,
         },
-        contador: asistencia.contEnvios
-      }))
+        contador: asistencia.contEnvios,
+      })),
     };
 
     response.json(newEventDetail);
@@ -95,10 +96,11 @@ module.exports.getById = async (request, response, next) => {
   }
 };
 
-
-// Create a new event
+//Método para agregar datos fijos para reportes
+//Create a new event
 module.exports.create = async (request, response, next) => {
-  const { idCreador, titulo, descripcion, fecha, hora, localizacion } = request.body;
+  const { idCreador, titulo, descripcion, fecha, hora, localizacion } =
+    request.body;
   try {
     const evento = await prisma.evento.create({
       data: {
@@ -107,7 +109,7 @@ module.exports.create = async (request, response, next) => {
         descripcion,
         fecha,
         hora,
-        localizacion
+        localizacion,
       },
     });
 
@@ -117,10 +119,62 @@ module.exports.create = async (request, response, next) => {
   }
 };
 
+//Método para crear evento y asistencia(Estado: No enviada)
+module.exports.createEvent_Asistencia = async (request, response, next) => {
+  try {
+    const { idCreador, titulo, descripcion, fecha, hora, localizacion } =
+    request.body;
+
+    const newEvento = await prisma.evento.create({
+      data: {
+        idCreador,
+        titulo,
+        descripcion,
+        fecha,
+        hora,
+        localizacion,
+      },
+    });
+
+    const usuarios = await prisma.usuario.findMany({
+      where: {
+        idEstUsuario: 1,
+        idRol: 3,
+      },
+      select: {
+        idUsuario: true, 
+      }
+    });
+
+    const asistenciaData = usuarios.map((usuario) => ({
+      idEvento: newEvento.idEvento,
+      idAsociado: usuario.idUsuario,
+      idEstadoConfir: 4,
+      idAsistencia: 3,
+      contEnvios: 0,
+    }));
+
+    await prisma.asistencia.createMany({
+      data: asistenciaData,
+    });
+
+    response.status(201).json(newEvento);
+  } catch (error) {
+    next(error);
+  }
+};
+
 // // Update event
 module.exports.update = async (request, response, next) => {
-  const { idEvento, idCreador, titulo, descripcion, fecha, hora, localizacion } =
-    request.body;
+  const {
+    idEvento,
+    idCreador,
+    titulo,
+    descripcion,
+    fecha,
+    hora,
+    localizacion,
+  } = request.body;
   try {
     const updatedEvento = await prisma.evento.update({
       where: { idEvento: Number(idEvento) },
@@ -130,7 +184,7 @@ module.exports.update = async (request, response, next) => {
         descripcion,
         fecha,
         hora,
-        localizacion
+        localizacion,
       },
     });
 
@@ -160,9 +214,9 @@ module.exports.searchByTitle = async (request, response, next) => {
     const eventos = await prisma.evento.findMany({
       where: {
         titulo: {
-          contains: titulo
+          contains: titulo,
         },
-      }
+      },
     });
     response.json(eventos);
   } catch (error) {
