@@ -9,10 +9,11 @@ const routes: Routes = [
     path: 'usuario',
     component: UsuarioIndexComponent,
   },
-  /*   {
+     {
     path: 'usuario/create/',
     component: UsuarioCreateComponent,
   },
+   /*
   {
     path: 'usuario/update/:id',
     component: UsuarioUpdateComponent,

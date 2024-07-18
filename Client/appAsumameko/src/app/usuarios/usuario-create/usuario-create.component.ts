@@ -174,9 +174,9 @@ export class UsuarioCreateComponent {
       this.userForm.get('contrasena')?.updateValueAndValidity();
     }
 
-    /*     if (this.userForm.invalid) {
+    if (this.userForm.invalid) {
       return;
-    } */
+    }
 
     if (this.isCreate) {
       if (this.userForm.value) {

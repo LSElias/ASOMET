@@ -70,11 +70,11 @@
             <mat-error *ngIf="errorHandling('cedula', 'pattern')">
               La cédula solo deberá tener digitos <strong>numéricos</strong>.
             </mat-error>
-            <mat-error *ngIf="errorHandling('cedula', 'minLength')">
+            <mat-error *ngIf="errorHandling('cedula', 'minlength')">
               La cédula deberá tener digitos al menos
               <strong>9 digitos</strong>.
             </mat-error>
-            <mat-error *ngIf="errorHandling('cedula', 'maxLength')">
+            <mat-error *ngIf="errorHandling('cedula', 'maxlength')">
               La cédula deberá tener digitos hasta <strong>12 digitos</strong>.
             </mat-error>
           </div>
@@ -88,7 +88,7 @@
             <mat-error *ngIf="errorHandling('nombreCompleto', 'required')">
               El nombre es <strong>requerido</strong>.
             </mat-error>
-            <mat-error *ngIf="errorHandling('nombreCompleto', 'minLength')">
+            <mat-error *ngIf="errorHandling('nombreCompleto', 'minlength')">
               El nombre debe tener al menos <strong>8 digitos</strong>.
             </mat-error>
           </div>
@@ -102,11 +102,11 @@
             <mat-error *ngIf="errorHandling('contrasena', 'required')">
               La contraseña es <strong>requerida</strong>.
             </mat-error>
-            <mat-error *ngIf="errorHandling('contrasena', 'minLength')">
+            <mat-error *ngIf="errorHandling('contrasena', 'minlength')">
               La contraseña deberá tener digitos al menos
               <strong>8 digitos</strong>.
             </mat-error>
-            <mat-error *ngIf="errorHandling('contrasena', 'maxLength')">
+            <mat-error *ngIf="errorHandling('contrasena', 'maxlength')">
               La contraseña deberá tener digitos hasta
               <strong>20 digitos</strong>.
             </mat-error>
@@ -123,11 +123,11 @@
             <mat-error *ngIf="errorHandling('telefono', 'pattern')">
               El teléfono solo deberá tener digitos <strong>numéricos</strong>.
             </mat-error>
-            <mat-error *ngIf="errorHandling('telefono', 'minLength')">
+            <mat-error *ngIf="errorHandling('telefono', 'minlength')">
               El teléfono deberá tener digitos al menos
-              <strong>9 digitos</strong>.
+              <strong>8 digitos</strong>.
             </mat-error>
-            <mat-error *ngIf="errorHandling('telefono', 'maxLength')">
+            <mat-error *ngIf="errorHandling('telefono', 'maxlength')">
               El teléfono deberá tener digitos hasta
               <strong>12 digitos</strong>.
             </mat-error>
