@@ -10,6 +10,7 @@ router.post('/crear', eventoController.create);
 //Datos Dinámicos
 router.post('/crearEventoAsis', eventoController.createEvent_Asistencia);
 router.put('/actualizar/:id', eventoController.update);
+router.put('/asistencia/:idEvento', eventoController.updateAsistencia);
 router.delete('/eliminar/:id', eventoController.delete);
 
 

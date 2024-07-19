@@ -10,6 +10,10 @@
   background-image: url("../../../assets/images/emailIcon.png");
   background-repeat: no-repeat;
 }
+.bt-asistencia {
+  background-image: url("../../../assets/images/hideUserIcon.png");
+  background-repeat: no-repeat;
+}
 
 table {
   border-collapse: separate;
@@ -31,6 +35,18 @@ td {
 }
 
 .desactivado {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.disable {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.isDisable {
   opacity: 0.5;
   pointer-events: none;
   cursor: not-allowed;
