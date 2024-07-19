@@ -10,6 +10,7 @@ import { IndexComponent } from './reportes/index/index.component';
 import { ReporteMayorAsistenciaComponent } from './reportes/reporte-mayor-asistencia/reporte-mayor-asistencia.component';
 import { ReporteMenorAsistenciaComponent } from './reportes/reporte-menor-asistencia/reporte-menor-asistencia.component';
 import { ReporteConfirmacionesAsistenciaComponent } from './reportes/reporte-confirmaciones-asistencia/reporte-confirmaciones-asistencia.component';
+import { UsuarioCreateComponent } from './usuarios/usuario-create/usuario-create.component';
 
 /* const routes: Routes = [
   {
@@ -24,8 +25,8 @@ import { ReporteConfirmacionesAsistenciaComponent } from './reportes/reporte-con
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-
   { path: 'usuario', component: UsuarioIndexComponent },
+  { path: 'usuario/create', component: UsuarioCreateComponent },
   { path: 'dashboard', component: DashboardIndexComponent },
   { path: 'eventos', component: EventoIndexComponent },
   { path: 'reportes', component: IndexComponent },
