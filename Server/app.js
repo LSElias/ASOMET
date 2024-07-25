@@ -14,7 +14,7 @@ const reporteRoutes = require('./routes/reporteRoutes');
 const datosRoutes = require('./routes/datosRoutes'); 
 const asistenciaRoutes = require('./routes/asistenciaRoutes'); 
 const mailRoutes = require('./routes/mailRoutes'); 
-
+const authRoutes = require('./routes/auth');
 
 // Acceder a la configuracion del archivo .env
 dotEnv.config();
@@ -42,6 +42,7 @@ app.use(
  app.use("/datos/", datosRoutes);
  app.use("/asistencia/", asistenciaRoutes);
  app.use('/mail/', mailRoutes);
+ app.use('/login/', authRoutes);
 
 // Servidor
 app.listen(port, () => { 
