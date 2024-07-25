@@ -19,6 +19,7 @@ import { heroPaperAirplaneSolid} from '@ng-icons/heroicons/solid';
 import { EventoDetalleComponent } from './evento-detalle/evento-detalle.component';
 import { EventoFormComponent } from './evento-form/evento-form.component';
 import { EventoAsociadoComponent } from './evento-asociado/evento-asociado.component';
+import { EventoAsistenciaComponent } from './evento-asistencia/evento-asistencia.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { EventoAsociadoComponent } from './evento-asociado/evento-asociado.compo
     EventoDetalleComponent,
     EventoFormComponent,
     EventoAsociadoComponent,
+    EventoAsistenciaComponent,
   ],
   imports: [
     CommonModule,

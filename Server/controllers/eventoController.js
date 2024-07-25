@@ -38,6 +38,7 @@ module.exports.getById = async (request, response, next) => {
                 idEstUsuario: true,
                 cedula: true,
                 correo: true,
+                idUsuario: true, 
               },
             },
             estadoConfir: {
@@ -48,6 +49,7 @@ module.exports.getById = async (request, response, next) => {
             },
             estadoAsistencia: {
               select: {
+                idAsistencia: true,
                 nombre: true,
               },
             },
@@ -78,12 +80,14 @@ module.exports.getById = async (request, response, next) => {
           nombreCompleto: asistencia.asociado.nombreCompleto,
           cedula: asistencia.asociado.cedula,
           correo: asistencia.asociado.correo,
+          idUsuario: asistencia.asociado.idUsuario,
         },
         estadoConfirmacion: {
           idEstadoConfir: asistencia.estadoConfir.idEstadoConfir,
           nombre: asistencia.estadoConfir.nombre,
         },
         estadoAsistencia: {
+          idAsistencia: asistencia.estadoAsistencia.idAsistencia,
           nombre: asistencia.estadoAsistencia.nombre,
         },
         contador: asistencia.contEnvios,
@@ -123,7 +127,7 @@ module.exports.create = async (request, response, next) => {
 module.exports.createEvent_Asistencia = async (request, response, next) => {
   try {
     const { idCreador, titulo, descripcion, fecha, hora, localizacion } =
-    request.body;
+      request.body;
 
     const newEvento = await prisma.evento.create({
       data: {
@@ -142,8 +146,8 @@ module.exports.createEvent_Asistencia = async (request, response, next) => {
         idRol: 3,
       },
       select: {
-        idUsuario: true, 
-      }
+        idUsuario: true,
+      },
     });
 
     const asistenciaData = usuarios.map((usuario) => ({
@@ -219,6 +223,43 @@ module.exports.searchByTitle = async (request, response, next) => {
       },
     });
     response.json(eventos);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// // Update asistencia
+module.exports.updateAsistencia = async (request, response, next) => {
+  const { eventId, asociadoId, asistenciaId } = request.body;
+
+  try {
+    const evento = await prisma.evento.findUnique({
+      where: {
+        idEvento: parseInt(eventId, 10),
+      },
+    });
+
+    if (!evento) {
+      return response.status(404).json({ error: "Evento no encontrado" });
+    }
+
+    const usuario = await prisma.usuario.findUnique({
+      where: {
+        idUsuario: parseInt(asociadoId, 10),
+      }
+    });
+
+    const updateAsistencia = await prisma.asistencia.updateMany({
+      where: {
+        idEvento: parseInt(evento.idEvento, 10),
+        idAsociado: usuario.idUsuario,
+      },
+      data: {
+        idAsistencia: asistenciaId,
+      },
+    });
+
+    response.json(updateAsistencia);
   } catch (error) {
     next(error);
   }

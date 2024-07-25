@@ -92,20 +92,20 @@
         class="bg-white mx-5 my-5 h-fit rounded-lg p-2 justify-center gap-2 drop-shadow-sm"
       >
         <div class="flex w-full h-fit p-3">
-        
           <!-- ========== Enviar Invitaciones - General  ========== -->
           <div>
             <button
               type="button"
+              [disabled]="isDisabled"
+              [class.isDisable]="isDisabled"
               (click)="sendEmail_General()"
               class="py-2.5 px-3 me-2 mb-2 text-sm h-fit flex gap-1 font-medium text-white rounded-lg bg-[#8197B1] hover:bg-[#6E749B] transition duration-200"
-
             >
               <ng-icon name="heroPaperAirplaneSolid" size="1.4em"></ng-icon>
               <p>Enviar invitaciones</p>
             </button>
           </div>
-          
+
           <div>
             <button
               type="button"
@@ -196,7 +196,7 @@
                 mat-cell
                 *matCellDef="let row"
               >
-              {{ row.asociado.nombreCompleto }}
+                {{ row.asociado.nombreCompleto }}
               </td>
             </ng-container>
 
@@ -281,7 +281,18 @@
                     aria-label="Enviar invitación"
                     [disabled]="row.desactivado"
                     [class.desactivado]="row.desactivado"
-                    (click)="sendEmail_Individual(datos.idEvento, row.asociado.correo)"
+                    (click)="
+                      sendEmail_Individual(datos.idEvento, row.asociado.correo)
+                    "
+                  ></button>
+                  <button
+                  mat-mini-fab
+                  class="bt-asistencia h-5 w-5"
+                  matTooltip="Asistencia"
+                  aria-label="Asistencia"
+                  [disabled]="row.disable"
+                  [class.desactivado]="row.disable"
+                  (click)="updateAsistencia(row.asociado.idUsuario, row.asociado.nombreCompleto)"
                   ></button>
                 </div>
               </td>
@@ -308,3 +319,4 @@
 </div>
 
 <app-evento-asociado #asociadoModal></app-evento-asociado>
+<app-evento-asistencia #updateAsistenciaModal></app-evento-asistencia>
