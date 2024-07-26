@@ -2,3 +2,4 @@ Agregar a sus ".env" lo siguiente para que les funcione el método de enviar por
 
 EMAIL_USER="notiasomet@gmail.com"
 EMAIL_PASS="itmpzgjlcxszspjx"
+SECRETORPRIVATEKEY=SECRETE0002156
