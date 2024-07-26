@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HeaderNameService } from '../headername.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +11,16 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   pagina: any;
   user: any;
-  constructor(private hnService: HeaderNameService, private router: Router ){
-  }
+  constructor(private authService: AuthService) {}
 
-  ngOnInit() {
-    this.pagina = this.hnService.setTitle(this.router.url);
-    console.log(this.pagina);
-    this.user = 'username';
-}
+  ngOnInit(): void {
+    this.authService.user$.subscribe(user => {
+      this.user = user; 
+    });
+
+    if (!this.user) {
+      const token = this.authService.getToken();
+    }
+  }
 
 }
