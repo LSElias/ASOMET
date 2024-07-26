@@ -7,14 +7,16 @@ const logger = require("morgan");
 const app = express();
 const prism = new PrismaClient();
 
+
 //---Archivos de rutas---
+const authRoutes = require('./routes/authRoutes');
 const usuarioRoutes = require('./routes/usuarioRoutes'); 
 const eventoRoutes = require('./routes/eventoRoutes');
 const reporteRoutes = require('./routes/reporteRoutes'); 
 const datosRoutes = require('./routes/datosRoutes'); 
 const asistenciaRoutes = require('./routes/asistenciaRoutes'); 
 const mailRoutes = require('./routes/mailRoutes'); 
-const authRoutes = require('./routes/auth');
+
 
 // Acceder a la configuracion del archivo .env
 dotEnv.config();
@@ -36,13 +38,13 @@ app.use(
 );
 
 //---- Definir rutas ---- 
+ app.use("/login/", authRoutes);
  app.use("/usuario/", usuarioRoutes);
  app.use("/eventos/", eventoRoutes);
  app.use("/reporte/", reporteRoutes);
  app.use("/datos/", datosRoutes);
  app.use("/asistencia/", asistenciaRoutes);
  app.use('/mail/', mailRoutes);
- app.use('/login/', authRoutes);
 
 // Servidor
 app.listen(port, () => { 
