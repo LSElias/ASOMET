@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MenuComponent } from './shared/menu/menu.component';
-import { LoginComponent } from './login/login/login.component';
+import { LoginComponent } from '././login/login/login.component';
 import { UsuarioIndexComponent } from './usuarios/usuario-index/usuario-index.component';
 import { DashboardIndexComponent } from './dashboard/dashboard-index/dashboard-index.component';
 import { EventoIndexComponent } from './eventos/evento-index/evento-index.component';
@@ -11,23 +11,20 @@ import { ReporteMayorAsistenciaComponent } from './reportes/reporte-mayor-asiste
 import { ReporteMenorAsistenciaComponent } from './reportes/reporte-menor-asistencia/reporte-menor-asistencia.component';
 import { ReporteConfirmacionesAsistenciaComponent } from './reportes/reporte-confirmaciones-asistencia/reporte-confirmaciones-asistencia.component';
 import { UsuarioCreateComponent } from './usuarios/usuario-create/usuario-create.component';
-
-/* const routes: Routes = [
-  {
-    path: '',
-    component: LoginComponent,
-  },
-  {
-    path: 'ee',
-    component: MenuComponent,
-  },
-]; */
+import { AuthGuard } from './auth/auth.guard';
+import { UsuarioAjustesComponent } from './usuarios/usuario-ajustes/usuario-ajustes.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Ruta predeterminada
   { path: 'login', component: LoginComponent },
   { path: 'usuario', component: UsuarioIndexComponent },
   { path: 'usuario/create', component: UsuarioCreateComponent },
-  { path: 'dashboard', component: DashboardIndexComponent },
+  { path: 'usuario/ajustes', component: UsuarioAjustesComponent },
+  {
+    path: 'dashboard',
+    component: DashboardIndexComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'eventos', component: EventoIndexComponent },
   { path: 'reportes', component: IndexComponent },
   {
@@ -44,9 +41,8 @@ const routes: Routes = [
   },
 
   { path: 'eventos/:id', component: EventoDetalleComponent },
-  /*  { path: 'ajustes', component: AjustesComponent },
-  { path: 'logout', component: LogoutComponent }, */
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Ruta predeterminada
+  /*  { path: 'ajustes', component: AjustesComponent },*/
+  { path: 'logout', component: LoginComponent },
 ];
 
 @NgModule({

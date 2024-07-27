@@ -29,7 +29,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Ajustes',
     iconPath: '../../../assets/images/settingsDashIcon.png',
-    route: '/ajustes',
+    route: '/usuario/ajustes',
   },
   {
     displayName: 'Cerrar Sesión',
