@@ -12,24 +12,19 @@ import { ReporteMenorAsistenciaComponent } from './reportes/reporte-menor-asiste
 import { ReporteConfirmacionesAsistenciaComponent } from './reportes/reporte-confirmaciones-asistencia/reporte-confirmaciones-asistencia.component';
 import { UsuarioCreateComponent } from './usuarios/usuario-create/usuario-create.component';
 import { AuthGuard } from './auth/auth.guard';
-
-/* const routes: Routes = [
-  {
-    path: '',
-    component: LoginComponent,
-  },
-  {
-    path: 'ee',
-    component: MenuComponent,
-  },
-]; */
+import { UsuarioAjustesComponent } from './usuarios/usuario-ajustes/usuario-ajustes.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Ruta predeterminada
   { path: 'login', component: LoginComponent },
   { path: 'usuario', component: UsuarioIndexComponent },
   { path: 'usuario/create', component: UsuarioCreateComponent },
-  { path: 'dashboard', component: DashboardIndexComponent,canActivate: [AuthGuard] },
+  { path: 'usuario/ajustes', component: UsuarioAjustesComponent },
+  {
+    path: 'dashboard',
+    component: DashboardIndexComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'eventos', component: EventoIndexComponent },
   { path: 'reportes', component: IndexComponent },
   {
@@ -47,8 +42,7 @@ const routes: Routes = [
 
   { path: 'eventos/:id', component: EventoDetalleComponent },
   /*  { path: 'ajustes', component: AjustesComponent },*/
- { path: 'logout', component: LoginComponent },
- 
+  { path: 'logout', component: LoginComponent },
 ];
 
 @NgModule({

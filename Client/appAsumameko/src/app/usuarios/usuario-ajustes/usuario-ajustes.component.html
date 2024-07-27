@@ -1,0 +1,92 @@
+<div class="flex">
+  <app-menu></app-menu>
+  <div class="w-full">
+    <app-header></app-header>
+    <div class="bg-gray-100 w-full h-full py-1">
+      <div class="flex bg-white mx-8 my-5 h-32 rounded-lg drop-shadow-md">
+
+        <div class="py-8  rounded-lg flex w-full items-center">
+          <div class="mx-5 my-6 border-left h-14"></div>
+          <div class="flex flex-col w-full">
+            <h1 class="text-xl">Configuración del perfil</h1>
+            <p class="text-sm text-[#666]">En esta sección, puedes actualizar y personalizar la información de tu perfil
+              de usuario.
+              Asegúrate de mantener tus
+              datos personales y preferencias actualizadas para mejorar tu experiencia en el sistema.</p>
+          </div>
+          <div class="mx-5 my-6 border-left h-14"></div>
+        </div>
+      </div>
+
+      <section class="bg-white mx-8 my-5 h-fit rounded-lg p-2 justify-center gap-2 drop-shadow-sm">
+        <div class="flex flex-col w-full h-fit  pt-5 pb-10 px-10">
+
+          <div class="flex justify-between items-center w-full pb-2">
+            <h2 class="text-xl ">Información general</h2>
+            <div class="flex gap-4">
+              <button type="button " (click)="onCancel()" *ngIf="editar == true"
+                class="py-2 px-6  text-[#D92D20] text-xs h-fit flex gap-1 bg-[#ffffff] hover:bg-[#D92D20] hover:text-[#fff] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md  text-center transition duration-200 border drop-shadow-sm border-[#D92D20]">
+                Cancelar
+              </button>
+              <button type="button " (click)="onEdit()" *ngIf="editar == false"
+                class="py-2 px-6  text-[#E8A25A] text-xs h-fit flex gap-1 bg-[#ffffff] hover:bg-[#E8A25A] hover:text-[#fff] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md  text-center transition duration-200 border drop-shadow-sm border-orange-200">
+                Editar
+              </button>
+              <button type="button " *ngIf="editar == false" (click)="openPasswordModal()"
+                class="py-2 px-6   text-xs h-fit flex gap-1 font-medium text-[#5A6ACF] rounded-md bg-[#FBFCFE] hover:bg-[#6E749B] hover:text-white transition duration-200 border drop-shadow-sm ">
+                Cambiar contraseña
+              </button>
+            </div>
+          </div>
+          <hr class=" pb-7">
+
+          <form [formGroup]="userForm" novalidate class="flex flex-col gap-4 pt-5 w-full">
+            <div class="w-full flex justify-between gap-8">
+              <div class="w-full">
+                <label for="correo" class="block mb-2 text-sm font-medium text-[#344054]">Correo</label>
+                <input type="email" id="correo" placeholder="ejemplo@gmail.com" formControlName="correo"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                  [attr.disabled]="!editar ? true : null" required />
+              </div>
+
+              <div class="w-full">
+                <label for="cedula" class="block mb-2 text-sm font-medium text-[#344054]">Cédula</label>
+                <input type="text" id="cedula" placeholder="123456789 (Nacional) ó 123456789012 (DIMEX)"
+                  formControlName="cedula"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                  [attr.disabled]="!editar ? true : null" required />
+              </div>
+            </div>
+
+            <div class="w-full flex justify-between gap-8">
+              <div class="w-full">
+                <label for="nombreCompleto" class="block mb-2 text-sm font-medium text-[#344054]">Nombre
+                  completo</label>
+                <input type="text" id="nombreCompleto" placeholder="Nombre completo" formControlName="nombreCompleto"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                  [attr.disabled]="!editar ? true : null" required />
+              </div>
+
+              <div class="w-full">
+                <label for="telefono" class="block mb-2 text-sm font-medium text-[#344054]">Teléfono</label>
+                <input type="text" id="telefono" placeholder="62503829" formControlName="telefono"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                  [attr.disabled]="!editar ? true : null" required />
+              </div>
+            </div>
+
+            <button type="submit" *ngIf="editar" (click)="onSubmit()"
+              class="mt-4 w-full text-white bg-[#E8A25A] hover:bg-[#c48546] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-200">
+              Guardar
+            </button>
+          </form>
+
+
+
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<app-usuario-contrasena #modalPasswordChild></app-usuario-contrasena>
