@@ -18,6 +18,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { UsuarioDesactivarComponent } from './usuario-desactivar/usuario-desactivar.component';
 import { UsuarioDetalleComponent } from './usuario-detalle/usuario-detalle.component';
+import { UsuarioAjustesComponent } from './usuario-ajustes/usuario-ajustes.component';
+import { UsuarioContrasenaComponent } from './usuario-contrasena/usuario-contrasena.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { UsuarioDetalleComponent } from './usuario-detalle/usuario-detalle.compo
     UsuarioUpdateComponent,
     UsuarioDesactivarComponent,
     UsuarioDetalleComponent,
+    UsuarioAjustesComponent,
+    UsuarioContrasenaComponent,
   ],
   imports: [
     CommonModule,
