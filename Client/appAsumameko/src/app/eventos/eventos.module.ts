@@ -20,6 +20,7 @@ import { EventoDetalleComponent } from './evento-detalle/evento-detalle.componen
 import { EventoFormComponent } from './evento-form/evento-form.component';
 import { EventoAsociadoComponent } from './evento-asociado/evento-asociado.component';
 import { EventoAsistenciaComponent } from './evento-asistencia/evento-asistencia.component';
+import { EventoAsambleaComponent } from './evento-asamblea/evento-asamblea.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { EventoAsistenciaComponent } from './evento-asistencia/evento-asistencia
     EventoFormComponent,
     EventoAsociadoComponent,
     EventoAsistenciaComponent,
+    EventoAsambleaComponent
   ],
   imports: [
     CommonModule,
