@@ -12,6 +12,7 @@ import {
   TipoMessage,
 } from 'src/app/shared/notification.service';
 import {EventoAsociadoComponent} from '../evento-asociado/evento-asociado.component'; 
+import { EventoAsistenciaComponent } from '../evento-asistencia/evento-asistencia.component';
 
 @Component({
   selector: 'app-evento-detalle',
@@ -21,6 +22,7 @@ import {EventoAsociadoComponent} from '../evento-asociado/evento-asociado.compon
 export class EventoDetalleComponent implements AfterViewInit{
   eventId: number | null = null;
   datos: any;
+  isDisabled: boolean = false; 
   destroy$: Subject<boolean> = new Subject<boolean>();
   displayedColumns = [
     'cedula',
@@ -37,7 +39,8 @@ export class EventoDetalleComponent implements AfterViewInit{
   dataSource = new MatTableDataSource<any>();
   @ViewChild('eventModal') eventModal!: EventoFormComponent;
   @ViewChild('asociadoModal') asociadoFormModal!: EventoAsociadoComponent;
-
+  @ViewChild('updateAsistenciaModal') asistenciaFormModal!: EventoAsistenciaComponent; 
+  
   constructor(
     private gService: GenericService,
     private router: Router,
@@ -53,10 +56,16 @@ export class EventoDetalleComponent implements AfterViewInit{
         if(this.asociadoFormModal){
           this.asociadoFormModal.idEvento = this.eventId; 
         }
+        if(this.asistenciaFormModal){
+          this.asistenciaFormModal.idEvento = this.eventId; 
+        }
       }
     });
    
     this.asociadoFormModal.asociadoCreado.subscribe(() => {
+      this.fetch(); 
+    });
+    this.asistenciaFormModal.asistenciaModificada.subscribe(() => {
       this.fetch(); 
     });
   }
@@ -68,6 +77,9 @@ export class EventoDetalleComponent implements AfterViewInit{
         this.eventId = +id;
         if(this.asociadoFormModal){
           this.asociadoFormModal.idEvento = this.eventId; 
+        }
+        if(this.asistenciaFormModal){
+          this.asistenciaFormModal.idEvento = this.eventId; 
         }
       }
     });
@@ -81,6 +93,8 @@ export class EventoDetalleComponent implements AfterViewInit{
       .subscribe((response: any) => {
         this.datos = response;
         this.disableButton();
+        this.disableButton_UpdateAsistencia(); 
+        this.isDisabled = this.disableButton_General(); 
         console.log(response);
         this.dataSource = new MatTableDataSource(response.asistencia);
         this.dataSource.sort = this.sort;
@@ -98,6 +112,9 @@ export class EventoDetalleComponent implements AfterViewInit{
         ) {
           i.desactivado = true;
         }
+        else{
+          i.desactivado = false; 
+        }
       });
     }
   }
@@ -106,17 +123,35 @@ export class EventoDetalleComponent implements AfterViewInit{
     if (this.datos && this.datos.asistencia) {
       for (let i of this.datos.asistencia) {
         if (
-          i.contador >= 3 ||
-          i.estadoConfirmacion.idEstadoConfir === 1 ||
-          i.estadoConfirmacion.idEstadoConfir === 2
+          i.contador < 3 &&
+          i.estadoConfirmacion.idEstadoConfir !== 1 &&
+          i.estadoConfirmacion.idEstadoConfir !== 2
         ) {
-          return true;
+          return false;
         }
       }
+      return true;
     }
-    return false;
-
+    return true;
   }
+
+ disableButton_UpdateAsistencia() {
+    if (this.datos && this.datos.asistencia) {
+      this.datos.asistencia.forEach((i: any) => {
+        if (
+          i.estadoConfirmacion.idEstadoConfir === 3
+          || i.estadoConfirmacion.idEstadoConfir === 4
+          && i.estadoAsistencia.idAsistencia === 3
+        ) {
+          i.disable = true;
+        }
+        else {
+          i.disable = false;
+        }
+      });
+    }
+  }
+
 
   nombreChange(event: any) {
     const nombre = event.target.value.toLowerCase();
@@ -206,4 +241,7 @@ export class EventoDetalleComponent implements AfterViewInit{
     this.destroy$.unsubscribe(); 
   }
 
+  updateAsistencia(idUsuario : number, nombre: string){
+    this.asistenciaFormModal.openModal(idUsuario, nombre);
+  }
 }
