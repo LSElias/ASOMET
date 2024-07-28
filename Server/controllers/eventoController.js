@@ -264,3 +264,29 @@ module.exports.updateAsistencia = async (request, response, next) => {
     next(error);
   }
 };
+
+module.exports.getActiveEventos = async (request, response, next) => {
+  try {
+    const currentDate = new Date().toISOString();
+
+    const eventos = await prisma.evento.findMany({
+      where: {
+        fecha: {
+          gt: currentDate
+        }
+      },
+      orderBy: {
+        fecha: "asc",
+      },
+      include: {
+        administrador: true,
+        asistencia: true,
+      },
+    });
+
+    response.json(eventos);
+  } catch (error) {
+    next(error);
+  }
+};
+
