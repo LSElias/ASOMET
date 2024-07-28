@@ -8,12 +8,14 @@ import { heroChartPieSolid, heroUserSolid } from '@ng-icons/heroicons/solid';
 import { octPerson } from '@ng-icons/octicons';
 import { lucideCalendarRange, lucideBarChart2, lucideSettings, lucideLogOut } from '@ng-icons/lucide';
 import { HeaderComponent } from './header/header.component';
+import { MessageDialogComponent } from './dialog/message-dialog.component'; // Importa el componente
 
 
 @NgModule({
   declarations: [
     MenuComponent,
-    HeaderComponent
+    HeaderComponent,
+    MessageDialogComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { HeaderComponent } from './header/header.component';
   ],
   exports: [    
     MenuComponent,
-    HeaderComponent]
+    HeaderComponent,
+    MessageDialogComponent]
 })
 export class SharedModule { }
