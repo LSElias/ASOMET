@@ -4,21 +4,7 @@ import { UsuarioIndexComponent } from './usuario-index/usuario-index.component';
 import { UsuarioUpdateComponent } from './usuario-update/usuario-update.component';
 import { UsuarioCreateComponent } from './usuario-create/usuario-create.component';
 
-const routes: Routes = [
-  {
-    path: 'usuario',
-    component: UsuarioIndexComponent,
-  },
-     {
-    path: 'usuario/create/',
-    component: UsuarioCreateComponent,
-  },
-   /*
-  {
-    path: 'usuario/update/:id',
-    component: UsuarioUpdateComponent,
-  }, */
-];
+const routes: Routes = [];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
