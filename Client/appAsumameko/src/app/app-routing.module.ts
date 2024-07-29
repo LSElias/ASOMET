@@ -6,25 +6,31 @@ import { UsuarioIndexComponent } from './usuarios/usuario-index/usuario-index.co
 import { DashboardIndexComponent } from './dashboard/dashboard-index/dashboard-index.component';
 import { EventoIndexComponent } from './eventos/evento-index/evento-index.component';
 import { EventoDetalleComponent } from './eventos/evento-detalle/evento-detalle.component';
+import { EventoAsambleaComponent } from './eventos/evento-asamblea/evento-asamblea.component';
 import { IndexComponent } from './reportes/index/index.component';
 import { ReporteMayorAsistenciaComponent } from './reportes/reporte-mayor-asistencia/reporte-mayor-asistencia.component';
 import { ReporteMenorAsistenciaComponent } from './reportes/reporte-menor-asistencia/reporte-menor-asistencia.component';
 import { ReporteConfirmacionesAsistenciaComponent } from './reportes/reporte-confirmaciones-asistencia/reporte-confirmaciones-asistencia.component';
 import { UsuarioCreateComponent } from './usuarios/usuario-create/usuario-create.component';
 import { AuthGuard } from './auth/auth.guard';
-import { UsuarioAjustesComponent } from './usuarios/usuario-ajustes/usuario-ajustes.component';
+
+/* const routes: Routes = [
+  {
+    path: '',
+    component: LoginComponent,
+  },
+  {
+    path: 'ee',
+    component: MenuComponent,
+  },
+]; */
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Ruta predeterminada
   { path: 'login', component: LoginComponent },
   { path: 'usuario', component: UsuarioIndexComponent },
   { path: 'usuario/create', component: UsuarioCreateComponent },
-  { path: 'usuario/ajustes', component: UsuarioAjustesComponent },
-  {
-    path: 'dashboard',
-    component: DashboardIndexComponent,
-    canActivate: [AuthGuard],
-  },
+  { path: 'dashboard', component: DashboardIndexComponent,canActivate: [AuthGuard] },
   { path: 'eventos', component: EventoIndexComponent },
   { path: 'reportes', component: IndexComponent },
   {
@@ -42,7 +48,9 @@ const routes: Routes = [
 
   { path: 'eventos/:id', component: EventoDetalleComponent },
   /*  { path: 'ajustes', component: AjustesComponent },*/
-  { path: 'logout', component: LoginComponent },
+ { path: 'logout', component: LoginComponent },
+ { path: 'asamblea', component: EventoAsambleaComponent },
+ 
 ];
 
 @NgModule({

@@ -43,23 +43,20 @@ module.exports.sendEventNotification = async (request, response, next) => {
 
     // Enviar correos electrónicos a los usuarios
     const promises = usuarios.map(async usuario => {
-      const mailText =
-      `Estimado(a) asociado,
-       
-      Nos complace informarle que se ha creado un nuevo evento, nos encantaría contar con su asistencia. Para confirmar o rechazar su asistencia puede ingresar al siguiente enlace.
-      **Agregar acá el url de la invitación** 
+      const mailHtml = `
+        <p>Estimado(a) asociado,</p>
+        <p>Nos complace informarle que se ha creado un nuevo evento, nos encantaría contar con su asistencia. Para confirmar o rechazar su asistencia puede ingresar al siguiente enlace.</p>
+        <a href="http://localhost:4200/asamblea" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;">Ver Eventos</a>
+        <p>Información sobre el evento a realizar:</p>
+        <p>${evento.titulo}<br>
+        Descripción: ${evento.descripcion}<br>
+        Fecha: ${evento.fecha}, ${evento.hora}<br>
+        Localización: ${evento.localizacion}</p>
+        <p>Esperamos contar con su participación.</p>
+        <p>Saludos cordiales,<br>Asomameco.</p>
+      `;
 
-      Información sobre el evento a realizar: \n
-      ${evento.titulo}
-      Descripción: ${evento.descripcion}
-      Fecha: ${evento.fecha},  ${evento.hora}
-      Localización: ${evento.localizacion}
-      
-      Esperamos contar con su participación.\n
-      Saludos cordiales,\n
-      Asomameco.`; 
-
-      await sendMail(usuario.correo, 'Nuevo Evento Creado', mailText);
+      await sendMail(usuario.correo, 'Nuevo Evento Creado', mailHtml);
 
       await prisma.asistencia.updateMany({
         where: {
