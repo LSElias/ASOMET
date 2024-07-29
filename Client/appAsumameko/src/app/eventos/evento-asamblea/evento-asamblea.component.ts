@@ -41,7 +41,7 @@ export class EventoAsambleaComponent {
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      window.location.href = '/login';
+      window.location.href = '/respuesta';
     });
   }
   chunk(array: any[], size: number) {

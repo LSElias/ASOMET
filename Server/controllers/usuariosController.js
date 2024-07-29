@@ -244,7 +244,6 @@ module.exports.create = async (request, response, next) => {
       });
 
       if (eventosVigentes[0]) {
-        
         await prisma.asistencia.create({
           data: {
             idEvento: eventosVigentes[0].idEvento,
@@ -263,12 +262,43 @@ module.exports.create = async (request, response, next) => {
         };
         const mailResponse = {
           status: (code) => ({
-            json: (message) => console.log(`Mail Response Status: ${code}, Message: ${message}`),
+            json: (message) =>
+              console.log(`Mail Response Status: ${code}, Message: ${message}`),
           }),
-        }; 
-        
-        await mailController.sendEventNotification(mailInfo, mailResponse,next);
+        };
 
+        await mailController.sendEventNotification(
+          mailInfo,
+          mailResponse,
+          next
+        );
+      }
+    } else {
+      const fechaActual = new Date().toISOString().split("T")[0];
+
+      const eventosVigentes = await prisma.evento.findMany({
+        where: {
+          fecha: {
+            gt: fechaActual,
+          },
+        },
+        orderBy: {
+          fecha: "asc",
+        },
+      });
+
+      if (eventosVigentes[0]) {
+        const asistencias = eventosVigentes.map((e) => ({
+          idEvento: e.idEvento,
+          idAsociado: newUsuario.idUsuario,
+          idEstadoConfir: 4,
+          idAsistencia: 3,
+          contEnvios: 0,
+        }));
+
+        await prisma.asistencia.createMany({
+          data: asistencias,
+        }); 
       }
     }
 
@@ -299,40 +329,38 @@ module.exports.createEnAsistencia = async (request, response, next) => {
       },
     });
 
-      const eventosVigentes = await prisma.evento.findUnique({
-        where: {
-          idEvento: infoUsuario.idEvento
+    const eventosVigentes = await prisma.evento.findUnique({
+      where: {
+        idEvento: infoUsuario.idEvento,
+      },
+    });
+
+    if (eventosVigentes) {
+      await prisma.asistencia.create({
+        data: {
+          idEvento: eventosVigentes.idEvento,
+          idAsociado: newUsuario.idUsuario,
+          idEstadoConfir: 3,
+          idAsistencia: 3,
+          contEnvios: 0,
         },
       });
 
-      if (eventosVigentes) {
+      const mailInfo = {
+        body: {
+          eventId: eventosVigentes.idEvento,
+          selectedEmails: [newUsuario.correo],
+        },
+      };
+      const mailResponse = {
+        status: (code) => ({
+          json: (message) =>
+            console.log(`Mail Response Status: ${code}, Message: ${message}`),
+        }),
+      };
 
-        await prisma.asistencia.create({
-          data: {
-            idEvento: eventosVigentes.idEvento,
-            idAsociado: newUsuario.idUsuario,
-            idEstadoConfir: 3,
-            idAsistencia: 3,
-            contEnvios: 0,
-          },
-        });
-
-        const mailInfo = {
-          body: {
-            eventId: eventosVigentes.idEvento,
-            selectedEmails: [newUsuario.correo],
-          },
-        };
-        const mailResponse = {
-          status: (code) => ({
-            json: (message) => console.log(`Mail Response Status: ${code}, Message: ${message}`),
-          }),
-        }; 
-  
-        await mailController.sendEventNotification(mailInfo, mailResponse,next);
-
-      }
-  
+      await mailController.sendEventNotification(mailInfo, mailResponse, next);
+    }
 
     response.status(201).json({
       status: true,
@@ -408,5 +436,36 @@ module.exports.updateEstadoUsuario = async (request, response, next) => {
     response
       .status(500)
       .json({ message: "Error en la actualización del estado" });
+  }
+};
+
+//Cambiar contraseña
+module.exports.updatePassword = async (request, response, next) => {
+  try {
+    const correo = request.params.correo;
+    const {contrasena} = request.body; 
+
+    const oldUser = await prisma.usuario.findUnique({
+      where: { correo: correo },
+    });
+
+    if (!oldUser) {
+      return response.status(400).json({ message: "Usuario No Encontrado" });
+    }
+
+    const newUser = await prisma.usuario.update({
+      where: {
+        correo: correo,
+      },
+      data: {
+        contrasena: contrasena,
+      },
+    });
+
+    response.json(newUser);
+  } catch (error) {
+    response
+      .status(500)
+      .json({ message: "Error en la actualización de la contraseña" });
   }
 };

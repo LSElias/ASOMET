@@ -13,6 +13,7 @@ import { ReporteMenorAsistenciaComponent } from './reportes/reporte-menor-asiste
 import { ReporteConfirmacionesAsistenciaComponent } from './reportes/reporte-confirmaciones-asistencia/reporte-confirmaciones-asistencia.component';
 import { UsuarioCreateComponent } from './usuarios/usuario-create/usuario-create.component';
 import { AuthGuard } from './auth/auth.guard';
+import { RespuestaComponent } from './eventos/respuesta/respuesta.component';
 
 /* const routes: Routes = [
   {
@@ -50,6 +51,7 @@ const routes: Routes = [
   /*  { path: 'ajustes', component: AjustesComponent },*/
  { path: 'logout', component: LoginComponent },
  { path: 'asamblea', component: EventoAsambleaComponent },
+ { path: 'respuesta', component: RespuestaComponent },
  
 ];
 

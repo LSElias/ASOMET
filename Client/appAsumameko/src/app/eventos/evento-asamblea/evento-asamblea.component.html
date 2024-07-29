@@ -1,17 +1,37 @@
 <!-- evento-asamblea.component.html -->
+<div class="header flex">
+  <div class="lg-container">
+    <img class="logo" src="../../../assets/images/logo.png" alt="Logo" />
+  </div>
+  <div class="bs-container">
+    <p class="asumameko px-2">Bienvenido a Asomameco</p>
+  </div>
+</div>
 
-<div class="w-full content-container">
-  <app-header></app-header>
-  <div class="card-container">
-    <div class="card-row" *ngFor="let row of chunk(eventos, 3)">
-      <div class="card" *ngFor="let evento of row">
-        <h2>{{ evento.titulo }}</h2>
-        <p>{{ evento.descripcion }}</p>
-        <p>{{ evento.fecha }} - {{ evento.hora }}</p>
-        <p>{{ evento.localizacion }}</p>
-        <button class="confirm" (click)="confirmarAsistencia(evento.idEvento)">Confirmar Asistencia</button>
-        <button class="reject" (click)="rechazarAsistencia(evento.idEvento)">Rechazar Asistencia</button>
+  
+<div class="content-container">
+  
+    <div class="welcome-sec">
+      <h3>A continuación se puede observar la lista de eventos a los cuales agradeceríamos contar con su presencia.
+      </h3>
+    </div>
+  
+    <div class="card-container">
+      <div class="card-row" *ngFor="let row of chunk(eventos, 3)">
+        <div class="card" *ngFor="let evento of row">
+          <h2>{{ evento.titulo }}</h2>
+          <p>{{ evento.descripcion }}</p>
+          <p>{{ evento.fecha }} - {{ evento.hora }}</p>
+          <p>{{ evento.localizacion }}</p>
+          
+          <p style="margin: 30px 10px 10px 10px "> <b>¿Asistirá al presente evento?</b> </p>
+
+          <div>
+          <button class="confirm" (click)="confirmarAsistencia(evento.idEvento)">Confirmar</button>
+          <button class="reject" (click)="rechazarAsistencia(evento.idEvento)">Rechazar</button>
+          
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>

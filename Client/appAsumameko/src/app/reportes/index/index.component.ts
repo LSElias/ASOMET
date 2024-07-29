@@ -164,7 +164,7 @@ export class IndexComponent implements AfterViewInit {
   updateDataGrafico(chart: Chart) {
     chart.data.datasets = [
       {
-        label: 'Eventos con la mayor asistencia: ',
+        label: 'Eventos con la menor asistencia: ',
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -257,7 +257,7 @@ export class IndexComponent implements AfterViewInit {
             },
             title: {
               display: true,
-              text: 'Eventos con mayor asistencia',
+              text: 'Eventos con menor asistencia',
               position: 'left',
               align: 'center',
               fullSize: true,
