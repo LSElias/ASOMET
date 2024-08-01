@@ -28,27 +28,39 @@
       <!-- Modal body -->
       <div class="px-4 py-6 border-t-4 border-top border-[#193E68] mt-2">
         <!-- Formulario para crear o actualizar usuario -->
-        <form [formGroup]="passwordForm" novalidate class="flex flex-col gap-4">
-          <div>
-            <label for="contrasenaActual" class="block mb-2 text-sm font-medium text-[#344054]">Contraseña actual
-            </label>
-            <input type="password" name="titulo" id="titulo" placeholder="********" formControlName="contrasenaActual"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              required />
-
-          </div>
+        <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()"  novalidate class="flex flex-col gap-4">
 
           <div>
             <label for="contrasenaNueva" class="block mb-2 text-sm font-medium text-[#344054]">Nueva contraseña
             </label>
-            <input type="password" name="localizacion" placeholder="********" formControlName="contrasenaNueva"
+            <input type="password" name="contrasenaNueva" id="contrasenaNueva" placeholder="********" formControlName="contrasenaNueva"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required />
+              <div style="font-size: large;" *ngIf="passwordForm.controls['contrasenaNueva'].invalid && (passwordForm.controls['contrasenaNueva'].dirty || passwordForm.controls['contrasenaNueva'].touched)">
+                <small class="text-red-500 font-medium" *ngIf="passwordForm.controls['contrasenaNueva'].errors?.['required']">La nueva contraseña es requerida.</small>
+                <small class="text-red-500 font-medium" *ngIf="passwordForm.controls['contrasenaNueva'].errors?.['minlength']">La nueva contraseña debe tener al menos 8 caracteres.</small>
+                <small class="text-red-500 font-medium" *ngIf="passwordForm.controls['contrasenaNueva'].errors?.['maxlength']">La nueva contraseña no debe exceder los 20 caracteres.</small>
+              </div>
+            </div>
 
+          <div>
+            <label for="contrasena" class="block mb-2 text-sm font-medium text-[#344054]">Confirmar nueva contraseña
+            </label>
+            <input type="password" name="contrasena" id="contrasena" placeholder="********" formControlName="contrasena"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              required />
+              <div style="font-size: large;" *ngIf="passwordForm.controls['contrasena'].invalid && (passwordForm.controls['contrasena'].dirty || passwordForm.controls['contrasena'].touched)">
+                <small class="text-red-500 font-medium" *ngIf="passwordForm.controls['contrasena'].errors?.['required']">Confirmar la nueva contraseña es requerido.</small>
+                <small class="text-red-500 font-medium" *ngIf="passwordForm.controls['contrasena'].errors?.['minlength']">Confirmar contraseña debe tener al menos 8 caracteres.</small>
+                <small class="text-red-500 font-medium" *ngIf="passwordForm.controls['contrasena'].errors?.['maxlength']">Confirmar contraseña no debe exceder los 20 caracteres.</small>
+              </div>
+              <div style="font-size: large;" *ngIf="passwordForm.errors?.['passwordMismatch'] && (passwordForm.controls['contrasena'].dirty || passwordForm.controls['contrasena'].touched)">
+                <small class="text-red-500 font-medium">Las contraseñas no coinciden.</small>
+              </div>
           </div>
 
 
-          <button type="submit" (click)="onSubmit()"
+          <button type="submit" 
             class="mt-4 w-full text-white bg-[#E8A25A] hover:bg-[#c48546] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-200">
             Guardar
           </button>

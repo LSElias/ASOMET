@@ -216,6 +216,10 @@ module.exports.create = async (request, response, next) => {
   try {
     const infoUsuario = request.body;
 
+/*     let salt = bcrypt.genSaltSync(10);
+
+    let hash = bcrypt.hashSync(infoUsuario.contrasena, salt);
+ */
     const newUsuario = await prisma.usuario.create({
       data: {
         idRol: infoUsuario.idRol,
@@ -223,7 +227,7 @@ module.exports.create = async (request, response, next) => {
         cedula: infoUsuario.cedula,
         nombreCompleto: infoUsuario.nombreCompleto,
         correo: infoUsuario.correo,
-        contrasena: infoUsuario.contrasena,
+        contrasena: hash,
         telefono: infoUsuario.telefono,
       },
     });
@@ -317,6 +321,10 @@ module.exports.createEnAsistencia = async (request, response, next) => {
   try {
     const infoUsuario = request.body;
 
+/*     let salt = bcrypt.genSaltSync(10);
+
+    let hash = bcrypt.hashSync(infoUsuario.contrasena, salt);
+ */
     const newUsuario = await prisma.usuario.create({
       data: {
         idRol: infoUsuario.idRol,
@@ -324,7 +332,7 @@ module.exports.createEnAsistencia = async (request, response, next) => {
         cedula: infoUsuario.cedula,
         nombreCompleto: infoUsuario.nombreCompleto,
         correo: infoUsuario.correo,
-        contrasena: infoUsuario.contrasena,
+        contrasena: hash,
         telefono: infoUsuario.telefono,
       },
     });
@@ -386,21 +394,26 @@ module.exports.update = async (request, response, next) => {
       },
     });
 
-    const newUser = await prisma.usuario.update({
-      where: {
-        idUsuario: idUsuario,
-      },
-      data: {
-        idRol: infoUsuario.idRol,
-        idEstUsuario: infoUsuario.idEstUsuario,
-        cedula: infoUsuario.cedula,
-        nombreCompleto: infoUsuario.nombreCompleto,
-        correo: infoUsuario.correo,
-        contrasena: infoUsuario.contrasena,
-        telefono: infoUsuario.telefono,
-      },
-    });
-
+    /* const isMatchPass = await bcrypt.compare(
+      infoUsuario.contrasena,
+      oldUser.contrasena
+    ); */
+  
+      const newUser = await prisma.usuario.update({
+        where: {
+          idUsuario: idUsuario,
+        },
+        data: {
+          idRol: infoUsuario.idRol,
+          idEstUsuario: infoUsuario.idEstUsuario,
+          cedula: infoUsuario.cedula,
+          nombreCompleto: infoUsuario.nombreCompleto,
+          correo: infoUsuario.correo,
+          contrasena: infoUsuario.contrasena,
+          telefono: infoUsuario.telefono,
+        },
+      });
+      
     response.json(newUser);
   } catch (error) {
     response
@@ -442,8 +455,11 @@ module.exports.updateEstadoUsuario = async (request, response, next) => {
 //Cambiar contraseña
 module.exports.updatePassword = async (request, response, next) => {
   try {
-    const correo = request.params.correo;
-    const {contrasena} = request.body; 
+    //const correo = request.params.correo;
+    const {correo,contrasena} = request.body; 
+
+    //let salt = bcrypt.genSaltSync(10);
+    // let hash = bcrypt.hashSync(contrasena, salt);
 
     const oldUser = await prisma.usuario.findUnique({
       where: { correo: correo },

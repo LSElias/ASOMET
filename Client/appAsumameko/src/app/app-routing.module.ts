@@ -14,6 +14,7 @@ import { ReporteConfirmacionesAsistenciaComponent } from './reportes/reporte-con
 import { UsuarioCreateComponent } from './usuarios/usuario-create/usuario-create.component';
 import { AuthGuard } from './auth/auth.guard';
 import { RespuestaComponent } from './eventos/respuesta/respuesta.component';
+import { UsuarioAjustesComponent } from './usuarios/usuario-ajustes/usuario-ajustes.component';
 
 /* const routes: Routes = [
   {
@@ -52,7 +53,7 @@ const routes: Routes = [
  { path: 'logout', component: LoginComponent },
  { path: 'asamblea', component: EventoAsambleaComponent },
  { path: 'respuesta', component: RespuestaComponent },
- 
+ { path: 'ajustes', component: UsuarioAjustesComponent },
 ];
 
 @NgModule({
