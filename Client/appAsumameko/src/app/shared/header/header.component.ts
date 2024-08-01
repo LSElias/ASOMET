@@ -14,12 +14,12 @@ export class HeaderComponent {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.authService.user$.subscribe(user => {
+    this.authService.decodeToken.subscribe((user:any) => {
       this.user = user; 
     });
 
     if (!this.user) {
-      const token = this.authService.getToken();
+      const token = this.authService.getToken;
     }
   }
 

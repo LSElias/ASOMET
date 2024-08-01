@@ -12,7 +12,7 @@
             <div class="flex flex-col gap-8">
               <div>
                 <h2 class="text-lg font-medium">{{ user?.nombreCompleto || 'Nombre de Usuario' }}</h2>
-                <span class="text-sm text-[#666666]">{{ user?.rol || 'Rol del Usuario' }}</span>
+                <span class="text-sm text-[#666666]">{{ user?.rol.nombre || 'Rol del Usuario' }}</span>
               </div>
             </div>
           </div>

@@ -69,11 +69,11 @@
 
     <div class="flex flex-col items-center justify-center text-center pt-28">
       <img class="logo w-28 3xl:w-28" src="../../../assets/logo.png" />
-      <h1 class="asumameko text-2xl text-center text-[#b9c2f7] laptop:text-[#1b78b7]">Asoma<span
-          class="meko text-[#ffffff] laptop:text-[#646364]">meco</span></h1>
+      <h1 class="asumameko text-2xl text-center text-[#b9c2f7] laptop:text-[#1b78b7]">Asomameco</h1>
+      
     </div>
 
-    <form (ngSubmit)="login()" class="w-[370px] laptop:w-[320px] 3xl:w-[330px] mx-auto pt-16 laptop:pt-10 xl:pt-5 2xl:pt-0">
+    <form  [formGroup]="userForm" novalidate class="w-[370px] laptop:w-[320px] 3xl:w-[330px] mx-auto pt-16 laptop:pt-10 xl:pt-5 2xl:pt-0">
       <div class="flex justify-center pb-9">
         <span class="text-[#f6f5f5] laptop:text-[#7F837F] text-base font-semibold text-center">
           Bienvenido a Asomameco
@@ -81,15 +81,26 @@
       </div>
       <div class="mb-7">
         <label for="email" class="text-[#dedede] laptop:text-[#666666] block mb-2 text-xs font-medium">Correo</label>
-        <input type="email" id="email" [(ngModel)]="email" name="email"
+        <input type="email" id="email"  formControlName="correo" name="email"
           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder="correo@ejemplo.com" required />
+          <mat-error *ngIf="errorHandling('correo', 'required')">
+            El correo es <strong>requerido</strong>.
+          </mat-error>
+          <mat-error *ngIf="errorHandling('correo', 'email')">
+            El correo debe tener formato de correo. Ejemplo
+            <strong>abc126@correo.com</strong>.
+          </mat-error>
       </div>
       <div class="mb-5">
-        <label for="password" class="text-[#dedede] laptop:text-[#666666] block mb-2 text-xs font-medium">Contraseña</label>
-        <input type="password" id="password" [(ngModel)]="password" name="password"
+        <label for="contrasena" class="text-[#dedede] laptop:text-[#666666] block mb-2 text-xs font-medium">Contraseña</label>
+        <input type="password" id="contrasena" placeholder="**********" name="contrasena"
+         formControlName="contrasena"
           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder="********" required />
+          <mat-error *ngIf="errorHandling('contrasena', 'required')">
+            La contraseña es <strong>requerida</strong>.
+          </mat-error>
         <div class="flex justify-end">
           <a href="#" class="mt-2 text-xs font-semibold text-[#3B4270]">¿Olvidaste tu contraseña? </a>
         </div>
@@ -98,7 +109,7 @@
         {{ errorMessage }}
       </div>
       <div class="flex justify-center items-center mt-9">
-        <button type="submit"
+        <button (click)="onSubmit()" type="submit"
           class="text-sm text-white bg-[#E69F5B] hover:bg-[#636570] transition duration-200 laptop:bg-[#636570] laptop:hover:bg-[#E69F5B] font-medium rounded-3xl px-10 py-2.5 text-center">Iniciar
           Sesión</button>
       </div>
