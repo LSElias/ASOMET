@@ -1,59 +1,106 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, catchError, throwError, BehaviorSubject, tap } from 'rxjs';
+import { Observable, catchError, throwError, BehaviorSubject, tap, map } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
+import { environment } from 'src/environments/environment';
 
-export interface LoginResponse {
+/*export interface LoginResponse {
   token: string;
   user: {
     id: number;
     email: string;
     nombreCompleto: string;
+    rol: any;
   };
-}
+}*/
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = environment.apiURL;
   private userSubject = new BehaviorSubject<any>(null);
-  public user$ = this.userSubject.asObservable();
+ // public user$ = this.userSubject.asObservable();
+  private usuario = new BehaviorSubject<any>(null);
+  private tokenUserSubject = new BehaviorSubject<any>(null);
+  private authenticated = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient) {}
+  public currentUser: Observable<any>;
 
-  login(email: string, password: string): Observable<LoginResponse> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { email, password }, { headers }).pipe(
-      tap(response => {
-        if (response && response.token) {
-          this.setToken(response.token);
-          this.userSubject.next(response.user);
-        }
-      }),
-      catchError(this.handleError)
-    );
+  constructor(private http: HttpClient) {
+    let cs = localStorage.getItem('token');
+
+    if(cs && cs != "undefined"){
+      this.tokenUserSubject = new BehaviorSubject<any>(
+        JSON.parse(cs)
+      ); 
+    }
+
+    this.currentUser = this.tokenUserSubject.asObservable();
   }
 
-  setToken(token: string): void {
+  login(formData: any): Observable<any> {
+
+    var email = formData.correo;
+    var password = formData.contrasena;
+   // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+   return this.http.post<any>(`${this.apiUrl}login`, { email, password }, { headers }).pipe(
+      map((response => {
+          localStorage.setItem('token', JSON.stringify(response.token));
+          this.authenticated.next(true);       
+          this.tokenUserSubject.next(response.token)
+       /*   this.userSubject.next(response.user);*/
+          let userData = this.decodeToken;
+          return userData;
+      })),
+        catchError(this.handleError)
+    );
+    
+  }
+
+ setToken(token: any) {
     localStorage.setItem('token', token);
   }
 
-  getToken(): string | null {
-    return localStorage.getItem('token');
+  public get getToken(): any {
+    return this.tokenUserSubject.value;
   }
 
-  isAuthenticated(): boolean {
-    return !!this.getToken();
+  get decodeToken(): any {
+    this.usuario.next(null);
+    if (this.getToken != null ) {
+      this.usuario.next(jwtDecode(this.getToken))
+    }
+   
+    return this.usuario.asObservable();
   }
 
-  logout(): void {
-    localStorage.removeItem('token');
-    this.userSubject.next(null); 
+
+  get isAuthenticated() {
+    if (this.getToken != null) {
+      this.authenticated.next(true);
+    } else {
+      this.authenticated.next(false);
+    }
+    return this.authenticated.asObservable();
   }
 
-  getUser(): Observable<any> {
+  logout() {
+    let usuario = this.tokenUserSubject.value;
+    if (usuario) {
+      localStorage.removeItem('currentUser');
+      this.tokenUserSubject.next(null);
+      this.authenticated.next(false);
+      //Eliminar carrito
+      return true;
+    }
+    return false;
+  }
+
+/*  get getUser(): Observable<any> {
     return this.user$;
-  }
+  }*/
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Ocurrió un error inesperado';

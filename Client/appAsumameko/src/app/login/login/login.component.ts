@@ -1,6 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
+import { GenericService } from 'src/app/shared/generic.service';
+import { NotificacionService, TipoMessage } from 'src/app/shared/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -8,15 +12,30 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  email: string = '';
-  password: string = '';
+  correo: string = '';
+  contrasena: string = '';
   currentSlide = 0;
   slides = [0, 1, 2, 3];
   /* slides = [0]; */
   private carouselInterval: any;
   errorMessage: string | null = null;
 
-  constructor(private authService: AuthService, private router: Router) {}
+// FORM -->
+  submitted = false;
+  makeSubmit: boolean = false;
+  userForm: FormGroup;
+  userData: any;
+  destroy$: Subject<boolean> = new Subject<boolean>();
+  respuesta: any;
+// <-- FORM 
+
+
+  constructor(private authService: AuthService, private router: Router, public fb: FormBuilder,
+    private gService: GenericService,
+    private noti: NotificacionService
+  ) {
+    this.reactiveForm();
+  }
 
   ngOnInit() {
     this.startCarousel();
@@ -25,6 +44,19 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.stopCarousel();
   }
+
+  reactiveForm() {
+    this.userForm = this.fb.group({
+      correo: ['', [Validators.required, Validators.email]],
+      contrasena: [
+        '',
+        Validators.compose([
+          Validators.required
+        ]),
+      ],
+    });
+  }
+
 
   setCurrentSlide(index: number) {
     this.currentSlide = index;
@@ -48,8 +80,52 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  login(): void {
-    this.authService.login(this.email, this.password).subscribe(
+  onSubmit(): void {
+    this.submitted = true;
+    const formData = this.userForm.value;
+
+    if (this.userForm.invalid) {
+      this.noti.mensajeRedirect(
+        'Inicio de sesión',
+        `Sus credenciales no son correctos. Verifiquelos y intente iniciar sesión otra vez.`,
+        TipoMessage.error,
+        'Inicio Sesión'
+      );
+      return;
+    }
+
+      if (this.userForm.value) {
+        this.authService
+          .login(formData)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(
+            (data: any) => {
+
+            console.log(data);
+           // this.authService.setToken(data.token);
+            this.respuesta = data;
+            this.noti.mensajeRedirect(
+              'Inicio de Sesión',
+              `Se ha logrado iniciar seisón con éxito.`,
+              TipoMessage.success,
+              'dashboard'
+            );
+            this.router.navigate(['/dashboard/']);
+          },
+        (error)=>{
+          this.noti.mensajeRedirect(
+            'Inicio de sesión',
+            `Sus credenciales no son correctos. Verifiquelos y intente iniciar sesión otra vez.`,
+            TipoMessage.error,
+            'dashboard'
+          );
+          return;
+        });
+      }
+
+
+
+/*    this.authService.login(this.email, this.password).subscribe(
       (response) => {
         this.authService.setToken(response.token);
         this.router.navigate(['/dashboard']);
@@ -58,11 +134,15 @@ export class LoginComponent implements OnInit, OnDestroy {
         console.error('Error al iniciar sesión', error);
         this.errorMessage = error.message;
       }
-    );
+    );*/
 }
 
-
-
-
-
+  // Control de Errores
+  public errorHandling = (control: string, error: string) => {
+    return (
+      this.userForm.controls[control].hasError(error) &&
+      this.userForm.controls[control].invalid &&
+      (this.makeSubmit || this.userForm.controls[control].touched)
+    );
+  };
 }
