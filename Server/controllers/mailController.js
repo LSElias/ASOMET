@@ -44,7 +44,7 @@ module.exports.sendEventNotification = async (request, response, next) => {
     // Enviar correos electrónicos a los usuarios
     const promises = usuarios.map(async usuario => {
       const mailHtml = `
-        <p>Estimado(a) asociado,</p>
+        <p>Estimado/a asociado,</p>
         <p>Nos complace informarle que se ha creado un nuevo evento, nos encantaría contar con su asistencia. Para confirmar o rechazar su asistencia puede ingresar al siguiente enlace.</p>
         <a href="http://localhost:4200/asamblea" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;">Ver Eventos</a>
         <p>Información sobre el evento a realizar:</p>
@@ -80,3 +80,50 @@ module.exports.sendEventNotification = async (request, response, next) => {
     next(error);
   }
 };
+
+
+module.exports.sendUserCodePassword = async (request, response, next) => {
+  const { code, selectedEmails } = request.body;
+
+  if (!code || !selectedEmails || selectedEmails.length === 0) {
+    return response.status(400).json({ message: 'Código y correos electrónicos son requeridos.' });
+  }
+
+  try {
+
+      const usuarios = await prisma.usuario.findMany({
+        where: {
+          correo: { in: selectedEmails },
+        },
+        select: {
+          correo: true,
+          idUsuario: true,
+          nombreCompleto: true,
+        },
+      });
+
+      if (usuarios.length === 0) {
+        return response.status(404).json({ message: 'No se encontraron usuarios con los correos electrónicos proporcionados.' });
+      }
+
+    // Enviar correos electrónicos a los usuarios
+    const promises = usuarios.map(async usuario => {
+      const mailHtml = `
+        <p>Estimado/a <b> ${usuario.nombreCompleto} </b></p>
+        <p>Esperamos que este mensaje lo encuentre bien.</p>
+        <p>Para completar este proceso, por favor utilice el siguiente código de verificación: </p>
+        <p><b>Código de verificación:</b> ${code}<br></p>
+        <p>Saludos cordiales,<br>Asomameco.</p>
+      `;
+
+      await sendMail(usuario.correo, 'Código de Verificación - Cambio de Contraseña', mailHtml);
+    });
+
+    await Promise.all(promises);
+
+    response.status(200).json({ message: 'Correos electrónicos enviados exitosamente' });
+  } catch (error) {
+    next(error);
+  }
+};
+

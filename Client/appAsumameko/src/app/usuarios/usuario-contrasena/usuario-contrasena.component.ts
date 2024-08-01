@@ -1,7 +1,14 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 import { GenericService } from 'src/app/shared/generic.service';
 import {
   NotificacionService,
@@ -15,12 +22,15 @@ import {
 })
 export class UsuarioContrasenaComponent {
   isVisible = false;
-  idUser: any;
+  //idUser: any;
   genericService: any;
 
   passwordForm: FormGroup;
   destroy$: Subject<boolean> = new Subject<boolean>();
   respuesta: any;
+  @Input() correo: string | null = null;
+  @Output() passModificada: EventEmitter<void> = new EventEmitter<void>();
+  showWarning: boolean = false;
 
   // Flags de creación/actualización
   isCreate: boolean = true;
@@ -30,7 +40,7 @@ export class UsuarioContrasenaComponent {
     public fb: FormBuilder,
     private router: Router,
     private gService: GenericService,
-    //   private authService: AuthenticationService,
+    private authService: AuthService,
     private noti: NotificacionService
   ) {
     this.reactiveForm();
@@ -38,9 +48,8 @@ export class UsuarioContrasenaComponent {
 
   reactiveForm() {
     this.passwordForm = this.fb.group({
-      idUsuario: [null, null],
-
-      contrasenaActual: [
+      correo: this.correo,
+      contrasenaNueva: [
         '',
         Validators.compose([
           Validators.required,
@@ -48,7 +57,7 @@ export class UsuarioContrasenaComponent {
           Validators.maxLength(20),
         ]),
       ],
-      contrasenaNueva: [
+      contrasena: [
         '',
         Validators.compose([
           Validators.required,
@@ -65,9 +74,63 @@ export class UsuarioContrasenaComponent {
 
   closeModal() {
     this.isVisible = false;
+    this.passwordForm.get('contrasena')?.reset();
+    this.passwordForm.get('contrasenaNueva')?.reset();
   }
 
   onSubmit() {
-    console.log(this.passwordForm.value);
+    if (this.passwordForm.invalid) {
+      Object.keys(this.passwordForm.controls).forEach((f) => {
+        const control = this.passwordForm.get(f);
+        control?.markAsTouched({ onlySelf: true });
+      });
+      return;
+    }
+
+    const newPass = this.passwordForm.get('contrasenaNueva')?.value;
+    const confirmPass = this.passwordForm.get('contrasena')?.value;
+
+    if (newPass !== confirmPass) {
+      this.passwordForm.setErrors({ passwordMismatch: true });
+      this.showWarning = true;
+
+      setTimeout(() => {
+        this.passwordForm.get('contrasena')?.reset();
+        this.passwordForm.get('contrasenaNueva')?.reset();
+        this.showWarning = false;
+      }, 2000);
+
+      return;
+    } else {
+      if (this.passwordForm.value) {
+
+        console.log(`usuario/correo/${this.correo}`);
+
+        let info = {
+          correo: this.correo,
+          contrasena: this.passwordForm.value.contrasena,
+        };
+        
+        console.log(info);
+
+        this.gService
+          .update('usuario/correo', info)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((data: any) => {
+            this.noti.mensajeRedirect(
+              'Usuario • Actualización de Contraseña',
+              `Su contraseña ha sido actualizada con éxito.`,
+              TipoMessage.success,
+              'ajustes'
+            );
+
+            this.passwordForm.get('contrasena')?.reset();
+            this.passwordForm.get('contrasenaNueva')?.reset();
+            this.passModificada.emit();
+            this.closeModal();
+            this.router.navigate(['/ajustes/']);
+          });
+      }
+    }
   }
 }

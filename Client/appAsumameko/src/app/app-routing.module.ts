@@ -13,6 +13,8 @@ import { ReporteMenorAsistenciaComponent } from './reportes/reporte-menor-asiste
 import { ReporteConfirmacionesAsistenciaComponent } from './reportes/reporte-confirmaciones-asistencia/reporte-confirmaciones-asistencia.component';
 import { UsuarioCreateComponent } from './usuarios/usuario-create/usuario-create.component';
 import { AuthGuard } from './auth/auth.guard';
+import { RespuestaComponent } from './eventos/respuesta/respuesta.component';
+import { UsuarioAjustesComponent } from './usuarios/usuario-ajustes/usuario-ajustes.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Ruta predeterminada
@@ -50,12 +52,18 @@ const routes: Routes = [
     canActivate: [AuthGuard], data:{rol:[1,2]}
    },
   /*  { path: 'ajustes', component: AjustesComponent },*/
+
  { path: 'logout', component: LoginComponent,
   canActivate: [AuthGuard], data:{rol:[1,2]}
   },
+  
  { path: 'asamblea', component: EventoAsambleaComponent,
   canActivate: [AuthGuard], data:{rol:[1,2]}
   },
+  
+  { path: 'ajustes', component: UsuarioAjustesComponent },
+  
+  { path: 'respuesta', component: RespuestaComponent },
  
 ];
 

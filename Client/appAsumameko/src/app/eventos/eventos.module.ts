@@ -21,6 +21,9 @@ import { EventoFormComponent } from './evento-form/evento-form.component';
 import { EventoAsociadoComponent } from './evento-asociado/evento-asociado.component';
 import { EventoAsistenciaComponent } from './evento-asistencia/evento-asistencia.component';
 import { EventoAsambleaComponent } from './evento-asamblea/evento-asamblea.component';
+import { RespuestaComponent } from './respuesta/respuesta.component';
+import { heroCheckCircle} from '@ng-icons/heroicons/outline';
+
 
 @NgModule({
   declarations: [
@@ -29,13 +32,14 @@ import { EventoAsambleaComponent } from './evento-asamblea/evento-asamblea.compo
     EventoFormComponent,
     EventoAsociadoComponent,
     EventoAsistenciaComponent,
-    EventoAsambleaComponent
+    EventoAsambleaComponent,
+    RespuestaComponent
   ],
   imports: [
     CommonModule,
     UsuariosRoutingModule,
     SharedModule,
-    NgIconsModule.withIcons({ heroPlus, heroPaperAirplaneSolid }),
+    NgIconsModule.withIcons({ heroPlus, heroPaperAirplaneSolid, heroCheckCircle }),
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
