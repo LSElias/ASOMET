@@ -106,7 +106,7 @@ async function main() {
       titulo: "Prueba 5",
       descripcion:
         "Asomameco, les invita a asistir a la primera asamblea del año. Catering:  Información",
-      fecha: "2024-08-30",
+      fecha: "2024-08-10",
       hora: "17:30",
       localizacion: "Auditorio General",
     },
@@ -119,7 +119,7 @@ async function main() {
       titulo: "Prueba 6",
       descripcion:
         "Asomameco, les invita a asistir a la primera asamblea del año. Catering:  Información",
-      fecha: "2024-08-05",
+      fecha: "2024-08-25",
       hora: "17:30",
       localizacion: "Auditorio General",
     },
@@ -131,7 +131,7 @@ async function main() {
       titulo: "Prueba 7",
       descripcion:
         "Asomameco, les invita a asistir a la primera asamblea del año. Catering:  Información",
-      fecha: "2024-08-10",
+      fecha: "2024-08-28",
       hora: "17:30",
       localizacion: "Auditorio General",
     },
@@ -143,7 +143,7 @@ async function main() {
       titulo: "Prueba 8",
       descripcion:
         "Asomameco, les invita a asistir a la primera asamblea del año. Catering:  Información",
-      fecha: "2024-08-15",
+      fecha: "2024-08-30",
       hora: "17:30",
       localizacion: "Auditorio General",
     },

@@ -47,6 +47,13 @@
                 <input type="email" id="correo" placeholder="ejemplo@gmail.com" formControlName="correo"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   [attr.disabled]="!editar ? true : null" required />
+                  <mat-error *ngIf="errorHandling('correo', 'required')">
+                    El correo es <strong>requerido</strong>.
+                  </mat-error>
+                  <mat-error *ngIf="errorHandling('correo', 'email')">
+                    El correo debe tener formato de correo. Ejemplo
+                    <strong>abc126@correo.com</strong>.
+                  </mat-error>
               </div>
 
               <div class="w-full">
@@ -55,6 +62,19 @@
                   formControlName="cedula"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   [attr.disabled]="!editar ? true : null" required />
+                  <mat-error *ngIf="errorHandling('cedula', 'required')">
+                    La cédula es <strong>requerida</strong>.
+                  </mat-error>
+                  <mat-error *ngIf="errorHandling('cedula', 'pattern')">
+                    La cédula solo deberá tener digitos <strong>numéricos</strong>.
+                  </mat-error>
+                  <mat-error *ngIf="errorHandling('cedula', 'minlength')">
+                    La cédula deberá tener digitos al menos
+                    <strong>9 digitos</strong>.
+                  </mat-error>
+                  <mat-error *ngIf="errorHandling('cedula', 'maxlength')">
+                    La cédula deberá tener digitos hasta <strong>12 digitos</strong>.
+                  </mat-error>
               </div>
             </div>
 
@@ -65,6 +85,12 @@
                 <input type="text" id="nombreCompleto" placeholder="Nombre completo" formControlName="nombreCompleto"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   [attr.disabled]="!editar ? true : null" required />
+                  <mat-error *ngIf="errorHandling('nombreCompleto', 'required')">
+                    El nombre es <strong>requerido</strong>.
+                  </mat-error>
+                  <mat-error *ngIf="errorHandling('nombreCompleto', 'minlength')">
+                    El nombre debe tener al menos <strong>8 digitos</strong>.
+                  </mat-error>
               </div>
 
               <div class="w-full">
@@ -72,6 +98,20 @@
                 <input type="text" id="telefono" placeholder="62503829" formControlName="telefono"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   [attr.disabled]="!editar ? true : null" required />
+                  <mat-error *ngIf="errorHandling('telefono', 'required')">
+                    El teléfono es <strong>requerido</strong>.
+                  </mat-error>
+                  <mat-error *ngIf="errorHandling('telefono', 'pattern')">
+                    El teléfono solo deberá tener digitos <strong>numéricos</strong>.
+                  </mat-error>
+                  <mat-error *ngIf="errorHandling('telefono', 'minlength')">
+                    El teléfono deberá tener digitos al menos
+                    <strong>8 digitos</strong>.
+                  </mat-error>
+                  <mat-error *ngIf="errorHandling('telefono', 'maxlength')">
+                    El teléfono deberá tener digitos hasta
+                    <strong>12 digitos</strong>.
+                  </mat-error>
               </div>
             </div>
 
