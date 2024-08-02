@@ -9,7 +9,8 @@ import { octPerson } from '@ng-icons/octicons';
 import { lucideCalendarRange, lucideBarChart2, lucideSettings, lucideLogOut } from '@ng-icons/lucide';
 import { HeaderComponent } from './header/header.component';
 import { MessageDialogComponent } from './dialog/message-dialog.component';
-import { LogoutComponent } from './logout/logout.component'; // Importa el componente
+import { LogoutComponent } from './logout/logout.component';
+import { NotFoundComponent } from './not-found/not-found.component'; // Importa el componente
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { LogoutComponent } from './logout/logout.component'; // Importa el compo
     MenuComponent,
     HeaderComponent,
     MessageDialogComponent,
-    LogoutComponent
+    LogoutComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,

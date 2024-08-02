@@ -16,11 +16,11 @@ import { AuthGuard } from './auth/auth.guard';
 import { RespuestaComponent } from './eventos/respuesta/respuesta.component';
 import { UsuarioAjustesComponent } from './usuarios/usuario-ajustes/usuario-ajustes.component';
 import { LogoutComponent } from './shared/logout/logout.component';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Ruta predeterminada
   { path: 'login', component: LoginComponent },
-
 
   
   { path: 'usuario', component: UsuarioIndexComponent, 
@@ -64,7 +64,11 @@ const routes: Routes = [
   { path: 'ajustes', component: UsuarioAjustesComponent },
   
   { path: 'respuesta', component: RespuestaComponent },
-  { path: 'logout', component: LogoutComponent}
+  { path: 'logout', component: LogoutComponent},
+  
+  
+  { path: '**', redirectTo: '/notfound', pathMatch: 'full' }, // Ruta predeterminada
+  { path:'notfound', component: NotFoundComponent},
  
 ];
 
