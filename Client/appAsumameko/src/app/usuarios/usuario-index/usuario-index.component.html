@@ -154,7 +154,9 @@
                 <div class="flex  gap-5">
                   <button mat-mini-fab class="bt-detalle h-5 w-5" matTooltip="Ir a Detalle" aria-label="Ir a Detalle"
                     (click)="redirectDetalle(row.id)"></button>
-                  <button mat-mini-fab class="bt-editar h-5 w-5" matTooltip="Editar" aria-label="Editar"
+                  <button
+                  *ngIf="!(this.usuariologged._rol.idRol === 2 && (row.idRol === 2 || row.idRol === 1))"
+                  mat-mini-fab class="bt-editar h-5 w-5" matTooltip="Editar" aria-label="Editar"
                     (click)="update(row.id)"></button>
                   <button mat-mini-fab class="bt-desactivar h-5 w-5" matTooltip="Desactivar" aria-label="Desactivar"
                     (click)="deactivate(row.id)"></button>

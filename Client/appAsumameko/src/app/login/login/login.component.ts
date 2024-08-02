@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   /* slides = [0]; */
   private carouselInterval: any;
   errorMessage: string | null = null;
+  passwordFieldType: string = 'password';
+
 
 // FORM -->
   submitted = false;
@@ -89,7 +91,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         'Inicio de sesión',
         `Sus credenciales no son correctos. Verifiquelos y intente iniciar sesión otra vez.`,
         TipoMessage.error,
-        'Inicio Sesión'
+        '/'
       );
       return;
     }
@@ -117,7 +119,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             'Inicio de sesión',
             `Sus credenciales no son correctos. Verifiquelos y intente iniciar sesión otra vez.`,
             TipoMessage.error,
-            'dashboard'
+            '/'
           );
           return;
         });
@@ -137,6 +139,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     );*/
 }
 
+togglePasswordVisibility(): void {
+  this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+}
+
+
   // Control de Errores
   public errorHandling = (control: string, error: string) => {
     return (
@@ -145,4 +152,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       (this.makeSubmit || this.userForm.controls[control].touched)
     );
   };
+
+  
 }

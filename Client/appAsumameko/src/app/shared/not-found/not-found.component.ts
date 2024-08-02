@@ -8,16 +8,17 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./not-found.component.css']
 })
 export class NotFoundComponent {
-
+    user:any;
     constructor(public router: Router, public authservice: AuthService){
-
+      this.authservice.decodeToken.subscribe((user: any) => {
+        this.user = user;
+      });
     }
-
-
     volver() : void{
-      if(this.authservice.isAuthenticated){
-        this.authservice.logout
+      if(this.user){
+        this.router.navigate(['/dashboard'])
+      }else{
+        this.router.navigate(['/'])
       }
-      this.router.navigate(['/'])
     }
 }

@@ -8,6 +8,7 @@ import { GenericService } from 'src/app/shared/generic.service';
 import { UsuarioCreateComponent } from '../usuario-create/usuario-create.component';
 import { UsuarioDesactivarComponent } from '../usuario-desactivar/usuario-desactivar.component';
 import { UsuarioDetalleComponent } from '../usuario-detalle/usuario-detalle.component';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-usuario-index',
@@ -21,6 +22,7 @@ export class UsuarioIndexComponent implements AfterViewInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
   displayedColumns = ['id', 'cedula', 'nombre', 'correo', 'accion'];
   user = '';
+  usuariologged: any;
   filteredData: any;
   asociados = [];
   ops = [];
@@ -65,8 +67,13 @@ export class UsuarioIndexComponent implements AfterViewInit {
   constructor(
     private gService: GenericService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService : AuthService,
   ) {
+    this.authService.decodeToken.subscribe((user: any) => {
+      this.usuariologged = user;
+    });
+
     this.selectedStatus = 1;
     this.selectedRole = 1;
   }
@@ -97,6 +104,7 @@ export class UsuarioIndexComponent implements AfterViewInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: any) => {
         this.datos = response;
+        console.log(response);
         this.dataSource = new MatTableDataSource(response);
 
         if (this.sort) {

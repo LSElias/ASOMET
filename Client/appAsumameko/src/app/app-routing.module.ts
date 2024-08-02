@@ -61,13 +61,16 @@ const routes: Routes = [
   canActivate: [AuthGuard], data:{rol:[1,2]}
   },
   
-  { path: 'ajustes', component: UsuarioAjustesComponent },
+  { path: 'ajustes', component: UsuarioAjustesComponent,
+    canActivate: [AuthGuard], data:{rol:[1,2]}
+   },
   
-  { path: 'respuesta', component: RespuestaComponent },
+  { path: 'respuesta', component: RespuestaComponent},
+
   { path: 'logout', component: LogoutComponent},
   
   
-  { path: '**', redirectTo: '/notfound', pathMatch: 'full' }, // Ruta predeterminada
+  { path: '**', redirectTo: '/notfound', pathMatch: 'full' }, 
   { path:'notfound', component: NotFoundComponent},
  
 ];
