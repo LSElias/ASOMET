@@ -33,7 +33,7 @@
       <p>Eventos</p>
     </button>
   
-    <button *ngIf="this.user?._rol.idRol === 3" class="botones bg-transparent my-2 menu-item" (click)="onItemSelected({ displayName: 'Reportes', route: '/reportes' })"
+    <button *ngIf="this.user?._rol.idRol === 1" class="botones bg-transparent my-2 menu-item" (click)="onItemSelected({ displayName: 'Reportes', route: '/reportes' })"
       [ngClass]="{
         'activo': router.isActive('/reportes', true)
       }">
