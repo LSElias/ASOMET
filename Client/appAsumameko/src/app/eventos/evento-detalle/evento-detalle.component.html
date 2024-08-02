@@ -109,6 +109,8 @@
           <div>
             <button
               type="button"
+              [disabled]="isDated"
+              [class.isDate]="isDated"
               (click)="crear()"
               class="py-2.5 px-3 me-2 mb-2 text-sm h-fit flex gap-1 font-medium text-white rounded-lg bg-[#8197B1] hover:bg-[#6E749B] transition duration-200"
             >

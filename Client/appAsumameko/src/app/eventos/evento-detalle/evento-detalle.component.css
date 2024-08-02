@@ -52,6 +52,12 @@ td {
   cursor: not-allowed;
 }
 
+.isDate {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
