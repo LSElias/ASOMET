@@ -45,14 +45,16 @@ export class UserGuard {
           'Usuario',
           `Usuario sin permisos para acceder`,
           TipoMessage.warning,
-          '/'
+          'noredireccion'
         );
         this.router.navigate(['**']);
         return false;
       }
       return true;
     } else {
-      this.router.navigate(['**']);
+      if(!this.authService.isLogin){
+        this.router.navigate(['**']);
+      }
       return false;
     }
   }

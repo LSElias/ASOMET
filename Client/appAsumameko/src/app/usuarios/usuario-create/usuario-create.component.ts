@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 import { GenericService } from 'src/app/shared/generic.service';
 import {
   NotificacionService,
@@ -39,25 +40,20 @@ export class UsuarioCreateComponent {
   // Flags de creación/actualización
   isCreate: boolean = true;
   titleForm: string = 'Creación';
+  user:any;
 
-  roles = [
-    {
-      id: 2,
-      name: 'Operario',
-    },
-    {
-      id: 3,
-      name: 'Asociado',
-    },
-  ];
+
 
   constructor(
     public fb: FormBuilder,
     private router: Router,
     private gService: GenericService,
-    //   private authService: AuthenticationService,
+    private authService: AuthService,
     private noti: NotificacionService
   ) {
+    this.authService.decodeToken.subscribe((user: any) => {
+      this.user = user;
+    });
     this.reactiveForm();
   }
 

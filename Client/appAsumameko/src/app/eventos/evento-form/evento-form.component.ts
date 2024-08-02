@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 import { GenericService } from 'src/app/shared/generic.service';
 import {
   NotificacionService,
@@ -25,16 +26,23 @@ export class EventoFormComponent {
   @Output() eventoCreado: EventEmitter<void> = new EventEmitter<void>();
   makeSubmit: boolean = false;
   submitted = false;
-
+  currentcreator : any;
+  
   constructor(
     public fb: FormBuilder,
     private router: Router,
     private gService: GenericService,
-    private noti: NotificacionService
+    private noti: NotificacionService,
+    private authservice: AuthService
   ) {
+
+    this.authservice.decodeToken.subscribe((user: any) => {
+      this.currentcreator = user;
+    });
+
     this.eventForm = this.fb.group({
       idEvento: [null, null],
-      idCreador: [30, Validators.required],
+      idCreador: [this.currentcreator._id, Validators.required],
       titulo: [
         '',
         Validators.compose([Validators.required, Validators.minLength(5)]),
