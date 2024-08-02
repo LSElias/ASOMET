@@ -94,10 +94,15 @@
       </div>
       <div class="mb-5">
         <label for="contrasena" class="text-[#dedede] laptop:text-[#666666] block mb-2 text-xs font-medium">Contraseña</label>
-        <input type="password" id="contrasena" placeholder="**********" name="contrasena"
-         formControlName="contrasena"
-          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          placeholder="********" required />
+        <div class="relative">
+          <input [type]="passwordFieldType" id="contrasena" placeholder="********" name="contrasena"
+            formControlName="contrasena"
+            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pr-10"
+            required />
+          <button type="button" class="absolute inset-y-0 right-0 flex items-center px-2 pr-3" (click)="togglePasswordVisibility()">
+            <i class="fas" style="color:#8a9196" [ngClass]="passwordFieldType === 'password' ? 'fa-eye' : 'fa-eye-slash'"></i>
+          </button>
+        </div>
           <mat-error *ngIf="errorHandling('contrasena', 'required')">
             La contraseña es <strong>requerida</strong>.
           </mat-error>

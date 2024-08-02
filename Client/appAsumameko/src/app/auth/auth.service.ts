@@ -24,7 +24,7 @@ export class AuthService {
   private usuario = new BehaviorSubject<any>(null);
   private tokenUserSubject = new BehaviorSubject<any>(null);
   private authenticated = new BehaviorSubject<boolean>(false);
-
+  public isLogin = false;
   public currentUser: Observable<any>;
 
   constructor(private http: HttpClient) {
@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   login(formData: any): Observable<any> {
-
+    this.isLogin = true;
     var email = formData.correo;
     var password = formData.contrasena;
    // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -52,6 +52,7 @@ export class AuthService {
           this.tokenUserSubject.next(response.token)
        /*   this.userSubject.next(response.user);*/
           let userData = this.decodeToken;
+          
           return userData;
       })),
         catchError(this.handleError)
@@ -60,14 +61,17 @@ export class AuthService {
   }
 
  setToken(token: any) {
+    this.isLogin = false;
     localStorage.setItem('token', token);
   }
 
   public get getToken(): any {
+    this.isLogin = false;
     return this.tokenUserSubject.value;
   }
 
   get decodeToken(): any {
+    this.isLogin = false;
     this.usuario.next(null);
     if (this.getToken != null ) {
       this.usuario.next(jwtDecode(this.getToken))
@@ -78,6 +82,7 @@ export class AuthService {
 
 
   get isAuthenticated() {
+    this.isLogin = false;
     if (this.getToken != null) {
       this.authenticated.next(true);
     } else {
@@ -87,12 +92,12 @@ export class AuthService {
   }
 
   logout() {
+    this.isLogin = false;
     let usuario = this.tokenUserSubject.value;
     if (usuario) {
-      localStorage.removeItem('currentUser');
+      localStorage.removeItem('token');
       this.tokenUserSubject.next(null);
       this.authenticated.next(false);
-      //Eliminar carrito
       return true;
     }
     return false;

@@ -9,12 +9,52 @@
 
   <!-- Inicio Botones -->
   <div class="my-10">
-    <button *ngFor="let item of navItems" class="botones bg-transparent my-2 menu-item" (click)="onItemSelected(item)"
+    <button class="botones bg-transparent my-2 menu-item" (click)="onItemSelected({ displayName: 'Dashboard', route: '/dashboard' })"
       [ngClass]="{
-        'activo': router.isActive(item.route, true)
+        'activo': router.isActive('/dashboard', true)
       }">
-      <img class="icono" [src]="item.iconPath" [alt]="item.displayName" />
-      <p>{{ item.displayName }}</p>
+      <img class="icono" src="../../../assets/images/dashIcon.png" alt="Dashboard" *ngIf="authService.isAuthenticated" />
+      <p>Dashboard</p>
+    </button>
+  
+    <button class="botones bg-transparent my-2 menu-item" (click)="onItemSelected({ displayName: 'Usuarios', route: '/usuario' })"
+      [ngClass]="{
+        'activo': router.isActive('/usuario', true)
+      }">
+      <img class="icono" src="../../../assets/images/userDashIcon.png" alt="Usuarios" *ngIf="authService.isAuthenticated" />
+      <p>Usuarios</p>
+    </button>
+  
+    <button class="botones bg-transparent my-2 menu-item" (click)="onItemSelected({ displayName: 'Eventos', route: '/eventos' })"
+      [ngClass]="{
+        'activo': router.isActive('/eventos', true)
+      }">
+      <img class="icono" src="../../../assets/images/calendarDashIcon.png" alt="Eventos" *ngIf="authService.isAuthenticated" />
+      <p>Eventos</p>
+    </button>
+  
+    <button *ngIf="this.user?._rol.idRol === 1" class="botones bg-transparent my-2 menu-item" (click)="onItemSelected({ displayName: 'Reportes', route: '/reportes' })"
+      [ngClass]="{
+        'activo': router.isActive('/reportes', true)
+      }">
+      <img class="icono" src="../../../assets/images/reportDashIcon.png" alt="Reportes" />
+      <p>Reportes</p>
+    </button>
+  
+    <button class="botones bg-transparent my-2 menu-item" (click)="onItemSelected({ displayName: 'Ajustes', route: '/ajustes' })"
+      [ngClass]="{
+        'activo': router.isActive('/ajustes', true)
+      }">
+      <img class="icono" src="../../../assets/images/settingsDashIcon.png" alt="Ajustes" *ngIf="authService.isAuthenticated" />
+      <p>Ajustes</p>
+    </button>
+  
+    <button class="botones bg-transparent my-2 menu-item" (click)="onItemSelected({ displayName: 'Cerrar Sesión', route: '/logout' })"
+      [ngClass]="{
+        'activo': router.isActive('/logout', true)
+      }">
+      <img class="icono" src="../../../assets/images/signOutDashIcon.png" alt="Cerrar Sesión" *ngIf="authService.isAuthenticated" />
+      <p>Cerrar Sesión</p>
     </button>
   </div>
   <!-- FIN Botones -->

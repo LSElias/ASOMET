@@ -126,7 +126,7 @@ export class UsuarioAjustesComponent implements OnInit{
       this.userForm.get(key)?.disable();
     });
 
-    this.authService.user$.subscribe(user => {
+    this.authService.decodeToken.subscribe((user:any) => {
       this.user = user; 
     });
 
