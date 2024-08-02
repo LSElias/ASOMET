@@ -89,10 +89,9 @@ export class AuthService {
   logout() {
     let usuario = this.tokenUserSubject.value;
     if (usuario) {
-      localStorage.removeItem('currentUser');
+      localStorage.removeItem('token');
       this.tokenUserSubject.next(null);
       this.authenticated.next(false);
-      //Eliminar carrito
       return true;
     }
     return false;

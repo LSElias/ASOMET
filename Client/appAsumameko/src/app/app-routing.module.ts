@@ -15,10 +15,14 @@ import { UsuarioCreateComponent } from './usuarios/usuario-create/usuario-create
 import { AuthGuard } from './auth/auth.guard';
 import { RespuestaComponent } from './eventos/respuesta/respuesta.component';
 import { UsuarioAjustesComponent } from './usuarios/usuario-ajustes/usuario-ajustes.component';
+import { LogoutComponent } from './shared/logout/logout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Ruta predeterminada
   { path: 'login', component: LoginComponent },
+
+
+  
   { path: 'usuario', component: UsuarioIndexComponent, 
     canActivate: [AuthGuard], data:{rol:[1,2]}
   },
@@ -52,10 +56,6 @@ const routes: Routes = [
     canActivate: [AuthGuard], data:{rol:[1,2]}
    },
   /*  { path: 'ajustes', component: AjustesComponent },*/
-
- { path: 'logout', component: LoginComponent,
-  canActivate: [AuthGuard], data:{rol:[1,2]}
-  },
   
  { path: 'asamblea', component: EventoAsambleaComponent,
   canActivate: [AuthGuard], data:{rol:[1,2]}
@@ -64,6 +64,7 @@ const routes: Routes = [
   { path: 'ajustes', component: UsuarioAjustesComponent },
   
   { path: 'respuesta', component: RespuestaComponent },
+  { path: 'logout', component: LogoutComponent}
  
 ];
 
