@@ -227,7 +227,7 @@ module.exports.create = async (request, response, next) => {
         cedula: infoUsuario.cedula,
         nombreCompleto: infoUsuario.nombreCompleto,
         correo: infoUsuario.correo,
-        contrasena: hash,
+        contrasena: infoUsuario.contrasena,
         telefono: infoUsuario.telefono,
       },
     });
@@ -332,7 +332,7 @@ module.exports.createEnAsistencia = async (request, response, next) => {
         cedula: infoUsuario.cedula,
         nombreCompleto: infoUsuario.nombreCompleto,
         correo: infoUsuario.correo,
-        contrasena: hash,
+        contrasena:infoUsuario.contrasena,
         telefono: infoUsuario.telefono,
       },
     });
@@ -353,6 +353,33 @@ module.exports.createEnAsistencia = async (request, response, next) => {
           contEnvios: 0,
         },
       });
+
+      const fechaActual = new Date().toISOString().split("T")[0];
+
+      const vigentes = await prisma.evento.findMany({
+        where: {
+          fecha: {
+            gt: fechaActual,
+          },
+        },
+        orderBy: {
+          fecha: "asc",
+        },
+      });
+
+      if (vigentes[0]) {
+        const asistencias = vigentes.map((e) => ({
+          idEvento: e.idEvento,
+          idAsociado: newUsuario.idUsuario,
+          idEstadoConfir: 4,
+          idAsistencia: 3,
+          contEnvios: 0,
+        }));
+
+        await prisma.asistencia.createMany({
+          data: asistencias,
+        }); 
+      }
 
       const mailInfo = {
         body: {
