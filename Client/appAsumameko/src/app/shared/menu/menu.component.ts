@@ -17,7 +17,6 @@ export class MenuComponent {
   constructor(public router: Router, public authService: AuthService) {
     this.authService.decodeToken.subscribe((user: any) => {
       this.user = user;
-      console.log(user);
     });
   }
 

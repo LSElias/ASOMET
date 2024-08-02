@@ -144,10 +144,8 @@ export class UsuarioAjustesComponent implements OnInit{
     .subscribe((response: any) => {
       this.datos = response;
 
-      console.log(response);
 
       this.idUser = this.datos.correo; 
-      //console.log(this.idUser);
       
       this.userForm.setValue({
         idUsuario: this.datos.id,
@@ -183,7 +181,6 @@ export class UsuarioAjustesComponent implements OnInit{
     });
   }
   onSubmit() {
-    console.log(this.userForm.value);
 
     this.submitted = true;
 

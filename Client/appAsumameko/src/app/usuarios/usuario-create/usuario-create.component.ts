@@ -156,7 +156,6 @@ export class UsuarioCreateComponent {
   onSubmit() {
     this.submitted = true;
 
-    console.log(this.userForm.value);
 
     const formData = this.userForm.value;
 
@@ -187,7 +186,6 @@ export class UsuarioCreateComponent {
               TipoMessage.success,
               'usuario'
             );
-            console.log(data);
             this.usuarioCreado.emit();
             this.router.navigate(['usuario/']);
           });

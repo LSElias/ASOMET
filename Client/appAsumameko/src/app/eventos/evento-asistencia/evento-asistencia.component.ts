@@ -33,7 +33,6 @@ export class EventoAsistenciaComponent {
       this.idUsuario = id;
       this.nombreCompleto = nombre; 
       this.isVisible = true;
-      console.log(this.idUsuario);
     }
   
     // Método para cerrar el modal
@@ -44,8 +43,6 @@ export class EventoAsistenciaComponent {
     onConfirmarAsistencia(){
       const info = { eventId: this.idEvento, asociadoId: this.idUsuario, asistenciaId: 1 }
       
-      console.log(info); 
-
       this.gService
       .update('eventos/asistencia', info)
       .pipe(takeUntil(this.destroy$))
@@ -67,8 +64,6 @@ export class EventoAsistenciaComponent {
 
     onAusenciaAsistencia(){
       const info = { eventId: this.idEvento, asociadoId: this.idUsuario, asistenciaId: 2 }
-      
-      console.log(info); 
 
       this.gService
       .update('eventos/asistencia', info)

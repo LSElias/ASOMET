@@ -41,7 +41,6 @@ export class UsuarioDesactivarComponent {
   openModal(id: any) {
     this.idUser = id;
     this.isVisible = true;
-    console.log(this.idUser);
     this.loadUser(this.idUser);
   }
 
@@ -53,7 +52,6 @@ export class UsuarioDesactivarComponent {
   // Método para manejar el envío del formulario
   onSubmit() {
     if (this.userForm.value) {
-      console.log(`usuario/idUser/${this.idUser}`);
 
       this.gService
         .update(`usuario/idUser`, this.userForm.value)
@@ -84,7 +82,6 @@ export class UsuarioDesactivarComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
         this.userData = data;
-        console.log(this.userData);
         let idEstUsuario = this.userData.idEstUsuario === 1 ? 2 : 1;
         this.userForm.setValue({
           id: this.userData.id,

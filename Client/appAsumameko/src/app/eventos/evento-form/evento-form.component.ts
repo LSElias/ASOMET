@@ -81,7 +81,6 @@ export class EventoFormComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
         this.eventoData = data;
-        console.log(this.eventoData);
         this.eventForm.setValue({
           idEvento: this.eventoData.idEvento,
           idCreador: this.eventoData.idCreador,
@@ -105,7 +104,6 @@ export class EventoFormComponent {
   onSubmit() {
     this.submitted = true;
 
-    console.log(this.eventForm.value);
     if (this.eventForm.invalid) {
       this.noti.mensajeRedirect(
         'Eventos • Creación de evento',
