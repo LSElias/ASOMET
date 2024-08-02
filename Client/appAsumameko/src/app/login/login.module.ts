@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router'; 
 import { LoginComponent } from './login/login.component'; 
 import { LoginRoutingModule } from './login-routing.module';  
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -12,7 +16,12 @@ import { FormsModule } from '@angular/forms';
     CommonModule, 
     RouterModule,  
     LoginRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
   ],
   exports: [LoginComponent] 
 })

@@ -12,12 +12,12 @@ export class DashboardIndexComponent implements OnInit {
   constructor(private authService: AuthService,private router: Router) {}
 
   ngOnInit(): void {
-    this.authService.user$.subscribe(user => {
-      this.user = user; 
+    this.authService.decodeToken.subscribe((usuario: any) => {
+      this.user = usuario; 
     });
 
     if (!this.user) {
-      const token = this.authService.getToken();
+      const token = this.authService.getToken;
     }
   }
   logout(): void {

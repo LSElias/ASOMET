@@ -16,48 +16,59 @@ import { AuthGuard } from './auth/auth.guard';
 import { RespuestaComponent } from './eventos/respuesta/respuesta.component';
 import { UsuarioAjustesComponent } from './usuarios/usuario-ajustes/usuario-ajustes.component';
 
-/* const routes: Routes = [
-  {
-    path: '',
-    component: LoginComponent,
-  },
-  {
-    path: 'ee',
-    component: MenuComponent,
-  },
-]; */
-
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Ruta predeterminada
   { path: 'login', component: LoginComponent },
-  { path: 'usuario', component: UsuarioIndexComponent },
-  { path: 'usuario/create', component: UsuarioCreateComponent },
-  { path: 'dashboard', component: DashboardIndexComponent,canActivate: [AuthGuard] },
-  { path: 'eventos', component: EventoIndexComponent },
-  { path: 'reportes', component: IndexComponent },
+  { path: 'usuario', component: UsuarioIndexComponent, 
+    canActivate: [AuthGuard], data:{rol:[1,2]}
+  },
+  { path: 'usuario/create', component: UsuarioCreateComponent, 
+    canActivate: [AuthGuard], data:{rol:[1,2]}
+  },
+  { path: 'dashboard', component: DashboardIndexComponent,
+    canActivate: [AuthGuard], data:{rol:[1,2]} },
+  { path: 'eventos', component: EventoIndexComponent,
+    canActivate: [AuthGuard], data:{rol:[1,2]} },
+  { path: 'reportes', component: IndexComponent,
+    canActivate: [AuthGuard], data:{rol:[1]}
+   },
   {
     path: 'reportes/mayor-asistencia',
     component: ReporteMayorAsistenciaComponent,
+    canActivate: [AuthGuard], data:{rol:[1]}
   },
   {
     path: 'reportes/menor-asistencia',
     component: ReporteMenorAsistenciaComponent,
+    canActivate: [AuthGuard], data:{rol:[1]}
   },
   {
     path: 'reportes/confirmaciones-asistencia',
     component: ReporteConfirmacionesAsistenciaComponent,
+    canActivate: [AuthGuard], data:{rol:[1]}
   },
 
-  { path: 'eventos/:id', component: EventoDetalleComponent },
+  { path: 'eventos/:id', component: EventoDetalleComponent,
+    canActivate: [AuthGuard], data:{rol:[1,2]}
+   },
   /*  { path: 'ajustes', component: AjustesComponent },*/
- { path: 'logout', component: LoginComponent },
- { path: 'asamblea', component: EventoAsambleaComponent },
- { path: 'respuesta', component: RespuestaComponent },
- { path: 'ajustes', component: UsuarioAjustesComponent },
+
+ { path: 'logout', component: LoginComponent,
+  canActivate: [AuthGuard], data:{rol:[1,2]}
+  },
+  
+ { path: 'asamblea', component: EventoAsambleaComponent,
+  canActivate: [AuthGuard], data:{rol:[1,2]}
+  },
+  
+  { path: 'ajustes', component: UsuarioAjustesComponent },
+  
+  { path: 'respuesta', component: RespuestaComponent },
+ 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -43,11 +43,11 @@ module.exports.login = async (req, res) => {
     }
 
     // Generar el JWT
-    const token = await generarJWT(user.idUsuario);
+    const token = await generarJWT(user.idUsuario, user.correo, user.nombreCompleto, user.rol);
 
     if (token) {
       return res.status(200).json({
-        user: { id: user.idUsuario, email: user.correo, nombreCompleto: user.nombreCompleto,  rol: user.rol.nombre },
+        user: { id: user.idUsuario, email: user.correo, nombreCompleto: user.nombreCompleto,  rol: user.rol },
         token: token,
       });
     }
