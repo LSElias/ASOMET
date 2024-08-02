@@ -76,6 +76,10 @@ export class UsuarioAjustesComponent implements OnInit{
     private noti: NotificacionService
   ) {
     this.reactiveForm();
+    const nav = this.router.getCurrentNavigation(); 
+    if(nav?.extras?.state) {
+      this.user = nav.extras.state['user']; 
+    }
   }
 
   reactiveForm() {
@@ -126,20 +130,12 @@ export class UsuarioAjustesComponent implements OnInit{
       this.userForm.get(key)?.disable();
     });
 
-    this.authService.decodeToken.subscribe((user:any) => {
-      this.user = user; 
-    });
-
-    if(!this.user){
-      const token = this.authService.getToken(); 
-    }
-
     this.fetch(); 
   }
 
   fetch(){
     this.gService
-    .get('usuario/IdU', this.user.id)
+    .get('usuario/IdU', this.user._id)
     .pipe(takeUntil(this.destroy$))
     .subscribe((response: any) => {
       this.datos = response;

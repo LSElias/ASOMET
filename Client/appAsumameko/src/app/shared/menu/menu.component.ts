@@ -22,6 +22,6 @@ export class MenuComponent {
 
   // Método para manejar la navegación cuando se selecciona un elemento
   onItemSelected(item: any) {
-    this.router.navigate([item.route]);
+    this.router.navigate([item.route], {state: {user: this.user}});
   }
 }

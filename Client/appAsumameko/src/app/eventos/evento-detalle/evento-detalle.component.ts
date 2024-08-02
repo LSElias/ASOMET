@@ -23,6 +23,7 @@ export class EventoDetalleComponent implements AfterViewInit{
   eventId: number | null = null;
   datos: any;
   isDisabled: boolean = false; 
+  isDated: boolean = false; 
   destroy$: Subject<boolean> = new Subject<boolean>();
   displayedColumns = [
     'cedula',
@@ -95,6 +96,7 @@ export class EventoDetalleComponent implements AfterViewInit{
         this.disableButton();
         this.disableButton_UpdateAsistencia(); 
         this.isDisabled = this.disableButton_General(); 
+        this.isDated = this.disableButton_AsignarAsociado(); 
         this.dataSource = new MatTableDataSource(response.asistencia);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
@@ -102,33 +104,51 @@ export class EventoDetalleComponent implements AfterViewInit{
   }
 
   disableButton() {
-    if (this.datos && this.datos.asistencia) {
-      this.datos.asistencia.forEach((i: any) => {
-        if (
-          i.contador >= 3 ||
-          i.estadoConfirmacion.idEstadoConfir === 1 ||
-          i.estadoConfirmacion.idEstadoConfir === 2
-        ) {
-          i.desactivado = true;
+    if (this.datos && this.datos.asistencia && this.datos.fecha) {
+
+        const currentDate = new Date(); 
+        const datosDate = new Date(this.datos.fecha); 
+  
+        if(datosDate > currentDate) {
+          this.datos.asistencia.forEach((i: any) => {
+            if (
+              i.contador >= 3 ||
+              i.estadoConfirmacion.idEstadoConfir === 1 ||
+              i.estadoConfirmacion.idEstadoConfir === 2
+            ) {
+              i.desactivado = true;
+            }
+            else{
+              i.desactivado = false; 
+            }
+          });
+        } else {
+          this.datos.asistencia.forEach((i: any) => {
+            i.desactivado = true; 
+          });
         }
-        else{
-          i.desactivado = false; 
-        }
-      });
+
     }
   }
 
   disableButton_General(): boolean {
-    if (this.datos && this.datos.asistencia) {
-      for (let i of this.datos.asistencia) {
-        if (
-          i.contador < 3 &&
-          i.estadoConfirmacion.idEstadoConfir !== 1 &&
-          i.estadoConfirmacion.idEstadoConfir !== 2
-        ) {
-          return false;
+    if (this.datos && this.datos.asistencia && this.datos.fecha) {
+    
+      const currentDate = new Date(); 
+      const datosDate = new Date(this.datos.fecha); 
+
+      if(datosDate > currentDate) {
+        for (let i of this.datos.asistencia) {
+          if (
+            i.contador < 3 &&
+            i.estadoConfirmacion.idEstadoConfir !== 1 &&
+            i.estadoConfirmacion.idEstadoConfir !== 2
+          ) {
+            return false;
+          }
         }
       }
+
       return true;
     }
     return true;
@@ -151,6 +171,18 @@ export class EventoDetalleComponent implements AfterViewInit{
     }
   }
 
+  disableButton_AsignarAsociado(): boolean {
+
+    if (this.datos && this.datos.fecha) {
+      const currentDate = new Date(); 
+      const datosDate = new Date(this.datos.fecha); 
+
+      if(datosDate < currentDate) {
+        return true; 
+      }
+    }
+    return false; 
+  }
 
   nombreChange(event: any) {
     const nombre = event.target.value.toLowerCase();
