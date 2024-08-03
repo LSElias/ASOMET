@@ -41,11 +41,10 @@ export class UserGuard {
         route.data['rol'].length &&
         !route.data['rol'].includes(userRole)
       ) {
-        this.noti.mensajeRedirect(
+        this.noti.mensaje(
           'Usuario',
           `Usuario sin permisos para acceder`,
           TipoMessage.warning,
-          'noredireccion'
         );
         this.router.navigate(['**']);
         return false;

@@ -98,11 +98,10 @@ export class CambiarPassComponent implements OnInit {
           .update('usuario/correo', info)
           .pipe(takeUntil(this.destroy$))
           .subscribe((data: any) => {
-            this.noti.mensajeRedirect(
+            this.noti.mensaje(
               'Nueva contraseña establecida',
               `Su contraseña ha sido actualizada con éxito.`,
-              TipoMessage.success,
-              ''
+              TipoMessage.success
             );
 
             this.passwordForm.get('contrasena')?.reset();

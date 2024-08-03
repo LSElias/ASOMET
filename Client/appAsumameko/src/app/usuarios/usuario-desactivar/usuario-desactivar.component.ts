@@ -59,11 +59,10 @@ export class UsuarioDesactivarComponent {
         .subscribe(
           (data: any) => {
             this.respuesta = data;
-            this.noti.mensajeRedirect(
+            this.noti.mensaje(
               'Usuarios • Modificación de estado',
               `Usuario: ${data.nombreCompleto} ha sido actualizado exitosamente.`,
-              TipoMessage.success,
-              'usuario'
+              TipoMessage.success
             );
             /* this.usuarioModificado.emit(); */
             this.usuarioModificado.emit(this.userForm.value.idEstUsuario);
