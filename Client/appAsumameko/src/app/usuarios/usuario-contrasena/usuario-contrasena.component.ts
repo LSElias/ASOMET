@@ -114,11 +114,10 @@ export class UsuarioContrasenaComponent {
           .update('usuario/correo', info)
           .pipe(takeUntil(this.destroy$))
           .subscribe((data: any) => {
-            this.noti.mensajeRedirect(
+            this.noti.mensaje(
               'Usuario • Actualización de Contraseña',
               `Su contraseña ha sido actualizada con éxito.`,
-              TipoMessage.success,
-              'ajustes'
+              TipoMessage.success
             );
 
             this.passwordForm.get('contrasena')?.reset();

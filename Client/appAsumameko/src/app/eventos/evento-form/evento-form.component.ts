@@ -104,11 +104,10 @@ export class EventoFormComponent {
     this.submitted = true;
 
     if (this.eventForm.invalid) {
-      this.noti.mensajeRedirect(
+      this.noti.mensaje(
         'Eventos • Creación de evento',
         `Datos incorrectos, revise haber introducido bien la información.`,
-        TipoMessage.success,
-        'evento'
+        TipoMessage.success
       );
       return;
     }
@@ -120,11 +119,10 @@ export class EventoFormComponent {
           .pipe(takeUntil(this.destroy$))
           .subscribe((data: any) => {
             this.respuesta = data;
-            this.noti.mensajeRedirect(
+            this.noti.mensaje(
               'Eventos • Creación de evento',
               `Evento: ${data.titulo} ha sido creado con exito.`,
-              TipoMessage.success,
-              'evento'
+              TipoMessage.success
             );
             /* this.router.navigate(['/eventos/']); */
             this.eventoCreado.emit();
@@ -137,11 +135,10 @@ export class EventoFormComponent {
         .subscribe((data: any) => {
           //Obtener respuesta
           this.respuesta = data;
-          this.noti.mensajeRedirect(
+          this.noti.mensaje(
             'Usuarios • Actualización de Evento',
             `Usuario: ${data.titulo} ha sido actualizado con éxito.`,
             TipoMessage.success,
-            'usuarios'
           );
           this.router.navigate(['/eventos/']);
           this.eventoCreado.emit();

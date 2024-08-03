@@ -248,11 +248,10 @@ export class EventoDetalleComponent implements AfterViewInit{
       this.datos = response;
       this.updateTable(this.datos);
       this.fetch();
-      this.noti.mensajeRedirect(
+      this.noti.mensaje(
         'Correo Enviado Exitosamente',
         `Invitación enviada`,
-        TipoMessage.success,
-        'Correo Enviado'
+        TipoMessage.success
       );
     });
 
