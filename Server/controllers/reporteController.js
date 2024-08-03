@@ -31,7 +31,7 @@ module.exports.getAsistenciaByEvento = async (request, response, next) => {
 module.exports.getAsistenciaSiguienteEvento = async (request, response, next) => {
   try {
     const result = await prisma.$queryRaw(
-      Prisma.sql`SELECT e.titulo, e.fecha, (SELECT COUNT(*) FROM asistencia a WHERE a.idEstadoConfir = 1 AND a.idEvento = e.idEvento) AS Confirmacion, (SELECT COUNT(*) FROM asistencia a WHERE a.idEstadoConfir = 2 AND a.idEvento = e.idEvento) AS Rechazado, (SELECT COUNT(*) FROM asistencia a WHERE a.idEstadoConfir = 3 AND a.idEvento = e.idEvento) AS Pendiente FROM evento e WHERE e.fecha >=  CURDATE() ORDER BY e.fecha ASC LIMIT 1`
+      Prisma.sql`SELECT e.idEvento, e.titulo, e.fecha, e.localizacion, (SELECT COUNT(*) FROM asistencia a WHERE a.idEstadoConfir = 1 AND a.idEvento = e.idEvento) AS Confirmacion, (SELECT COUNT(*) FROM asistencia a WHERE a.idEstadoConfir = 2 AND a.idEvento = e.idEvento) AS Rechazado, (SELECT COUNT(*) FROM asistencia a WHERE a.idEstadoConfir = 3 AND a.idEvento = e.idEvento) AS Pendiente FROM evento e WHERE e.fecha >=  CURDATE() ORDER BY e.fecha ASC LIMIT 1`
     )
   
     //Modificar tipo Fecha --> Int to String

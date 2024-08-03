@@ -58,7 +58,6 @@ export class EventoAsociadoComponent {
   reactiveForm() {
     this.asociadoForm = this.fb.group({
       idUsuario: [null, null],
-      idRol: [null, Validators.required],
       idEstUsuario: [1],
       cedula: [
         '',
@@ -122,7 +121,7 @@ export class EventoAsociadoComponent {
     const formData = this.asociadoForm.value;
 
     formData.id = parseInt(this.idUser, 10);
-    formData.idRol = parseInt(formData.idRol, 10);
+    formData.idRol = 3;
     formData.cedula = parseInt(formData.cedula, 10);
     formData.telefono = parseInt(formData.telefono, 10);
 
