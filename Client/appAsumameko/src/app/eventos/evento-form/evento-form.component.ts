@@ -26,8 +26,8 @@ export class EventoFormComponent {
   @Output() eventoCreado: EventEmitter<void> = new EventEmitter<void>();
   makeSubmit: boolean = false;
   submitted = false;
-  currentcreator : any;
-  
+  currentcreator: any;
+
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -35,7 +35,6 @@ export class EventoFormComponent {
     private noti: NotificacionService,
     private authservice: AuthService
   ) {
-
     this.authservice.decodeToken.subscribe((user: any) => {
       this.currentcreator = user;
     });
@@ -127,7 +126,7 @@ export class EventoFormComponent {
               TipoMessage.success,
               'evento'
             );
-            this.router.navigate(['/eventos/']);
+            /* this.router.navigate(['/eventos/']); */
             this.eventoCreado.emit();
           });
       }

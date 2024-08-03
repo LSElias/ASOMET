@@ -23,3 +23,25 @@
   top: 3.5px;
   position: relative;
 }
+
+.imgConfirmaciones {
+  background-image: url("../../../assets/images/confirmDashChart.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.imgPendiente {
+  background-image: url("../../../assets/images/pendingDashChart.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.imgRechados {
+  background-image: url("../../../assets/images/rejectedDashChart.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+div > h3.text-sm + span.text-xs {
+  max-width: 180px;
+  display: block;
+}
