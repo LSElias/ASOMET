@@ -103,14 +103,11 @@ export class LoginComponent implements OnInit, OnDestroy {
           .subscribe(
             (data: any) => {
 
-            console.log(data);
-           // this.authService.setToken(data.token);
             this.respuesta = data;
-            this.noti.mensajeRedirect(
+            this.noti.mensaje(
               'Inicio de Sesión',
               `Se ha logrado iniciar sesión con éxito.`,
-              TipoMessage.success,
-              'dashboard'
+              TipoMessage.success
             );
             this.router.navigate(['/dashboard/']);
           },
