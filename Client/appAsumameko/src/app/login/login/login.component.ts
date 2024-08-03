@@ -108,7 +108,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.respuesta = data;
             this.noti.mensajeRedirect(
               'Inicio de Sesión',
-              `Se ha logrado iniciar seisón con éxito.`,
+              `Se ha logrado iniciar sesión con éxito.`,
               TipoMessage.success,
               'dashboard'
             );

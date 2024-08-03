@@ -216,10 +216,10 @@ module.exports.create = async (request, response, next) => {
   try {
     const infoUsuario = request.body;
 
-/*     let salt = bcrypt.genSaltSync(10);
+    let salt = bcrypt.genSaltSync(10);
 
     let hash = bcrypt.hashSync(infoUsuario.contrasena, salt);
- */
+
     const newUsuario = await prisma.usuario.create({
       data: {
         idRol: infoUsuario.idRol,
@@ -227,82 +227,86 @@ module.exports.create = async (request, response, next) => {
         cedula: infoUsuario.cedula,
         nombreCompleto: infoUsuario.nombreCompleto,
         correo: infoUsuario.correo,
-        contrasena: infoUsuario.contrasena,
+        contrasena: hash,
         telefono: infoUsuario.telefono,
       },
     });
 
-    if (infoUsuario.enviarInv === "true") {
-      const fechaActual = new Date().toISOString().split("T")[0];
+    if (infoUsuario.idRol === 3) {
+      if (infoUsuario.enviarInv === "true") {
+        const fechaActual = new Date().toISOString().split("T")[0];
 
-      const eventosVigentes = await prisma.evento.findMany({
-        where: {
-          fecha: {
-            gt: fechaActual,
+        const eventosVigentes = await prisma.evento.findMany({
+          where: {
+            fecha: {
+              gt: fechaActual,
+            },
           },
-        },
-        orderBy: {
-          fecha: "asc",
-        },
-        take: 1,
-      });
+          orderBy: {
+            fecha: "asc",
+          },
+          take: 1,
+        });
 
-      if (eventosVigentes[0]) {
-        await prisma.asistencia.create({
-          data: {
-            idEvento: eventosVigentes[0].idEvento,
-            idAsociado: newUsuario.idUsuario,
-            idEstadoConfir: 3,
-            idAsistencia: 3,
-            contEnvios: 0,
+        if (eventosVigentes[0]) {
+          await prisma.asistencia.create({
+            data: {
+              idEvento: eventosVigentes[0].idEvento,
+              idAsociado: newUsuario.idUsuario,
+              idEstadoConfir: 3,
+              idAsistencia: 3,
+              contEnvios: 0,
+            },
+          });
+
+          const mailInfo = {
+            body: {
+              eventId: eventosVigentes[0].idEvento,
+              selectedEmails: [newUsuario.correo],
+            },
+          };
+          const mailResponse = {
+            status: (code) => ({
+              json: (message) =>
+                console.log(
+                  `Mail Response Status: ${code}, Message: ${message}`
+                ),
+            }),
+          };
+
+          await mailController.sendEventNotification(
+            mailInfo,
+            mailResponse,
+            next
+          );
+        }
+      } else {
+        const fechaActual = new Date().toISOString().split("T")[0];
+
+        const eventosVigentes = await prisma.evento.findMany({
+          where: {
+            fecha: {
+              gt: fechaActual,
+            },
+          },
+          orderBy: {
+            fecha: "asc",
           },
         });
 
-        const mailInfo = {
-          body: {
-            eventId: eventosVigentes[0].idEvento,
-            selectedEmails: [newUsuario.correo],
-          },
-        };
-        const mailResponse = {
-          status: (code) => ({
-            json: (message) =>
-              console.log(`Mail Response Status: ${code}, Message: ${message}`),
-          }),
-        };
+        if (eventosVigentes[0]) {
+          const asistencias = eventosVigentes.map((e) => ({
+            idEvento: e.idEvento,
+            idAsociado: newUsuario.idUsuario,
+            idEstadoConfir: 4,
+            idAsistencia: 3,
+            contEnvios: 0,
+          }));
 
-        await mailController.sendEventNotification(
-          mailInfo,
-          mailResponse,
-          next
-        );
-      }
-    } else {
-      const fechaActual = new Date().toISOString().split("T")[0];
-
-      const eventosVigentes = await prisma.evento.findMany({
-        where: {
-          fecha: {
-            gt: fechaActual,
-          },
-        },
-        orderBy: {
-          fecha: "asc",
-        },
-      });
-
-      if (eventosVigentes[0]) {
-        const asistencias = eventosVigentes.map((e) => ({
-          idEvento: e.idEvento,
-          idAsociado: newUsuario.idUsuario,
-          idEstadoConfir: 4,
-          idAsistencia: 3,
-          contEnvios: 0,
-        }));
-
-        await prisma.asistencia.createMany({
-          data: asistencias,
-        }); 
+          await prisma.asistencia.createMany({
+            data: asistencias,
+          });
+        }
       }
     }
 
@@ -321,10 +325,10 @@ module.exports.createEnAsistencia = async (request, response, next) => {
   try {
     const infoUsuario = request.body;
 
-/*     let salt = bcrypt.genSaltSync(10);
+    let salt = bcrypt.genSaltSync(10);
 
     let hash = bcrypt.hashSync(infoUsuario.contrasena, salt);
- */
+
     const newUsuario = await prisma.usuario.create({
       data: {
         idRol: infoUsuario.idRol,
@@ -332,69 +336,78 @@ module.exports.createEnAsistencia = async (request, response, next) => {
         cedula: infoUsuario.cedula,
         nombreCompleto: infoUsuario.nombreCompleto,
         correo: infoUsuario.correo,
-        contrasena:infoUsuario.contrasena,
+        contrasena: hash,
         telefono: infoUsuario.telefono,
       },
     });
 
-    const eventosVigentes = await prisma.evento.findUnique({
-      where: {
-        idEvento: infoUsuario.idEvento,
-      },
-    });
-
-    if (eventosVigentes) {
-      await prisma.asistencia.create({
-        data: {
-          idEvento: eventosVigentes.idEvento,
-          idAsociado: newUsuario.idUsuario,
-          idEstadoConfir: 3,
-          idAsistencia: 3,
-          contEnvios: 0,
-        },
-      });
-
-      const fechaActual = new Date().toISOString().split("T")[0];
-
-      const vigentes = await prisma.evento.findMany({
+    if (infoUsuario.idRol === 3) {
+      const eventosVigentes = await prisma.evento.findUnique({
         where: {
-          fecha: {
-            gt: fechaActual,
-          },
-        },
-        orderBy: {
-          fecha: "asc",
+          idEvento: infoUsuario.idEvento,
         },
       });
 
-      if (vigentes[0]) {
-        const asistencias = vigentes.map((e) => ({
-          idEvento: e.idEvento,
-          idAsociado: newUsuario.idUsuario,
-          idEstadoConfir: 4,
-          idAsistencia: 3,
-          contEnvios: 0,
-        }));
+      if (eventosVigentes) {
+        await prisma.asistencia.create({
+          data: {
+            idEvento: eventosVigentes.idEvento,
+            idAsociado: newUsuario.idUsuario,
+            idEstadoConfir: 3,
+            idAsistencia: 3,
+            contEnvios: 0,
+          },
+        });
 
-        await prisma.asistencia.createMany({
-          data: asistencias,
-        }); 
+        const fechaActual = new Date().toISOString().split("T")[0];
+
+        const vigentes = await prisma.evento.findMany({
+          where: {
+            fecha: {
+              gt: fechaActual,
+            },
+            idEvento: {
+              not: eventosVigentes.idEvento,
+            },
+          },
+          orderBy: {
+            fecha: "asc",
+          },
+        });
+
+        if (vigentes[0]) {
+          const asistencias = vigentes.map((e) => ({
+            idEvento: e.idEvento,
+            idAsociado: newUsuario.idUsuario,
+            idEstadoConfir: 4,
+            idAsistencia: 3,
+            contEnvios: 0,
+          }));
+
+          await prisma.asistencia.createMany({
+            data: asistencias,
+          });
+        }
+
+        const mailInfo = {
+          body: {
+            eventId: eventosVigentes.idEvento,
+            selectedEmails: [newUsuario.correo],
+          },
+        };
+        const mailResponse = {
+          status: (code) => ({
+            json: (message) =>
+              console.log(`Mail Response Status: ${code}, Message: ${message}`),
+          }),
+        };
+
+        await mailController.sendEventNotification(
+          mailInfo,
+          mailResponse,
+          next
+        );
       }
-
-      const mailInfo = {
-        body: {
-          eventId: eventosVigentes.idEvento,
-          selectedEmails: [newUsuario.correo],
-        },
-      };
-      const mailResponse = {
-        status: (code) => ({
-          json: (message) =>
-            console.log(`Mail Response Status: ${code}, Message: ${message}`),
-        }),
-      };
-
-      await mailController.sendEventNotification(mailInfo, mailResponse, next);
     }
 
     response.status(201).json({
@@ -421,26 +434,21 @@ module.exports.update = async (request, response, next) => {
       },
     });
 
-    /* const isMatchPass = await bcrypt.compare(
-      infoUsuario.contrasena,
-      oldUser.contrasena
-    ); */
-  
-      const newUser = await prisma.usuario.update({
-        where: {
-          idUsuario: idUsuario,
-        },
-        data: {
-          idRol: infoUsuario.idRol,
-          idEstUsuario: infoUsuario.idEstUsuario,
-          cedula: infoUsuario.cedula,
-          nombreCompleto: infoUsuario.nombreCompleto,
-          correo: infoUsuario.correo,
-          contrasena: infoUsuario.contrasena,
-          telefono: infoUsuario.telefono,
-        },
-      });
-      
+    const newUser = await prisma.usuario.update({
+      where: {
+        idUsuario: idUsuario,
+      },
+      data: {
+        idRol: infoUsuario.idRol,
+        idEstUsuario: infoUsuario.idEstUsuario,
+        cedula: infoUsuario.cedula,
+        nombreCompleto: infoUsuario.nombreCompleto,
+        correo: infoUsuario.correo,
+        contrasena: infoUsuario.contrasena,
+        telefono: infoUsuario.telefono,
+      },
+    });
+
     response.json(newUser);
   } catch (error) {
     response
@@ -483,10 +491,10 @@ module.exports.updateEstadoUsuario = async (request, response, next) => {
 module.exports.updatePassword = async (request, response, next) => {
   try {
     //const correo = request.params.correo;
-    const {correo,contrasena} = request.body; 
+    const { correo, contrasena } = request.body;
 
-    //let salt = bcrypt.genSaltSync(10);
-    // let hash = bcrypt.hashSync(contrasena, salt);
+    let salt = bcrypt.genSaltSync(10);
+    let hash = bcrypt.hashSync(contrasena, salt);
 
     const oldUser = await prisma.usuario.findUnique({
       where: { correo: correo },
@@ -501,7 +509,7 @@ module.exports.updatePassword = async (request, response, next) => {
         correo: correo,
       },
       data: {
-        contrasena: contrasena,
+        contrasena: hash,
       },
     });
 

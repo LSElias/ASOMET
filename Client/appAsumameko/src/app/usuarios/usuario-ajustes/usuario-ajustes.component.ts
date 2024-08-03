@@ -203,14 +203,12 @@ export class UsuarioAjustesComponent implements OnInit{
         .subscribe((response: any) => {
           this.datos = response;
 
-          this.noti.mensajeRedirect(
+          this.noti.mensaje(
             'Usuario • Actualización de Usuario',
             `Información actualizada con éxito.`,
-            TipoMessage.success,
-            ''
+            TipoMessage.success
           );
         });
-         //Probar nuevamente cuando funcione Auth.. 
          this.router.navigate(['/ajustes/']);
          this.editar = false; 
   }

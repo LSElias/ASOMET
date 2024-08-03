@@ -8,10 +8,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { OlvidarPassComponent } from './olvidar-pass/olvidar-pass.component';
+import { CambiarPassComponent } from './cambiar-pass/cambiar-pass.component';
 
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, OlvidarPassComponent, CambiarPassComponent],
   imports: [
     CommonModule, 
     RouterModule,  
