@@ -1,6 +1,8 @@
 const { PrismaClient } = require('@prisma/client');
 const { generarJWT } = require('../utils/generate-jwt');
 const { errors } = require('../utils/validations');
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const prisma = new PrismaClient();
 
@@ -33,13 +35,24 @@ module.exports.login = async (req, res) => {
       });
     }
 
+    const checkPass = await bcrypt.compare(
+      password,
+      user.contrasena,
+    );
+
     // Verificar la contraseña en texto plano
-    if (password !== user.contrasena) {
+    if (!checkPass) {
       return res.status(401).json({
         Code: errors.msj6.code,
         Message: errors.msj6.msj,
         Time: errors.msj6.time,
       });
+    }else {
+      const payload = {
+        idUsuario: user.idUsuario,
+        correo: user.correo,
+        rol: user.idRol,
+      }; 
     }
 
     // Generar el JWT

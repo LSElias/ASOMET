@@ -1,51 +1,33 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { AuthService } from 'src/app/auth/auth.service';
 import { GenericService } from 'src/app/shared/generic.service';
-import {
-  NotificacionService,
-  TipoMessage,
-} from 'src/app/shared/notification.service';
+import { NotificacionService, TipoMessage } from 'src/app/shared/notification.service';
 
 @Component({
-  selector: 'app-usuario-contrasena',
-  templateUrl: './usuario-contrasena.component.html',
-  styleUrls: ['./usuario-contrasena.component.css'],
+  selector: 'app-cambiar-pass',
+  templateUrl: './cambiar-pass.component.html',
+  styleUrls: ['./cambiar-pass.component.css']
 })
-export class UsuarioContrasenaComponent {
-  isVisible = false;
-  //idUser: any;
+export class CambiarPassComponent implements OnInit {
+  correo: string | null = null; 
   genericService: any;
 
   passwordForm: FormGroup;
   destroy$: Subject<boolean> = new Subject<boolean>();
   respuesta: any;
-  @Input() correo: string | null = null;
-  @Output() passModificada: EventEmitter<void> = new EventEmitter<void>();
   showWarning: boolean = false;
 
-  // Flags de creación/actualización
-  isCreate: boolean = true;
-  titleForm: string = 'Creación';
-
+  
   constructor(
     public fb: FormBuilder,
-    private router: Router,
     private gService: GenericService,
-    private authService: AuthService,
-    private noti: NotificacionService
-  ) {
-    this.reactiveForm();
-  }
-
+    private router: Router,
+    private route: ActivatedRoute,
+    private noti: NotificacionService,
+  ) {this.reactiveForm();}
+  
   reactiveForm() {
     this.passwordForm = this.fb.group({
       correo: this.correo,
@@ -67,15 +49,16 @@ export class UsuarioContrasenaComponent {
       ],
     });
   }
-
-  openModal() {
-    this.isVisible = true;
-  }
-
-  closeModal() {
-    this.isVisible = false;
-    this.passwordForm.get('contrasena')?.reset();
-    this.passwordForm.get('contrasenaNueva')?.reset();
+  
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      const email = params.get('correo');
+      if(email !== null) {
+        this.correo = email; 
+        console.log(this.correo); 
+      }
+    }); 
+    
   }
 
   onSubmit() {
@@ -103,9 +86,7 @@ export class UsuarioContrasenaComponent {
       return;
     } else {
       if (this.passwordForm.value) {
-
         console.log(`usuario/correo/${this.correo}`);
-
         let info = {
           correo: this.correo,
           contrasena: this.passwordForm.value.contrasena,
@@ -113,24 +94,23 @@ export class UsuarioContrasenaComponent {
         
         //console.log(info);
 
-        this.gService
+         this.gService
           .update('usuario/correo', info)
           .pipe(takeUntil(this.destroy$))
           .subscribe((data: any) => {
             this.noti.mensajeRedirect(
-              'Usuario • Actualización de Contraseña',
+              'Nueva contraseña establecida',
               `Su contraseña ha sido actualizada con éxito.`,
               TipoMessage.success,
-              'ajustes'
+              ''
             );
 
             this.passwordForm.get('contrasena')?.reset();
             this.passwordForm.get('contrasenaNueva')?.reset();
-            this.passModificada.emit();
-            this.closeModal();
-            this.router.navigate(['/ajustes/']);
-          });
+            this.router.navigate(['/login']);
+          }); 
       }
     }
   }
+
 }

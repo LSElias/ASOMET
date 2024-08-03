@@ -17,10 +17,14 @@ import { RespuestaComponent } from './eventos/respuesta/respuesta.component';
 import { UsuarioAjustesComponent } from './usuarios/usuario-ajustes/usuario-ajustes.component';
 import { LogoutComponent } from './shared/logout/logout.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { OlvidarPassComponent } from './login/olvidar-pass/olvidar-pass.component';
+import { CambiarPassComponent } from './login/cambiar-pass/cambiar-pass.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Ruta predeterminada
   { path: 'login', component: LoginComponent },
+  { path: 'olvidar', component: OlvidarPassComponent },
+  { path: 'cambiar/:correo', component: CambiarPassComponent },
 
   
   { path: 'usuario', component: UsuarioIndexComponent, 

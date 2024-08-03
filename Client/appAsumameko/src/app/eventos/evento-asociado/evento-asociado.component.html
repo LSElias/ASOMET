@@ -28,21 +28,6 @@
         <!-- Formulario para crear o actualizar usuario -->
         <form [formGroup]="asociadoForm" novalidate class="flex flex-col gap-4">
           <div>
-            <label for="estados" class="block mb-2 text-sm font-medium text-[#344054]">Tipo de rol
-            </label>
-
-            <select id="estados" name="idRol" formControlName="idRol" (change)="onChange($event)"
-              class="w-full text-[#667085] font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center border-gray-300">
-              <option value="" disabled selected>Seleccione el rol</option>
-              <option *ngFor="let rol of roles" [value]="rol.idRol">
-                {{ rol.name }}
-              </option>
-            </select>
-            <mat-error *ngIf="errorHandling('idRol', 'required')">
-              El tipo de rol es <strong>requerido</strong>.
-            </mat-error>
-          </div>
-          <div>
             <div>
               <label for="correo" class="block mb-2 text-sm font-medium text-[#344054]">Correo
               </label>
@@ -90,25 +75,6 @@
             </mat-error>
             <mat-error *ngIf="errorHandling('nombreCompleto', 'minLength')">
               El nombre debe tener al menos <strong>8 digitos</strong>.
-            </mat-error>
-          </div>
-
-          <div *ngIf="idRol == 2">
-            <label for="contrasena" class="block mb-2 text-sm font-medium text-[#344054]">Contraseña</label>
-            <input type="password" id="contrasena" placeholder="**********" name="contrasena"
-              formControlName="contrasena"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              required />
-            <mat-error *ngIf="errorHandling('contrasena', 'required')">
-              La contraseña es <strong>requerida</strong>.
-            </mat-error>
-            <mat-error *ngIf="errorHandling('contrasena', 'minLength')">
-              La contraseña deberá tener digitos al menos
-              <strong>8 digitos</strong>.
-            </mat-error>
-            <mat-error *ngIf="errorHandling('contrasena', 'maxLength')">
-              La contraseña deberá tener digitos hasta
-              <strong>20 digitos</strong>.
             </mat-error>
           </div>
 
