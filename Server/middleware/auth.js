@@ -18,7 +18,7 @@ module.exports.login = async (req, res) => {
       }
     });
 
-    if (!user) {
+    if (!user || user.idRol === 3) {
       return res.status(401).json({
         Code: errors.msj6.code,
         Message: errors.msj6.msj,
