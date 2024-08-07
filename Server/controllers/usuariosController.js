@@ -232,81 +232,33 @@ module.exports.create = async (request, response, next) => {
       },
     });
 
-    if (infoUsuario.idRol === 3) {
-      if (infoUsuario.enviarInv === "true") {
-        const fechaActual = new Date().toISOString().split("T")[0];
+    //Registra al usuario en asistencia con el estado de confirmación: No Enviada
+    if (newUsuario.idRol === 3) {
+      const fechaActual = new Date().toISOString().split("T")[0];
 
-        const eventosVigentes = await prisma.evento.findMany({
-          where: {
-            fecha: {
-              gt: fechaActual,
-            },
+      const eventosVigentes = await prisma.evento.findMany({
+        where: {
+          fecha: {
+            gt: fechaActual,
           },
-          orderBy: {
-            fecha: "asc",
-          },
-          take: 1,
+        },
+        orderBy: {
+          fecha: "asc",
+        },
+      });
+
+      if (eventosVigentes[0]) {
+        const asistencias = eventosVigentes.map((e) => ({
+          idEvento: e.idEvento,
+          idAsociado: newUsuario.idUsuario,
+          idEstadoConfir: 4,
+          idAsistencia: 3,
+          contEnvios: 0,
+        }));
+
+        await prisma.asistencia.createMany({
+          data: asistencias,
         });
-
-        if (eventosVigentes[0]) {
-          await prisma.asistencia.create({
-            data: {
-              idEvento: eventosVigentes[0].idEvento,
-              idAsociado: newUsuario.idUsuario,
-              idEstadoConfir: 3,
-              idAsistencia: 3,
-              contEnvios: 0,
-            },
-          });
-
-          const mailInfo = {
-            body: {
-              eventId: eventosVigentes[0].idEvento,
-              selectedEmails: [newUsuario.correo],
-            },
-          };
-          const mailResponse = {
-            status: (code) => ({
-              json: (message) =>
-                console.log(
-                  `Mail Response Status: ${code}, Message: ${message}`
-                ),
-            }),
-          };
-
-          await mailController.sendEventNotification(
-            mailInfo,
-            mailResponse,
-            next
-          );
-        }
-      } else {
-        const fechaActual = new Date().toISOString().split("T")[0];
-
-        const eventosVigentes = await prisma.evento.findMany({
-          where: {
-            fecha: {
-              gt: fechaActual,
-            },
-          },
-          orderBy: {
-            fecha: "asc",
-          },
-        });
-
-        if (eventosVigentes[0]) {
-          const asistencias = eventosVigentes.map((e) => ({
-            idEvento: e.idEvento,
-            idAsociado: newUsuario.idUsuario,
-            idEstadoConfir: 4,
-            idAsistencia: 3,
-            contEnvios: 0,
-          }));
-
-          await prisma.asistencia.createMany({
-            data: asistencias,
-          });
-        }
       }
     }
 
@@ -317,6 +269,80 @@ module.exports.create = async (request, response, next) => {
     });
   } catch (error) {
     response.status(500).json({ message: "Error en la creación del usuario" });
+  }
+};
+
+module.exports.modalCreate = async (request, response, next) => {
+  try {
+    const { idUsuario, enviarInv } = request.body;
+
+    const usuario = await prisma.usuario.findUnique({
+      where: { idUsuario: idUsuario },
+      include: {
+        rol: true,
+        estadoUsuario: true,
+      },
+    });
+
+    if (!usuario) {
+      return response
+        .status(404)
+        .json({ message: "El id ingresado no fue encontrado" });
+    }
+
+    if (usuario.idRol === 3 && enviarInv === "true") {
+      const fechaActual = new Date().toISOString().split("T")[0];
+
+      const eventosVigentes = await prisma.evento.findFirst({
+        where: {
+          fecha: {
+            gt: fechaActual,
+          },
+        },
+        orderBy: {
+          fecha: "asc",
+        },
+        select: {
+          idEvento: true,
+        },
+        take: 1,   
+      });
+
+      const actAsistencia = await prisma.asistencia.updateMany({
+        where: {
+          idEvento: eventosVigentes.idEvento,
+          idAsociado: Number(idUsuario),
+        },
+        data: {
+          idEstadoConfir: 3,
+        },
+      });
+
+      const mailInfo = {
+        body: {
+          eventId: eventosVigentes.idEvento,
+          selectedEmails: [usuario.correo],
+        },
+      };
+      const mailResponse = {
+        status: (code) => ({
+          json: (message) =>
+            console.log(`Mail Response Status: ${code}, Message: ${message}`),
+        }),
+      };
+
+      await mailController.sendEventNotification(mailInfo, mailResponse, next);
+  
+    }
+    response.status(201).json({
+      status: true,
+      message: "Invitación enviada exitosamente"
+    });
+
+  } catch (error) {
+    response
+      .status(500)
+      .json({ message: "Error en el envio de la invitación" });
   }
 };
 
