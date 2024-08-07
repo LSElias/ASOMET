@@ -1,6 +1,5 @@
 <!-- Main modal -->
-<div id="authentication-modal" tabindex="-1" aria-hidden="true"
-  class="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75 scrollable"
+<div tabindex="-1" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75 scrollable"
   [class.hidden]="!isVisible">
   <div class="relative p-4 w-full max-w-md max-h-full">
     <!-- Modal content -->
@@ -140,3 +139,5 @@
     </div>
   </div>
 </div>
+
+<app-usuario-asistencia #asistenciaModal #userInvited [formData]="formData"></app-usuario-asistencia>

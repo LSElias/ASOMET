@@ -9,6 +9,8 @@ import { UsuarioCreateComponent } from '../usuario-create/usuario-create.compone
 import { UsuarioDesactivarComponent } from '../usuario-desactivar/usuario-desactivar.component';
 import { UsuarioDetalleComponent } from '../usuario-detalle/usuario-detalle.component';
 import { AuthService } from 'src/app/auth/auth.service';
+import { UsuarioAsistenciaComponent } from '../usuario-asistencia/usuario-asistencia.component';
+import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-usuario-index',
@@ -59,16 +61,21 @@ export class UsuarioIndexComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource = new MatTableDataSource<any>();
+
   @ViewChild('userFormModal') userFormModal!: UsuarioCreateComponent;
   @ViewChild('hideUserFormModal')
   hideUserFormModal!: UsuarioDesactivarComponent;
   @ViewChild('userDetalleModal') userDetalleModal!: UsuarioDetalleComponent;
+  @ViewChild('userInvited') userInvited!: UsuarioAsistenciaComponent;
+  @ViewChild(UsuarioAsistenciaComponent)
+  usuarioAsistencia: UsuarioAsistenciaComponent;
 
   constructor(
     private gService: GenericService,
     private router: Router,
     private route: ActivatedRoute,
-    private authService : AuthService,
+    private authService: AuthService,
+    private userService: UserService
   ) {
     this.authService.decodeToken.subscribe((user: any) => {
       this.usuariologged = user;
@@ -79,15 +86,21 @@ export class UsuarioIndexComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    /*     this.fetchUsuarios(); */
     this.userFormModal.usuarioCreado.subscribe(() => {
       this.fetchUsuarios();
       this.selectedStatus = this.statuses[0];
       this.selectedRole = this.roles[0];
     });
+
     this.hideUserFormModal.usuarioModificado.subscribe((newStatus: number) => {
       this.fetchUsuarios();
-      //      this.selectedStatus = newStatus === 1 ? 2 : 1;
+      this.selectedStatus = this.statuses[0];
+      this.selectedRole = this.roles[0];
+      this.statusChangeDeactivate(this.selectedStatus.toString());
+    });
+
+    this.userService.userInvited$.subscribe(() => {
+      this.fetchUsuarios();
       this.selectedStatus = this.statuses[0];
       this.selectedRole = this.roles[0];
       this.statusChangeDeactivate(this.selectedStatus.toString());

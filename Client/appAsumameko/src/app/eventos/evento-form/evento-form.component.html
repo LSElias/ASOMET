@@ -1,6 +1,6 @@
 <!-- Main modal -->
-<div id="authentication-modal" tabindex="-1" aria-hidden="true"
-  class="scrollable fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75" [class.hidden]="!isVisible">
+<div tabindex="-1" class="scrollable fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75"
+  [class.hidden]="!isVisible">
   <div class="relative p-4 w-full max-w-md max-h-full">
     <!-- Modal content -->
     <div class="relative bg-white rounded-lg shadow">
@@ -32,12 +32,12 @@
             <input type="text" name="titulo" id="titulo" placeholder="Título" formControlName="titulo"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required />
-              <mat-error *ngIf="errorHandling('titulo', 'required')">
-                El título es <strong>requerido</strong>.
-              </mat-error>
-              <mat-error *ngIf="errorHandling('titulo', 'minlength')">
-                El título <strong> debe de tener más de 5 carácteres</strong>.
-              </mat-error>
+            <mat-error *ngIf="errorHandling('titulo', 'required')">
+              El título es <strong>requerido</strong>.
+            </mat-error>
+            <mat-error *ngIf="errorHandling('titulo', 'minlength')">
+              El título <strong> debe de tener más de 5 carácteres</strong>.
+            </mat-error>
           </div>
 
           <div>
@@ -46,12 +46,12 @@
             <input type="text" name="localizacion" placeholder="Auditorio General" formControlName="localizacion"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required />
-              <mat-error *ngIf="errorHandling('localizacion', 'required')">
-                La localización es <strong>requerida</strong>.
-              </mat-error>
-              <mat-error *ngIf="errorHandling('localizacion', 'minlength')">
-                La localización <strong> debe de tener más de 5 carácteres</strong>.
-              </mat-error>
+            <mat-error *ngIf="errorHandling('localizacion', 'required')">
+              La localización es <strong>requerida</strong>.
+            </mat-error>
+            <mat-error *ngIf="errorHandling('localizacion', 'minlength')">
+              La localización <strong> debe de tener más de 5 carácteres</strong>.
+            </mat-error>
           </div>
 
           <div>
@@ -68,13 +68,12 @@
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  "
                 placeholder="06/18/2024">
             </div> -->
-            <input type="text" name="fecha" id="fecha" placeholder="202X-01-25"
-              formControlName="fecha"
+            <input type="text" name="fecha" id="fecha" placeholder="202X-01-25" formControlName="fecha"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required />
-              <mat-error *ngIf="errorHandling('fecha', 'required')">
-                La fecha es <strong>requerida</strong>.
-              </mat-error>
+            <mat-error *ngIf="errorHandling('fecha', 'required')">
+              La fecha es <strong>requerida</strong>.
+            </mat-error>
           </div>
 
           <div>
@@ -83,9 +82,9 @@
               <input type="time" id="time" name="hora" formControlName="hora"
                 class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 min="00:00" max="23:59" value="00:00" required />
-                <mat-error *ngIf="errorHandling('hora', 'required')">
-                  La hora es <strong>requerida</strong>.
-                </mat-error>
+              <mat-error *ngIf="errorHandling('hora', 'required')">
+                La hora es <strong>requerida</strong>.
+              </mat-error>
             </div>
           </div>
 
@@ -95,12 +94,12 @@
             <textarea id="descripcion" rows="4" name="descripcion" formControlName="descripcion"
               class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  "
               placeholder="Escribe la descripción aquí.."></textarea>
-              <mat-error *ngIf="errorHandling('descripcion', 'required')">
-                La descripción es <strong>requerida</strong>.
-              </mat-error>
-              <mat-error *ngIf="errorHandling('descripcion', 'minlength')">
-                La descripción <strong> debe de tener más de 5 carácteres</strong>.
-              </mat-error>
+            <mat-error *ngIf="errorHandling('descripcion', 'required')">
+              La descripción es <strong>requerida</strong>.
+            </mat-error>
+            <mat-error *ngIf="errorHandling('descripcion', 'minlength')">
+              La descripción <strong> debe de tener más de 5 carácteres</strong>.
+            </mat-error>
           </div>
 
 

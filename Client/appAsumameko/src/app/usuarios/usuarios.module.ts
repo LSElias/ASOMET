@@ -20,6 +20,7 @@ import { UsuarioDesactivarComponent } from './usuario-desactivar/usuario-desacti
 import { UsuarioDetalleComponent } from './usuario-detalle/usuario-detalle.component';
 import { UsuarioAjustesComponent } from './usuario-ajustes/usuario-ajustes.component';
 import { UsuarioContrasenaComponent } from './usuario-contrasena/usuario-contrasena.component';
+import { UsuarioAsistenciaComponent } from './usuario-asistencia/usuario-asistencia.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { UsuarioContrasenaComponent } from './usuario-contrasena/usuario-contras
     UsuarioDetalleComponent,
     UsuarioAjustesComponent,
     UsuarioContrasenaComponent,
+    UsuarioAsistenciaComponent,
   ],
   imports: [
     CommonModule,

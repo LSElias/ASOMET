@@ -305,7 +305,7 @@ module.exports.modalCreate = async (request, response, next) => {
         select: {
           idEvento: true,
         },
-        take: 1,   
+        take: 1,
       });
 
       const actAsistencia = await prisma.asistencia.updateMany({
@@ -332,13 +332,11 @@ module.exports.modalCreate = async (request, response, next) => {
       };
 
       await mailController.sendEventNotification(mailInfo, mailResponse, next);
-  
     }
     response.status(201).json({
       status: true,
-      message: "Invitación enviada exitosamente"
+      message: "Invitación enviada exitosamente",
     });
-
   } catch (error) {
     response
       .status(500)

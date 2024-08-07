@@ -1,0 +1,45 @@
+<!-- Main modal -->
+<div tabindex="-1" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75 scrollable"
+  [class.hidden]="!isVisibleModalAsistencia">
+
+  <!-- Modal content -->
+  <div class="relative w-full max-w-[584px] max-h-full">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-lg shadow">
+      <div class=" py-8 px-5">
+        <div class=" flex justify-between items-start gap-4 ">
+          <button type="button" (click)="closeModal()" class="">
+            <img src="../../../assets/images/sentInvitation.png" class="w-[80px] h-12">
+          </button>
+          <div>
+            <h3 class="text-lg font-semibold ">
+              Enviar invitación
+            </h3>
+            <p class="text-sm text-[#475467]">¿Quieres anexar este usuario al último evento vigente y enviarle la
+              invitación de asistencia?</p>
+          </div>
+          <button type="button" (click)="closeModal()"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+
+        <!-- Modal header -->
+        <div class="flex items-center justify-end gap-4">
+          <button (click)=" closeModal()" class="mt-4 w-fit text-[#344054] hover:bg-gray-100 hover:text-blue-700
+            border border-gray-200  font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-200
+            ms-3  focus:outline-none bg-white   focus:z-10 focus:ring-3 focus:ring-gray-100            ">
+            Cancelar
+          </button>
+          <button type="submit" (click)="onSubmit()"
+            class="mt-4 w-fit text-white bg-[#E8A25A] hover:bg-[#c48546] border-[#E8A25A] border font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-200 focus:outline-none  focus:z-10 focus:ring-3 ">
+            Enviar
+          </button>
+        </div>
+      </div>
+      <!-- Modal body -->
+    </div>

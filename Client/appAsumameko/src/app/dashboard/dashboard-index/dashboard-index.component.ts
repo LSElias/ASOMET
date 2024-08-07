@@ -16,9 +16,6 @@ export class DashboardIndexComponent implements OnInit {
   anio: string;
   datos: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
-  rTitulo: any;
-  rFecha: any;
-  rLocalizacion: any;
 
   constructor(
     private authService: AuthService,
@@ -50,33 +47,16 @@ export class DashboardIndexComponent implements OnInit {
     }
 
     this.fetchEventos();
-    console.log(this.rTitulo);
   }
 
   fetchEventos() {
     this.gService
-      .list('eventos/')
+      .list('reporte/siguiente')
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: any) => {
         this.datos = response[0];
-        this.rTitulo = this.datos.titulo;
-        this.rFecha = this.datos.fecha;
-        this.rLocalizacion = this.datos.localizacion;
       });
   }
-  /* fetchEventoActual() {
-    this.gService
-      .list('eventos/')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((datos: any) => {
-        const { titulo, fecha, localizacion } = datos[0];
-
-        this.rTitulo = titulo;
-        this.rFecha = fecha;
-        this.rLocalizacion = localizacion;
-        console.log(titulo);
-      });
-  } */
 
   logout(): void {
     this.authService.logout();

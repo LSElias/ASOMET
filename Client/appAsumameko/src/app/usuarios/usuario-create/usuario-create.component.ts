@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -8,6 +14,7 @@ import {
   NotificacionService,
   TipoMessage,
 } from 'src/app/shared/notification.service';
+import { UsuarioAsistenciaComponent } from '../usuario-asistencia/usuario-asistencia.component';
 
 @Component({
   selector: 'app-usuario-create',
@@ -23,7 +30,7 @@ export class UsuarioCreateComponent {
   telefono: any;
   cedula: any;
   @Output() usuarioCreado: EventEmitter<void> = new EventEmitter<void>();
-
+  formData: any;
   makeSubmit: boolean = false;
   numRegex = '^[0-9]*$';
   activeRouter: any;
@@ -40,9 +47,10 @@ export class UsuarioCreateComponent {
   // Flags de creación/actualización
   isCreate: boolean = true;
   titleForm: string = 'Creación';
-  user:any;
+  user: any;
 
-
+  @ViewChild('asistenciaModal') asistenciaModal!: UsuarioAsistenciaComponent;
+  isVisibleModalAsistencia = false;
 
   constructor(
     public fb: FormBuilder,
@@ -93,6 +101,7 @@ export class UsuarioCreateComponent {
         '',
         Validators.compose([Validators.required, Validators.minLength(8)]),
       ],
+      enviarInv: [null, null],
     });
   }
 
@@ -152,19 +161,20 @@ export class UsuarioCreateComponent {
     this.isVisible = false;
   }
 
+  modalAsistencia(data: any) {
+    this.asistenciaModal.openModal(data);
+  }
   // Método para manejar el envío del formulario
   onSubmit() {
     this.submitted = true;
+    this.formData = this.userForm.value;
 
+    this.formData.id = parseInt(this.idUser, 10);
+    this.formData.idRol = parseInt(this.formData.idRol, 10);
+    this.formData.cedula = parseInt(this.formData.cedula, 10);
+    this.formData.telefono = parseInt(this.formData.telefono, 10);
 
-    const formData = this.userForm.value;
-
-    formData.id = parseInt(this.idUser, 10);
-    formData.idRol = parseInt(formData.idRol, 10);
-    formData.cedula = parseInt(formData.cedula, 10);
-    formData.telefono = parseInt(formData.telefono, 10);
-
-    if (formData.id != 2) {
+    if (this.formData.id != 2) {
       this.userForm.get('contrasena')?.clearValidators();
       this.userForm.get('contrasena')?.updateValueAndValidity();
     }
@@ -176,7 +186,7 @@ export class UsuarioCreateComponent {
     if (this.isCreate) {
       if (this.userForm.value) {
         this.gService
-          .create('usuario/registrar', formData)
+          .create('usuario/registrar', this.formData)
           .pipe(takeUntil(this.destroy$))
           .subscribe((data: any) => {
             this.respuesta = data;
@@ -186,12 +196,15 @@ export class UsuarioCreateComponent {
               TipoMessage.success
             );
             this.usuarioCreado.emit();
-            this.router.navigate(['usuario/']);
+            this.modalAsistencia(data);
           });
+
+        this.closeModal();
+        /* this.modalAsistencia(); */
       }
     } else {
       this.gService
-        .update('usuario', formData)
+        .update('usuario', this.formData)
         .pipe(takeUntil(this.destroy$))
         .subscribe((data: any) => {
           this.respuesta = data;

@@ -51,15 +51,15 @@
             <div class="flex gap-8">
               <div class="">
                 <h3 class="text-sm">Nombre del evento</h3>
-                <span class="text-xs">{{rTitulo}}</span>
+                <span class="text-xs">{{datos?.titulo}}</span>
               </div>
               <div>
                 <h3 class="text-sm">Fecha del evento</h3>
-                <span class="text-xs">{{rFecha}}</span>
+                <span class="text-xs">{{datos?.fecha}}</span>
               </div>
               <div>
                 <h3 class="text-sm">Localización del evento</h3>
-                <span class="text-xs">{{rLocalizacion}}</span>
+                <span class="text-xs">{{datos?.localizacion}}</span>
               </div>
               <div class="flex">
                 <button class="pl-5">
@@ -84,21 +84,21 @@
                   <!-- Confirmaciones -->
                   <div class="imgConfirmaciones flex justify-center items-center ">
                     <div class="w-[85px] h-[85px] 4 flex justify-center flex-col items-center">
-                      <span class="text-sm relative text-white">433</span>
+                      <span class="text-sm relative text-white">{{datos?.Confirmacion}}</span>
                       <span class="text-[10px] relative text-white">Confirmados</span>
                     </div>
                   </div>
                   <!-- Pendientes -->
                   <div class="imgPendiente flex justify-center items-center ">
                     <div class="w-[85px] h-[85px] 4 flex justify-center flex-col items-center">
-                      <span class="text-sm relative text-white">433</span>
+                      <span class="text-sm relative text-white">{{datos?.Pendiente}}</span>
                       <span class="text-[10px] relative text-white">Pendientes</span>
                     </div>
                   </div>
                   <!-- Rechazados -->
                   <div class="imgRechados flex justify-center items-center">
                     <div class="w-[85px] h-[85px] 4 flex justify-center flex-col items-center">
-                      <span class="text-sm relative text-white">433</span>
+                      <span class="text-sm relative text-white">{{datos?.Rechazado}}</span>
                       <span class="text-[10px] relative text-white">Rechazados</span>
                     </div>
                   </div>
