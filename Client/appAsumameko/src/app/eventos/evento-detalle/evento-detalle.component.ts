@@ -97,7 +97,6 @@ export class EventoDetalleComponent implements AfterViewInit{
         this.disableButton_UpdateAsistencia(); 
         this.isDisabled = this.disableButton_General(); 
         this.isDated = this.disableButton_AsignarAsociado(); 
-        console.log(response);
         this.dataSource = new MatTableDataSource(response.asistencia);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
@@ -220,14 +219,12 @@ export class EventoDetalleComponent implements AfterViewInit{
       selectedEmails: correos,
     };
 
-    console.log(info);
 
     this.gService
       .create('mail/sendEventNotification', info)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: any) => {
         this.datos = response;
-        console.log(response);
         this.updateTable(this.datos);
         this.fetch();
         this.disableButton();
@@ -243,21 +240,18 @@ export class EventoDetalleComponent implements AfterViewInit{
   sendEmail_Individual(idEvento: number, correo: string){
     const info = { eventId: idEvento, selectedEmails: [correo]};
 
-    console.log(info);
      
     this.gService
     .create('mail/sendEventNotification', info)
     .pipe(takeUntil(this.destroy$))
     .subscribe((response: any) => {
       this.datos = response;
-      console.log(response);
       this.updateTable(this.datos);
       this.fetch();
-      this.noti.mensajeRedirect(
+      this.noti.mensaje(
         'Correo Enviado Exitosamente',
         `Invitación enviada`,
-        TipoMessage.success,
-        'Correo Enviado'
+        TipoMessage.success
       );
     });
 

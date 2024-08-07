@@ -134,7 +134,6 @@ export class UsuarioDetalleComponent {
   onSubmit() {
     this.submitted = true;
 
-    console.log(this.userForm.value);
 
     const formData = this.userForm.value;
 
@@ -159,13 +158,11 @@ export class UsuarioDetalleComponent {
           .pipe(takeUntil(this.destroy$))
           .subscribe((data: any) => {
             this.respuesta = data;
-            this.noti.mensajeRedirect(
+            this.noti.mensaje(
               'Usuarios • Creación de Usuario',
               `Usuario: ${data.nombreCompleto} ha sido creado con éxito.`,
-              TipoMessage.success,
-              'usuario'
+              TipoMessage.success
             );
-            console.log(data);
             this.router.navigate(['usuario/']);
           });
       }
@@ -177,11 +174,10 @@ export class UsuarioDetalleComponent {
           //Obtener respuesta
           this.respuesta = data;
 
-          this.noti.mensajeRedirect(
+          this.noti.mensaje(
             'Usuarios • Actualización de Usuario',
             `Usuario: ${data.nombreCompleto} ha sido actualizado con éxito.`,
-            TipoMessage.success,
-            'usuarios'
+            TipoMessage.success
           );
           this.router.navigate(['/usuario/']);
         });

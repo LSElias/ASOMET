@@ -73,7 +73,6 @@ export class ReporteMayorAsistenciaComponent {
   }
 
   nombreChange(event: any) {
-    console.log(this.datos[0].titulo);
     const titulae = event.value;
     if (titulae !== '') {
       this.filteredData = this.datos.filter((i: any) =>

@@ -104,24 +104,20 @@ export class UsuarioContrasenaComponent {
     } else {
       if (this.passwordForm.value) {
 
-        console.log(`usuario/correo/${this.correo}`);
 
         let info = {
           correo: this.correo,
           contrasena: this.passwordForm.value.contrasena,
         };
-        
-        //console.log(info);
 
         this.gService
           .update('usuario/correo', info)
           .pipe(takeUntil(this.destroy$))
           .subscribe((data: any) => {
-            this.noti.mensajeRedirect(
+            this.noti.mensaje(
               'Usuario • Actualización de Contraseña',
               `Su contraseña ha sido actualizada con éxito.`,
-              TipoMessage.success,
-              'ajustes'
+              TipoMessage.success
             );
 
             this.passwordForm.get('contrasena')?.reset();

@@ -10,7 +10,6 @@ export class HeaderNameService {
     setTitle(url: any){
         
         url = url.replace(/\/\d{1,2}$/, '');
-        console.log(url);
         
         switch(url){
             case '/usuario': { 

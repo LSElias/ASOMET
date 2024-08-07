@@ -2,28 +2,123 @@
   <app-menu></app-menu>
   <div class="w-full">
     <app-header></app-header>
-    <div class="bg-gray-100 w-full h-full py-1">
-      <div class="flex bg-white mx-5 my-5 rounded-lg box drop-shadow-sm w-fit">
-        <div class="flex flex-col drop-shadow gap-6 flex-grow">
-          <div class="flex gap-3 ">
-            <div class="fs flex justify-center items-center">
-              <img src="../../../assets/images/userIcon.png" alt="User Icon">
-            </div>
-            <div class="flex flex-col gap-8">
-              <div>
-                <h2 class="text-lg font-medium">{{ user?._nombre || 'Nombre de Usuario' }}</h2>
-                <span class="text-sm text-[#666666]">{{ user?._rol.nombre || 'Rol del Usuario' }}</span>
+    <div class="bg-gray-100 w-full h-full py-1 flex gap-12">
+      <section>
+        <div class="flex  bg-white ml-5 my-5 rounded-lg box drop-shadow-sm w-full h-fit">
+          <div class="flex flex-col drop-shadow gap-6 flex-grow">
+            <div class="flex gap-3 ">
+              <div class="fs flex justify-center items-center">
+                <img src="../../../assets/images/userIcon.png" alt="User Icon">
+              </div>
+              <div class="flex flex-col gap-8">
+                <div>
+                  <h2 class="text-lg font-medium">{{ user?._nombre || 'Nombre de Usuario' }}</h2>
+                  <span class="text-sm text-[#666666]">{{ user?._rol.nombre || 'Rol del Usuario' }}</span>
+                </div>
               </div>
             </div>
-          </div>
-          <div>
-            <span class="text-base font-medium">Bienvenido</span>
-            <p class="text-sm text-[#666666] w-[65ch]">
-               Es un placer contar nuevamente con usted. Esperamos que esté teniendo un excelente día. Gracias por formar parte de nuestros equipo. 
-            </p>
+            <div>
+              <span class="text-base font-medium">Bienvenido</span>
+              <p class="text-sm text-[#666666] w-[65ch]">
+                Es un placer contar nuevamente con usted. Esperamos que esté teniendo un excelente día. Gracias por
+                formar
+                parte de nuestros equipo.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+
+        <div
+          class="flex text-[#737791] text-[15px] bg-white ml-5  rounded-[10px]  drop-shadow-sm  h-fit px-6 py-3 font-medium w-full">
+          <span class="flex-grow">Fecha actual: <span class="text-[#66CC66]">{{dia}}</span> {{mes}} {{anio}}</span>
+
+          <button class="flex-grow-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+              class="icon icon-tabler icons-tabler-filled icon-tabler-caret-down">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path
+                d="M18 9c.852 0 1.297 .986 .783 1.623l-.076 .084l-6 6a1 1 0 0 1 -1.32 .083l-.094 -.083l-6 -6l-.083 -.094l-.054 -.077l-.054 -.096l-.017 -.036l-.027 -.067l-.032 -.108l-.01 -.053l-.01 -.06l-.004 -.057v-.118l.005 -.058l.009 -.06l.01 -.052l.032 -.108l.027 -.067l.07 -.132l.065 -.09l.073 -.081l.094 -.083l.077 -.054l.096 -.054l.036 -.017l.067 -.027l.108 -.032l.053 -.01l.06 -.01l.057 -.004l12.059 -.002z" />
+            </svg>
+          </button>
+        </div>
+      </section>
+      <section>
+        <!-- Proximo evento -->
+        <div class="text-[#666]">
+          <h2 class="text-base  my-5 font-medium">Proximo evento</h2>
+
+          <div class="flex flex-col gap-8 p-6  bg-white  my-5 rounded-[10px]  drop-shadow-sm w-fit h-fit">
+            <div class="flex gap-8">
+              <div class="">
+                <h3 class="text-sm">Nombre del evento</h3>
+                <span class="text-xs">{{rTitulo}}</span>
+              </div>
+              <div>
+                <h3 class="text-sm">Fecha del evento</h3>
+                <span class="text-xs">{{rFecha}}</span>
+              </div>
+              <div>
+                <h3 class="text-sm">Localización del evento</h3>
+                <span class="text-xs">{{rLocalizacion}}</span>
+              </div>
+              <div class="flex">
+                <button class="pl-5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-dots">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                    <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                    <path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+
+            <div>
+              <h3 class="text-[#0e0e0e] font-normal text-sm">Estado de la asistencia</h3>
+
+              <div class="flex">
+                <div class="flex gap-7 mt-3 flex-grow">
+                  <!-- Confirmaciones -->
+                  <div class="imgConfirmaciones flex justify-center items-center ">
+                    <div class="w-[85px] h-[85px] 4 flex justify-center flex-col items-center">
+                      <span class="text-sm relative text-white">433</span>
+                      <span class="text-[10px] relative text-white">Confirmados</span>
+                    </div>
+                  </div>
+                  <!-- Pendientes -->
+                  <div class="imgPendiente flex justify-center items-center ">
+                    <div class="w-[85px] h-[85px] 4 flex justify-center flex-col items-center">
+                      <span class="text-sm relative text-white">433</span>
+                      <span class="text-[10px] relative text-white">Pendientes</span>
+                    </div>
+                  </div>
+                  <!-- Rechazados -->
+                  <div class="imgRechados flex justify-center items-center">
+                    <div class="w-[85px] h-[85px] 4 flex justify-center flex-col items-center">
+                      <span class="text-sm relative text-white">433</span>
+                      <span class="text-[10px] relative text-white">Rechazados</span>
+                    </div>
+                  </div>
+                </div>
+                <div class=" flex justify-center items-center ">
+                  <button type="button"
+                    class="py-2 px-4 me-2 mb-2 text-xs h-fit flex gap-1 font-medium text-[#5A6ACF] rounded-md bg-[#FBFCFE] hover:bg-[#6E749B] hover:text-white transition duration-200 border drop-shadow-sm">Editar
+                    evento
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
     </div>
+    <section>
+
+    </section>
   </div>
 </div>

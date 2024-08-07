@@ -87,11 +87,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     const formData = this.userForm.value;
 
     if (this.userForm.invalid) {
-      this.noti.mensajeRedirect(
+      this.noti.mensaje(
         'Inicio de sesión',
         `Sus credenciales no son correctos. Verifiquelos y intente iniciar sesión otra vez.`,
         TipoMessage.error,
-        '/'
       );
       return;
     }
@@ -103,23 +102,19 @@ export class LoginComponent implements OnInit, OnDestroy {
           .subscribe(
             (data: any) => {
 
-            console.log(data);
-           // this.authService.setToken(data.token);
             this.respuesta = data;
-            this.noti.mensajeRedirect(
+            this.noti.mensaje(
               'Inicio de Sesión',
               `Se ha logrado iniciar sesión con éxito.`,
-              TipoMessage.success,
-              'dashboard'
+              TipoMessage.success
             );
             this.router.navigate(['/dashboard/']);
           },
         (error)=>{
-          this.noti.mensajeRedirect(
+          this.noti.mensaje(
             'Inicio de sesión',
             `Sus credenciales no son correctos. Verifiquelos y intente iniciar sesión otra vez.`,
-            TipoMessage.error,
-            '/'
+            TipoMessage.error
           );
           return;
         });

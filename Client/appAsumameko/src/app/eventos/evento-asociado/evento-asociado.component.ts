@@ -40,10 +40,6 @@ export class EventoAsociadoComponent {
 
   roles = [
     {
-      idRol: 2,
-      name: 'Operario',
-    },
-    {
       idRol: 3,
       name: 'Asociado',
     },
@@ -121,7 +117,6 @@ export class EventoAsociadoComponent {
   onSubmit() {
     this.submitted = true;
 
-    console.log(this.asociadoForm.value);
 
     const formData = this.asociadoForm.value;
 
@@ -149,7 +144,6 @@ export class EventoAsociadoComponent {
               TipoMessage.success,
               `/eventos/${this.idEvento}`
             );
-            console.log(data);
             this.asociadoCreado.emit();
           });
       }

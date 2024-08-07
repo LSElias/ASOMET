@@ -26,8 +26,8 @@ export class EventoFormComponent {
   @Output() eventoCreado: EventEmitter<void> = new EventEmitter<void>();
   makeSubmit: boolean = false;
   submitted = false;
-  currentcreator : any;
-  
+  currentcreator: any;
+
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -35,7 +35,6 @@ export class EventoFormComponent {
     private noti: NotificacionService,
     private authservice: AuthService
   ) {
-
     this.authservice.decodeToken.subscribe((user: any) => {
       this.currentcreator = user;
     });
@@ -81,7 +80,6 @@ export class EventoFormComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
         this.eventoData = data;
-        console.log(this.eventoData);
         this.eventForm.setValue({
           idEvento: this.eventoData.idEvento,
           idCreador: this.eventoData.idCreador,
@@ -105,13 +103,11 @@ export class EventoFormComponent {
   onSubmit() {
     this.submitted = true;
 
-    console.log(this.eventForm.value);
     if (this.eventForm.invalid) {
-      this.noti.mensajeRedirect(
+      this.noti.mensaje(
         'Eventos • Creación de evento',
         `Datos incorrectos, revise haber introducido bien la información.`,
-        TipoMessage.success,
-        'evento'
+        TipoMessage.success
       );
       return;
     }
@@ -123,13 +119,12 @@ export class EventoFormComponent {
           .pipe(takeUntil(this.destroy$))
           .subscribe((data: any) => {
             this.respuesta = data;
-            this.noti.mensajeRedirect(
+            this.noti.mensaje(
               'Eventos • Creación de evento',
               `Evento: ${data.titulo} ha sido creado con exito.`,
-              TipoMessage.success,
-              'evento'
+              TipoMessage.success
             );
-            this.router.navigate(['/eventos/']);
+            /* this.router.navigate(['/eventos/']); */
             this.eventoCreado.emit();
           });
       }
@@ -140,11 +135,10 @@ export class EventoFormComponent {
         .subscribe((data: any) => {
           //Obtener respuesta
           this.respuesta = data;
-          this.noti.mensajeRedirect(
+          this.noti.mensaje(
             'Usuarios • Actualización de Evento',
             `Usuario: ${data.titulo} ha sido actualizado con éxito.`,
             TipoMessage.success,
-            'usuarios'
           );
           this.router.navigate(['/eventos/']);
           this.eventoCreado.emit();

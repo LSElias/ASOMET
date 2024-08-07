@@ -104,7 +104,6 @@ export class UsuarioIndexComponent implements AfterViewInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: any) => {
         this.datos = response;
-        console.log(response);
         this.dataSource = new MatTableDataSource(response);
 
         if (this.sort) {
@@ -188,7 +187,6 @@ export class UsuarioIndexComponent implements AfterViewInit {
   }
 
   roleChange(value: any) {
-    console.log(value.value);
     switch (value.value) {
       case '1': {
         this.filteredData = this.datos.filter((data: any) => data.idRol === 1);
@@ -213,7 +211,6 @@ export class UsuarioIndexComponent implements AfterViewInit {
   }
 
   cedulaChange(event: any) {
-    console.log(this.datos[0].cedula);
     const cedulae = event.value;
     if (cedulae !== '') {
       this.filteredData = this.datos.filter((i: any) =>
