@@ -15,6 +15,7 @@ import { EventoFormComponent } from '../evento-form/evento-form.component';
 export class EventoIndexComponent {
   selectedStatus: any;
   datos: any;
+  fecha: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
   displayedColumns = ['id', 'titulo', 'localizacion', 'fecha', 'accion'];
   user = '';
@@ -39,6 +40,7 @@ export class EventoIndexComponent {
 
   ngOnInit(): void {
     this.fetch();
+    this.fetchReciente(); 
   }
 
   ngAfterViewInit() {
@@ -46,6 +48,8 @@ export class EventoIndexComponent {
     this.eventModal.eventoCreado.subscribe(() => {
       this.fetch();
     });
+    this.fetchReciente(); 
+
   }
 
   fetch() {
@@ -58,6 +62,19 @@ export class EventoIndexComponent {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.fillReciente(this.datos[0]);
+      });
+  }
+
+
+  fetchReciente(){
+
+    this.gService
+      .list('eventos/fecha')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((response: any) => {
+      this.fecha = response;
+      console.log(this.fecha); 
+        this.fillReciente(this.fecha);
       });
   }
 

@@ -5,6 +5,7 @@ const eventoController = require('../controllers/eventoController');
 router.get('/', eventoController.getAll);
 router.get('/buscarPorTitulo', eventoController.searchByTitle);
 router.get('/recientes', eventoController.getActiveEventos);
+router.get('/fecha', eventoController.getByFecha);
 router.get('/:id', eventoController.getById);
 
 //Reportes -->Datos Evento Fijos
