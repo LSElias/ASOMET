@@ -103,6 +103,7 @@ export class EventoDetalleComponent implements AfterViewInit{
       });
   }
 
+
   disableButton() {
     if (this.datos && this.datos.asistencia && this.datos.fecha) {
 

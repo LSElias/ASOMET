@@ -28,6 +28,7 @@ module.exports.getById = async (request, response, next) => {
       where: {
         idEvento: parseInt(id, 10),
       },
+    
       include: {
         administrador: true,
         asistencia: {
@@ -95,6 +96,38 @@ module.exports.getById = async (request, response, next) => {
     };
 
     response.json(newEventDetail);
+  } catch (error) {
+    next(error);
+  }
+};
+
+//Get event by ID
+module.exports.getByFecha = async (request, response, next) => {
+
+  try {
+
+    const fechaActual = new Date().toISOString().split("T")[0];
+
+      const eventosVigentes = await prisma.evento.findFirst({
+        where: {
+          fecha: {
+            gt: fechaActual,
+          },
+        },
+        orderBy: {
+          fecha: "asc",
+        },
+        take: 1, 
+      });
+
+      const evento = {
+titulo: eventosVigentes.titulo,
+        fecha: eventosVigentes.fecha,
+        localizacion: eventosVigentes.localizacion
+      }
+              
+    response.json(evento);
+
   } catch (error) {
     next(error);
   }

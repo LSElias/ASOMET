@@ -94,7 +94,7 @@ async function main() {
       titulo: "Prueba 4",
       descripcion:
         "Asomameco, les invita a asistir a la primera asamblea del año. Catering:  Información",
-      fecha: "2024-07-26",
+      fecha: "2024-08-09",
       hora: "17:30",
       localizacion: "Auditorio General",
     },
@@ -106,48 +106,13 @@ async function main() {
       titulo: "Prueba 5",
       descripcion:
         "Asomameco, les invita a asistir a la primera asamblea del año. Catering:  Información",
-      fecha: "2024-08-05",
-      hora: "17:30",
-      localizacion: "Auditorio General",
-    },
-  });
-
-  
-  await prisma.evento.create({
-    data: {
-      idCreador: 30,
-      titulo: "Prueba 6",
-      descripcion:
-        "Asomameco, les invita a asistir a la primera asamblea del año. Catering:  Información",
-      fecha: "2024-08-10",
-      hora: "17:30",
-      localizacion: "Auditorio General",
-    },
-  });
-
-  await prisma.evento.create({
-    data: {
-      idCreador: 30,
-      titulo: "Prueba 7",
-      descripcion:
-        "Asomameco, les invita a asistir a la primera asamblea del año. Catering:  Información",
       fecha: "2024-08-12",
       hora: "17:30",
       localizacion: "Auditorio General",
     },
   });
 
-  await prisma.evento.create({
-    data: {
-      idCreador: 30,
-      titulo: "Prueba 8",
-      descripcion:
-        "Asomameco, les invita a asistir a la primera asamblea del año. Catering:  Información",
-      fecha: "2024-08-14",
-      hora: "17:30",
-      localizacion: "Auditorio General",
-    },
-  });
+ 
   //Asistencia
   const pathDatos = "./prisma/src/confirmacion_asistencia.csv";
 
